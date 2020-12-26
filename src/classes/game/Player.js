@@ -15,6 +15,7 @@ export default class Player {
         }
         this.pBody = Matter.Bodies.rectangle(this.params.startPos.x, this.params.startPos.y, this.params.width, this.params.height);
         this.pBody.frictionAir = 0.2
+        this.pBody.gameType = "player"
         Matter.World.add(this.engine.world, this.pBody)
 
     }

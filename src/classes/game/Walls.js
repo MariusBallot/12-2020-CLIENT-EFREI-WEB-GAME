@@ -1,4 +1,5 @@
 import Matter from 'matter-js'
+import gameConfig from './gameConfig'
 
 export default class Walls {
     constructor(engine, ctx) {
@@ -6,10 +7,7 @@ export default class Walls {
         this.engine = engine
         this.ctx = ctx
 
-        this.params = {
-            thickness: 10,
-            margin: 20,
-        }
+        this.params = gameConfig.walls
 
         this.topBody = Matter.Bodies.rectangle(window.innerWidth / 2, this.params.margin + this.params.thickness / 2,
             window.innerWidth - this.params.margin * 2, this.params.thickness,
@@ -25,8 +23,19 @@ export default class Walls {
 
     draw() {
         this.ctx.beginPath()
-        this.ctx.rect(this.params.margin, this.params.margin, window.innerWidth - this.params.margin * 2, this.params.thickness)
-        this.ctx.rect(this.params.margin, window.innerHeight - this.params.margin - this.params.thickness, window.innerWidth - this.params.margin * 2, this.params.thickness)
+
+        this.ctx.save()
+        this.ctx.translate(-(window.innerWidth - this.params.margin * 2) / 2, -this.params.thickness / 2)
+        this.ctx.translate(this.topBody.position.x, this.topBody.position.y)
+        this.ctx.rect(0, 0, window.innerWidth - this.params.margin * 2, this.params.thickness)
+        this.ctx.restore()
+
+        this.ctx.save()
+        this.ctx.translate(-(window.innerWidth - this.params.margin * 2) / 2, -this.params.thickness / 2)
+        this.ctx.translate(this.botBody.position.x, this.botBody.position.y)
+        this.ctx.rect(0, 0, window.innerWidth - this.params.margin * 2, this.params.thickness)
+        this.ctx.restore()
+
         this.ctx.fill()
         this.ctx.closePath()
 

@@ -1,16 +1,22 @@
 <template>
   <div class="gameCanvas">
     <canvas ref="gameCanvas"></canvas>
-    <div class="debugCanvas" ref="debugCanvas"></div>
+    <div v-if="config.matterDebug" class="debugCanvas" ref="debugCanvas"></div>
   </div>
 </template>
 
 <script>
 import MainGame from "../../classes/game/MainGame";
 import Controls from "../../classes/game/Controls";
+import config from "@/utils/config";
 
 export default {
   name: "GameCanvas",
+  data() {
+    return {
+      config: config
+    };
+  },
   mounted() {
     Controls.start();
     MainGame.init(this.$refs.gameCanvas, this.$refs.debugCanvas);

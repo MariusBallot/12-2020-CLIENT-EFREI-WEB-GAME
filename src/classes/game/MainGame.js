@@ -1,8 +1,13 @@
 import RAF from '@/utils/RAF'
 import Matter from "matter-js"
+import config from "@/utils/config";
+import { TweenLite } from 'gsap'
 
 import Player from './Player'
 import Walls from './Walls'
+import Obstacles from './Obstacles'
+import gameConfig from './gameConfig';
+
 
 class MainGame {
     constructor() {
@@ -34,10 +39,22 @@ class MainGame {
                 height: window.innerHeight
             }
         })
-        Matter.Render.run(this.debugRender)
+
+        if (config.matterDebug)
+            Matter.Render.run(this.debugRender)
 
         this.player = new Player(this.engine, this.ctx)
         this.walls = new Walls(this.engine, this.ctx)
+        Obstacles.init(this.engine, this.ctx, this.player.pBody)
+
+        Matter.Events.on(this.engine, 'collisionStart', (event) => {
+            if (event.pairs[0].bodyA.gameType == "obs" || event.pairs[0].bodyB.gameType == "obs") {
+                alert("perdu bo")
+                gameConfig.obstacle.speed = 0
+
+            }
+
+        })
 
         RAF.subscribe("gameUpadate", this.update)
 
@@ -46,7 +63,9 @@ class MainGame {
     update() {
         Matter.Engine.update(this.engine);
 
+
         this.player.update()
+        Obstacles.update()
         this.draw()
     }
 
@@ -54,6 +73,7 @@ class MainGame {
         this.ctx.clearRect(0, 0, this.cWidth, this.cHeight);
         this.player.draw()
         this.walls.draw()
+        Obstacles.draw()
     }
 
     stop() {
