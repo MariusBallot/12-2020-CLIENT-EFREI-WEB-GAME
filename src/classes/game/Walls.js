@@ -36,7 +36,10 @@ export default class Walls {
         this.ctx.rect(0, 0, window.innerWidth - this.params.horMargin * 2, this.params.thickness)
         this.ctx.restore()
 
-        this.ctx.fill()
+        this.ctx.strokeStyle = gameConfig.neonBlue
+        this.ctx.lineWidth = gameConfig.lineWidth
+        this.ctx.stroke()
+
         this.ctx.closePath()
 
     }

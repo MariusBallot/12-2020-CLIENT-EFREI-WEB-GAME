@@ -1,4 +1,7 @@
 const gameConfig = {
+    neonBlue: "#5EF7FF",
+    neonRed: "#D14036",
+    lineWidth: 3,
     walls: {
         thickness: 10,
         vertMargin: 100,
@@ -8,6 +11,7 @@ const gameConfig = {
     obstacles: {
         number: 5,
         space: 500,
+        startSpace: 2000
     },
     obstacle: {
         width: 40,

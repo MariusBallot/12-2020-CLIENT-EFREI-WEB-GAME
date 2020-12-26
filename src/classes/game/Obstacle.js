@@ -9,7 +9,7 @@ export default class Objstacle {
 
 
         this.params = gameConfig.obstacle
-        this.params.startPos.x = gameConfig.obstacles.space * i
+        this.params.startPos.x = gameConfig.obstacles.space * i + gameConfig.obstacles.startSpace
         this.params.startPos.y = gameConfig.walls.vertMargin + gameConfig.walls.thickness + this.params.height / 2
             + Math.random() * (window.innerHeight - 2 * (gameConfig.walls.vertMargin + gameConfig.walls.thickness + this.params.height / 2))
 
@@ -19,7 +19,7 @@ export default class Objstacle {
     }
 
     update() {
-        Matter.Body.setPosition(this.oBody, { x: this.oBody.position.x - this.params.speed, y: this.oBody.position.y })
+        Matter.Body.setPosition(this.oBody, { x: this.oBody.position.x - this.params.speed * RAF.dt, y: this.oBody.position.y })
 
         if (this.oBody.position.x <= 0 - this.params.width) {
             Matter.Body.setPosition(this.oBody, {
@@ -40,6 +40,7 @@ export default class Objstacle {
         this.ctx.translate(this.oBody.position.x, this.oBody.position.y)
 
         this.ctx.rect(0, 0, this.params.width, this.params.height)
+        this.ctx.fillStyle = gameConfig.neonRed
         this.ctx.fill()
         this.ctx.restore()
 

@@ -2,6 +2,8 @@ class RAF {
     constructor() {
         this.bind()
         this.callbacks = []
+        this.dt = 0
+        this.lastT = Date.now()
         this.render()
 
     }
@@ -21,10 +23,16 @@ class RAF {
     }
 
     render() {
+        this.dt = (Date.now() - this.lastT) * 0.1
+        this.lastT = Date.now()
+
+        let i = 0;
+        while (i < this.callbacks.length) {
+            this.callbacks[i].callback()
+            i++
+        }
+
         requestAnimationFrame(this.render)
-        this.callbacks.forEach(item => {
-            item.callback()
-        });
     }
 
     bind() {
