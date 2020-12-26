@@ -1,7 +1,7 @@
 <template>
   <div class="gameCanvas">
-    <!-- <canvas ref="gameCanvas"></canvas> -->
-    <div class="canvasHolder" ref="gameCanvas"></div>
+    <canvas ref="gameCanvas"></canvas>
+    <div class="debugCanvas" ref="debugCanvas"></div>
   </div>
 </template>
 
@@ -13,7 +13,7 @@ export default {
   name: "GameCanvas",
   mounted() {
     Controls.start();
-    MainGame.init(this.$refs.gameCanvas);
+    MainGame.init(this.$refs.gameCanvas, this.$refs.debugCanvas);
   }
 };
 </script>
@@ -31,8 +31,13 @@ canvas {
   height: 100%;
 }
 
-.canvasHolder {
-  width: 100%;
-  height: 100%;
+.debugCanvas {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.3;
+  background: grey;
 }
 </style>

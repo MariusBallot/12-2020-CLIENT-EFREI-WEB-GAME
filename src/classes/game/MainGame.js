@@ -2,6 +2,7 @@ import RAF from '@/utils/RAF'
 import Matter from "matter-js"
 
 import Player from './Player'
+import Walls from './Walls'
 
 class MainGame {
     constructor() {
@@ -14,43 +15,45 @@ class MainGame {
         }
     }
 
-    init(domCanvas) {
-        // this.domCanvas = domCanvas
-        // this.ctx = this.domCanvas.getContext('2d')
-        // this.cWidth = this.ctx.canvas.width = window.innerWidth
-        // this.cHeight = this.ctx.canvas.height = window.innerHeight
+
+    init(domCanvas, debugCanvas) {
+        this.domCanvas = domCanvas
+        this.debugCanvas = debugCanvas
+        this.ctx = this.domCanvas.getContext('2d')
+        this.cWidth = this.ctx.canvas.width = window.innerWidth
+        this.cHeight = this.ctx.canvas.height = window.innerHeight
 
         this.engine = Matter.Engine.create();
         this.engine.world.gravity.y = 0;
 
-        this.render = Matter.Render.create({
-            element: domCanvas,
+        this.debugRender = Matter.Render.create({
             engine: this.engine,
+            element: this.debugCanvas,
             options: {
                 width: window.innerWidth,
-                height: window.innerHeight,
-                wireframes: false
+                height: window.innerHeight
             }
-        });
+        })
+        Matter.Render.run(this.debugRender)
 
-        this.player = new Player(this.engine)
-
-        // run the this.engine
-        Matter.Engine.run(this.engine);
-        Matter.Render.run(this.render);
+        this.player = new Player(this.engine, this.ctx)
+        this.walls = new Walls(this.engine, this.ctx)
 
         RAF.subscribe("gameUpadate", this.update)
-        window.addEventListener('resize', this.resize)
 
     }
 
     update() {
-        // this.draw()
+        Matter.Engine.update(this.engine);
+
+        this.player.update()
+        this.draw()
     }
 
     draw() {
         this.ctx.clearRect(0, 0, this.cWidth, this.cHeight);
-        this.ctx.fillRect(100, 100, 1000, 10)
+        this.player.draw()
+        this.walls.draw()
     }
 
     stop() {
