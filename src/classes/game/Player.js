@@ -1,5 +1,6 @@
 import Matter from 'matter-js'
 import Controls from './Controls'
+import gameConfig from './gameConfig'
 
 export default class Player {
     constructor(engine, ctx) {
@@ -43,7 +44,9 @@ export default class Player {
         this.ctx.translate(this.pBody.position.x, this.pBody.position.y)
 
         this.ctx.rect(0, 0, this.params.width, this.params.height)
-        this.ctx.fill()
+        this.ctx.strokeStyle = gameConfig.neonBlue
+        this.ctx.lineWidth = gameConfig.lineWidth
+        this.ctx.stroke()
         this.ctx.restore()
 
         this.ctx.closePath()
