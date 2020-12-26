@@ -12,9 +12,21 @@ import gameConfig from './gameConfig';
 class MainGame {
     constructor() {
         this.bind()
-
+        this.time = 0
+        this.score = 0
+        this.startTime = 0;
+        this.lost = false
+        this.clockDom
+        this.scoreDom
     }
 
+    setClock(el) {
+        this.clockDom = el
+    }
+
+    setScore(el) {
+        this.scoreDom = el
+    }
 
     init(domCanvas, debugCanvas) {
         this.domCanvas = domCanvas
@@ -45,16 +57,21 @@ class MainGame {
         Matter.Events.on(this.engine, 'collisionStart', (event) => {
             if (event.pairs[0].bodyA.gameType == "obs" || event.pairs[0].bodyB.gameType == "obs") {
                 gameConfig.obstacle.speed = 0
-
+                this.lost = true
             }
 
         })
 
         RAF.subscribe("gameUpadate", this.update)
+        this.startTime = Date.now()
 
     }
 
     update() {
+        if (!this.lost) this.time = Date.now() - this.startTime
+        this.clockDom.innerHTML = this.time / 1000
+        this.scoreDom.innerHTML = Math.floor(this.time / 1000)
+
         Matter.Engine.update(this.engine);
 
         this.player.update()
@@ -82,6 +99,8 @@ class MainGame {
         this.draw = this.draw.bind(this)
         this.init = this.init.bind(this)
         this.resize = this.resize.bind(this)
+        this.setClock = this.setClock.bind(this)
+        this.setScore = this.setScore.bind(this)
     }
 }
 
