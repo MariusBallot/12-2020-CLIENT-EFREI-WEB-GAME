@@ -10,8 +10,8 @@ export default class Objstacle {
 
         this.params = gameConfig.obstacle
         this.params.startPos.x = gameConfig.obstacles.space * i
-        this.params.startPos.y = gameConfig.walls.margin + gameConfig.walls.thickness + this.params.height / 2
-            + Math.random() * (window.innerHeight - 2 * (gameConfig.walls.margin + gameConfig.walls.thickness + this.params.height / 2))
+        this.params.startPos.y = gameConfig.walls.vertMargin + gameConfig.walls.thickness + this.params.height / 2
+            + Math.random() * (window.innerHeight - 2 * (gameConfig.walls.vertMargin + gameConfig.walls.thickness + this.params.height / 2))
 
         this.oBody = Matter.Bodies.rectangle(this.params.startPos.x, this.params.startPos.y, this.params.width, this.params.height, { isStatic: true })
         this.oBody.gameType = `obs`
@@ -24,8 +24,8 @@ export default class Objstacle {
         if (this.oBody.position.x <= 0 - this.params.width) {
             Matter.Body.setPosition(this.oBody, {
                 x: gameConfig.obstacles.space * gameConfig.obstacles.number,
-                y: gameConfig.walls.margin + gameConfig.walls.thickness + this.params.height / 2
-                    + Math.random() * (window.innerHeight - 2 * (gameConfig.walls.margin + gameConfig.walls.thickness + this.params.height / 2))
+                y: gameConfig.walls.vertMargin + gameConfig.walls.thickness + this.params.height / 2
+                    + Math.random() * (window.innerHeight - 2 * (gameConfig.walls.vertMargin + gameConfig.walls.thickness + this.params.height / 2))
             })
         }
     }

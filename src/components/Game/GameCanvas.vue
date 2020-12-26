@@ -29,12 +29,10 @@ export default {
 .gameCanvas {
   width: 100vw;
   height: 100vh;
-  background: pink;
 }
 
 canvas {
   width: 100%;
-  height: 100%;
 }
 
 .debugCanvas {

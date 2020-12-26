@@ -1,5 +1,6 @@
 <template>
   <div class="game">
+    <!-- <div class="clock">Cojcou</div> -->
     <GameCanvas />
   </div>
 </template>

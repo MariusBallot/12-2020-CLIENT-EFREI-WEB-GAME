@@ -13,11 +13,6 @@ class MainGame {
     constructor() {
         this.bind()
 
-
-
-        this.params = {
-
-        }
     }
 
 
@@ -49,7 +44,6 @@ class MainGame {
 
         Matter.Events.on(this.engine, 'collisionStart', (event) => {
             if (event.pairs[0].bodyA.gameType == "obs" || event.pairs[0].bodyB.gameType == "obs") {
-                alert("perdu bo")
                 gameConfig.obstacle.speed = 0
 
             }
@@ -62,7 +56,6 @@ class MainGame {
 
     update() {
         Matter.Engine.update(this.engine);
-
 
         this.player.update()
         Obstacles.update()

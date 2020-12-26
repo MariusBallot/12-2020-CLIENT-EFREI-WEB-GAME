@@ -1,7 +1,8 @@
 const gameConfig = {
     walls: {
         thickness: 10,
-        margin: 20,
+        vertMargin: 100,
+        horMargin: 10,
     },
 
     obstacles: {
