@@ -14,23 +14,27 @@ class MainGame {
         this.bind()
         this.time = 0
         this.bonus = 0
+        this.score = 0
         this.startTime = 0;
         this.lost = false
 
         this.clockDom
         this.scoreDom
         this.bonusCallBack
+        this.deathCallBack
     }
 
     setClock(el) {
         this.clockDom = el
     }
-
     setScore(el) {
         this.scoreDom = el
     }
     setBonusCallback(cb) {
         this.bonusCallBack = cb
+    }
+    setDeathCallback(cb) {
+        this.deathCallBack = cb
     }
 
     init(domCanvas, debugCanvas) {
@@ -69,6 +73,10 @@ class MainGame {
             if (event.pairs[0].bodyA.gameType == "obs" || event.pairs[0].bodyB.gameType == "obs") {
                 gameConfig.obstacle.speed = 0
                 this.lost = true
+                this.deathCallBack(this.score, this.time * 0.001)
+                this.engine.world.gravity.y = 1;
+                this.player.pBody.frictionAir = 0;
+
                 clearInterval(this.bonusInt)
             }
 
@@ -81,7 +89,8 @@ class MainGame {
     update() {
         if (!this.lost) this.time = Date.now() - this.startTime
         this.clockDom.innerHTML = this.time / 1000
-        this.scoreDom.innerHTML = Math.floor(this.time / 1000) + this.bonus
+        this.score = Math.floor(this.time / 1000) + this.bonus
+        this.scoreDom.innerHTML = this.score
 
         Matter.Engine.update(this.engine);
 

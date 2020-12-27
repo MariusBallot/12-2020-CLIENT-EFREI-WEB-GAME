@@ -2,12 +2,16 @@
   <div class="game">
     <div class="hud">
       <div class="hud_time">
-        Time
-        <span ref="clock" class="hud_time_number"></span>
+        <p>
+          Time
+          <span ref="clock" class="hud_time_number"></span>
+        </p>
       </div>
       <div class="hud_score">
-        Score
-        <span ref="score" class="hud_score_number"></span>
+        <p>
+          Score
+          <span ref="score" class="hud_score_number"></span>
+        </p>
       </div>
       <div class="hud_notification">
         <GameNotification :animTrig="animTrig" :nTitle="nTitle" :bPoints="bPoints" />
@@ -28,11 +32,13 @@
         </div>
       </div>
     </div>
+    <DeathScreen :death="death" :score="score" :time="time" />
   </div>
 </template>
 
 <script>
 import GameCanvas from "@/components/Game/GameCanvas";
+import DeathScreen from "@/components/Game/DeathScreen";
 import ProgressBar from "@/components/UI/ProgressBar";
 import MainGame from "@/classes/game/MainGame";
 import GameNotification from "@/components/Game/GameNotification";
@@ -42,25 +48,35 @@ export default {
   components: {
     GameCanvas,
     ProgressBar,
-    GameNotification
+    GameNotification,
+    DeathScreen
   },
   data() {
     return {
       nTitle: "yo",
       bPoints: "yo",
-      animTrig: 0
+      animTrig: 0,
+      death: false,
+      score: null,
+      time: null
     };
   },
   mounted() {
     MainGame.setClock(this.$refs.clock);
     MainGame.setScore(this.$refs.score);
     MainGame.setBonusCallback(this.onBonus);
+    MainGame.setDeathCallback(this.onDeath);
   },
   methods: {
     onBonus: function(title, pts) {
       this.animTrig++;
       this.nTitle = title;
       this.bPoints = pts;
+    },
+    onDeath: function(score, time) {
+      this.score = score;
+      this.time = time;
+      this.death = true;
     }
   }
 };
