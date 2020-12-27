@@ -1,27 +1,34 @@
 <template>
   <div class="login">
     <div class="title">
-      <img src="faces.png" />
-      <h1>THE GAME</h1>
+      <img src="faces.png" id="img" />
+      <h1 id="title">THE GAME</h1>
     </div>
-    <h2>WELCOME BACK CAPTAIN</h2>
-    <h4>Log into the game</h4>
-    <br />
-    <form id="login" method="get">
-      <input type="text" name="Uname" id="Uname" placeholder="Username" />
-      <br /><br />
+    <div class="infos">
+      <h2>WELCOME BACK CAPTAIN</h2>
+      <h4>Log into the game</h4>
+      <br />
+      <form id="login" method="get">
+        <input type="text" name="Uname" id="Uname" placeholder="Username" />
+        <br /><br />
 
-      <input type="Password" name="Pass" id="Pass" placeholder="Password" />
-      <br /><br />
+        <input type="Password" name="Pass" id="Pass" placeholder="Password" />
+        <br /><br />
 
-      <div class="item">
-        <input type="button" name="log" id="log" value="Login" />
-      </div>
+        <div class="item">
+          <input type="button" name="log" id="log" value="Login" />
+        </div>
 
-      <div class="item">
-        <input type="button" name="create" id="create" value="Create Account" />
-      </div>
-    </form>
+        <div class="item">
+          <input
+            type="button"
+            name="create"
+            id="create"
+            value="Create Account"
+          />
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -43,7 +50,6 @@ body {
   overflow: hidden;
   margin: auto;
   margin: 20 0 0 450px;
-  padding: 120px;
   border-radius: 15px;
 }
 
@@ -65,6 +71,13 @@ label {
 .title {
   display: flex;
   justify-content: flex-start;
+  align-content: flex-start;
+  margin-left: 1.5em;
+  margin-top: 1.5em;
+}
+
+.infos {
+  margin-top: 125px;
 }
 
 #Uname {
