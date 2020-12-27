@@ -1,6 +1,7 @@
 <template>
   <div class="login">
     <h2>WELCOME BACK CAPTAIN</h2>
+    <h4>Log into the game</h4>
     <br />
     <form id="login" method="get">
       <input type="text" name="Uname" id="Uname" placeholder="Username" />
@@ -9,11 +10,13 @@
       <input type="Password" name="Pass" id="Pass" placeholder="Password" />
       <br /><br />
 
-      <input type="button" name="log" id="log" value="Login" />
-      <br /><br />
+      <div class="item">
+        <input type="button" name="log" id="log" value="Login" />
+      </div>
 
-      <input type="button" name="create" id="create" value="Create Account" />
-      <br /><br />
+      <div class="item">
+        <input type="button" name="create" id="create" value="Create Account" />
+      </div>
     </form>
   </div>
 </template>
@@ -28,11 +31,11 @@ body {
   margin: 0;
   padding: 0;
   background-color: #6abadeba;
-  font-family: 'Arial';
+  font-family: 'Rubik';
 }
 
 .login {
-  width: 382px;
+  text-align: center;
   overflow: hidden;
   margin: auto;
   margin: 20 0 0 450px;
@@ -43,7 +46,11 @@ body {
 h2 {
   text-align: center;
   color: red;
-  padding: 20px;
+}
+
+h4 {
+  text-align: center;
+  color: #5EF7FF;
 }
 
 label {
@@ -52,47 +59,47 @@ label {
 }
 
 #Uname {
-  width: 300px;
-  height: 30px;
+  width: 400px;
+  height: 76px;
   border: 1px solid #5EF7FF;
   box-sizing: border-box;
   border-radius: 10px;
   padding-left: 8px;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 #Pass {
-  width: 300px;
-  height: 30px;
+  width: 400px;
+  height: 76px;
   border: 1px solid #5EF7FF;
   box-sizing: border-box;
   border-radius: 10px;
   padding-left: 8px;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 #log {
-  width: 300px;
-  height: 30px;
-  border: none;
+  width: 190px;
+  height: 76px;
+  border: 1px solid #5EF7FF;
   border-radius: 17px;
   padding-left: 7px;
-  color: blue;
+  margin-right: 20px;
+  background-color: rgba(0, 0, 0, 0);
+  color: #5EF7FF;
 }
 
 #create {
-  width: 300px;
-  height: 30px;
-  border: none;
+  width: 190px;
+  height: 76px;
+  border: 1px solid red;
   border-radius: 17px;
   padding-left: 7px;
-  color: blue;
+  background-color: rgba(0, 0, 0, 0);
+  color: red;
 }
 
-span {
-  color: white;
-  font-size: 17px;
-}
-
-a {
-  float: right;
+.item {
+  display: inline-block;
 }
 </style>
