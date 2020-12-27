@@ -109,6 +109,13 @@ label {
   margin-right: 20px;
   background-color: rgba(0, 0, 0, 0);
   color: #5EF7FF;
+  transition: background-color color 1000ms 1000ms;
+}
+
+#log:hover {
+  color: black;
+  background-color: #5EF7FF;
+  cursor: pointer;
 }
 
 #create {
@@ -119,6 +126,12 @@ label {
   padding-left: 7px;
   background-color: rgba(0, 0, 0, 0);
   color: red;
+}
+
+#create:hover {
+  color: black;
+  background-color: red;
+  cursor: pointer;
 }
 
 .item {
