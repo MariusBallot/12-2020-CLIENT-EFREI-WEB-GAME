@@ -1,5 +1,9 @@
 <template>
   <div class="login">
+    <div class="title">
+      <img src="faces.png" />
+      <h1>THE GAME</h1>
+    </div>
     <h2>WELCOME BACK CAPTAIN</h2>
     <h4>Log into the game</h4>
     <br />
@@ -39,7 +43,7 @@ body {
   overflow: hidden;
   margin: auto;
   margin: 20 0 0 450px;
-  padding: 80px;
+  padding: 120px;
   border-radius: 15px;
 }
 
@@ -58,9 +62,14 @@ label {
   font-size: 17px;
 }
 
+.title {
+  display: flex;
+  justify-content: flex-start;
+}
+
 #Uname {
   width: 400px;
-  height: 76px;
+  height: 60px;
   border: 1px solid #5EF7FF;
   box-sizing: border-box;
   border-radius: 10px;
@@ -70,7 +79,7 @@ label {
 
 #Pass {
   width: 400px;
-  height: 76px;
+  height: 60px;
   border: 1px solid #5EF7FF;
   box-sizing: border-box;
   border-radius: 10px;
@@ -80,7 +89,7 @@ label {
 
 #log {
   width: 190px;
-  height: 76px;
+  height: 60px;
   border: 1px solid #5EF7FF;
   border-radius: 17px;
   padding-left: 7px;
@@ -91,7 +100,7 @@ label {
 
 #create {
   width: 190px;
-  height: 76px;
+  height: 60px;
   border: 1px solid red;
   border-radius: 17px;
   padding-left: 7px;
