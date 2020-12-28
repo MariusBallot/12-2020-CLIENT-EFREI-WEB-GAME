@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div class="title">
-      <img src="faces.png" id="img" />
+      <img src="assets/images/faces.png" id="img" />
       <h1 id="title">THE GAME</h1>
     </div>
     <div class="infos">
@@ -38,103 +38,102 @@ export default {
 };
 </script>
 <style lang="stylus" scoped>
-body {
-  margin: 0;
-  padding: 0;
-  background-color: #6abadeba;
-  font-family: 'Rubik';
-}
-
 .login {
   text-align: center;
   overflow: hidden;
   margin: auto;
   margin: 20 0 0 450px;
   border-radius: 15px;
-}
 
-h2 {
-  text-align: center;
-  color: red;
-}
+  h2 {
+    text-align: center;
+    color: red;
+  }
 
-h4 {
-  text-align: center;
-  color: #5EF7FF;
-}
+  h4 {
+    text-align: center;
+    color: #5EF7FF;
+  }
 
-label {
-  color: #08ffd1;
-  font-size: 17px;
-}
+  label {
+    color: #08ffd1;
+    font-size: 17px;
+  }
 
-.title {
-  display: flex;
-  justify-content: flex-start;
-  align-content: flex-start;
-  margin-left: 1.5em;
-  margin-top: 1.5em;
-}
+  .title {
+    display: flex;
+    justify-content: flex-start;
+    align-content: flex-start;
+    margin-left: 1.5em;
+    margin-top: 1.5em;
+  }
 
-.infos {
-  margin-top: 125px;
-}
+  .infos {
+    margin-top: 125px;
+  }
 
-#Uname {
-  width: 400px;
-  height: 60px;
-  border: 1px solid #5EF7FF;
-  box-sizing: border-box;
-  border-radius: 10px;
-  padding-left: 8px;
-  background-color: rgba(0, 0, 0, 0);
-}
+  #Uname {
+    width: 400px;
+    height: 60px;
+    border: 1px solid #5EF7FF;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding-left: 8px;
+    background-color: rgba(0, 0, 0, 0);
+  }
 
-#Pass {
-  width: 400px;
-  height: 60px;
-  border: 1px solid #5EF7FF;
-  box-sizing: border-box;
-  border-radius: 10px;
-  padding-left: 8px;
-  background-color: rgba(0, 0, 0, 0);
-}
+  #Pass {
+    width: 400px;
+    height: 60px;
+    border: 1px solid #5EF7FF;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding-left: 8px;
+    background-color: rgba(0, 0, 0, 0);
+  }
 
-#log {
-  width: 190px;
-  height: 60px;
-  border: 1px solid #5EF7FF;
-  border-radius: 17px;
-  padding-left: 7px;
-  margin-right: 20px;
-  background-color: rgba(0, 0, 0, 0);
-  color: #5EF7FF;
-  transition: background-color color 1000ms 1000ms;
-}
+  #log {
+    width: 190px;
+    height: 60px;
+    border: 1px solid #5EF7FF;
+    border-radius: 17px;
+    padding-left: 7px;
+    margin-right: 20px;
+    background-color: rgba(0, 0, 0, 0);
+    color: #5EF7FF;
+    transition: background-color color 1000ms 1000ms;
+  }
 
-#log:hover {
-  color: black;
-  background-color: #5EF7FF;
-  cursor: pointer;
-}
+  #log:hover {
+    color: black;
+    background-color: #5EF7FF;
+    cursor: pointer;
+  }
 
-#create {
-  width: 190px;
-  height: 60px;
-  border: 1px solid red;
-  border-radius: 17px;
-  padding-left: 7px;
-  background-color: rgba(0, 0, 0, 0);
-  color: red;
-}
+  #create {
+    width: 190px;
+    height: 60px;
+    border: 1px solid red;
+    border-radius: 17px;
+    padding-left: 7px;
+    background-color: rgba(0, 0, 0, 0);
+    color: red;
+  }
 
-#create:hover {
-  color: black;
-  background-color: red;
-  cursor: pointer;
-}
+  #create:hover {
+    color: black;
+    background-color: red;
+    cursor: pointer;
+  }
 
-.item {
-  display: inline-block;
+  .item {
+    display: inline-block;
+  }
+
+  #img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
 }
 </style>
