@@ -11,10 +11,9 @@ export const store = new Vuex.Store({
     },
     actions: {
         loadUser() {
-            // axios.get("localhost://")
         },
         login() {
 
         },
     }
-})
+}) 

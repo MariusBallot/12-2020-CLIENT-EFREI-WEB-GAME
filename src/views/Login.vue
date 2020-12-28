@@ -4,55 +4,74 @@
       <img src="assets/images/faces.png" id="img" />
       <h1 id="title">THE GAME</h1>
     </div>
-    <div class="infos">
-      <h2>WELCOME BACK CAPTAIN</h2>
-      <h4>Log into the game</h4>
-      <br />
-      <form id="login" method="get">
-        <input type="text" name="Uname" id="Uname" placeholder="Username" />
-        <br /><br />
+    <div class="login_wrapper">
+      <div class="login_wrapper_infos">
+        <h2>WELCOME BACK CAPTAIN</h2>
+        <h4>Log into the game</h4>
+        <br />
+        <form id="login" method="get">
+          <input type="text" name="Uname" id="Uname" placeholder="Username" />
+          <br /><br />
 
-        <input type="Password" name="Pass" id="Pass" placeholder="Password" />
-        <br /><br />
+          <input type="Password" name="Pass" id="Pass" placeholder="Password" />
+          <br /><br />
 
-        <div class="item">
-          <input type="button" name="log" id="log" value="Login" />
-        </div>
-
-        <div class="item">
-          <input
-            type="button"
-            name="create"
-            id="create"
-            value="Create Account"
-          />
-        </div>
-      </form>
+          <div class="login_wrapper_infos_buts">
+            <div class="login_wrapper_infos_buts_log">
+              <CusButton bCol="blue" bText="Login" />
+            </div>
+            <div class="login_wrapper_infos_buts_ca">
+              <CusButton bCol="red" bText="Create account" />
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import CusButton from "@/components/UI/CusButton.vue";
 export default {
   name: "Login",
+  components: {
+    CusButton,
+  },
 };
 </script>
 <style lang="stylus" scoped>
 .login {
-  text-align: center;
-  overflow: hidden;
-  margin: auto;
-  margin: 20 0 0 450px;
-  border-radius: 15px;
+  &_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    &_infos {
+      &_buts {
+        display: flex;
+        justify-content: space-between;
+
+        &_log, &_ca {
+          width: 48%;
+          height: 75px;
+        }
+      }
+    }
+  }
 
   h2 {
+    color: $neonRed;
     text-align: center;
-    color: red;
   }
 
   h4 {
+    color: $neonBlue;
     text-align: center;
-    color: #5EF7FF;
   }
 
   label {
@@ -60,74 +79,13 @@ export default {
     font-size: 17px;
   }
 
-  .title {
-    display: flex;
-    justify-content: flex-start;
-    align-content: flex-start;
-    margin-left: 1.5em;
-    margin-top: 1.5em;
-  }
-
-  .infos {
-    margin-top: 125px;
-  }
-
-  #Uname {
+  #Uname, #Pass {
     width: 400px;
     height: 60px;
-    border: 1px solid #5EF7FF;
-    box-sizing: border-box;
+    border: 1px solid $neonBlue;
     border-radius: 10px;
     padding-left: 8px;
-    background-color: rgba(0, 0, 0, 0);
-  }
-
-  #Pass {
-    width: 400px;
-    height: 60px;
-    border: 1px solid #5EF7FF;
-    box-sizing: border-box;
-    border-radius: 10px;
-    padding-left: 8px;
-    background-color: rgba(0, 0, 0, 0);
-  }
-
-  #log {
-    width: 190px;
-    height: 60px;
-    border: 1px solid #5EF7FF;
-    border-radius: 17px;
-    padding-left: 7px;
-    margin-right: 20px;
-    background-color: rgba(0, 0, 0, 0);
-    color: #5EF7FF;
-    transition: background-color color 1000ms 1000ms;
-  }
-
-  #log:hover {
-    color: black;
-    background-color: #5EF7FF;
-    cursor: pointer;
-  }
-
-  #create {
-    width: 190px;
-    height: 60px;
-    border: 1px solid red;
-    border-radius: 17px;
-    padding-left: 7px;
-    background-color: rgba(0, 0, 0, 0);
-    color: red;
-  }
-
-  #create:hover {
-    color: black;
-    background-color: red;
-    cursor: pointer;
-  }
-
-  .item {
-    display: inline-block;
+    background: transparent;
   }
 
   #img {
