@@ -2,6 +2,8 @@ import Vue from "vue"
 import Vuex from "vuex"
 import axios from "axios"
 
+const url = "http://localhost:3000"
+
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
@@ -9,11 +11,20 @@ export const store = new Vuex.Store({
         users: [],
         currUser: {}
     },
-    actions: {
-        loadUser() {
+    mutations: {
+        async loadUser() {
+            const res = await axios.get(url + '/users')
+            let users = res.data
         },
-        login() {
 
+    },
+    actions: {
+        register(req) {
+
+        },
+        async login(state, req) {
+            const res = await axios.get(url + '/users')
+            console.log(res.data)
         },
     }
 }) 
