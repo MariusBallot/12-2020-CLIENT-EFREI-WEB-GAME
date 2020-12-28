@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <div class="title">
+    <div class="login_title">
       <img src="assets/images/faces.png" id="img" />
       <h1 id="title">THE GAME</h1>
     </div>
@@ -64,6 +64,12 @@ export default {
     }
   }
 
+  &_title {
+    display: flex;
+    margin-left: 10px;
+    padding-top: 10px;
+  }
+
   h2 {
     color: $neonRed;
     text-align: center;
@@ -74,9 +80,8 @@ export default {
     text-align: center;
   }
 
-  label {
-    color: #08ffd1;
-    font-size: 17px;
+  input {
+    color: white;
   }
 
   #Uname, #Pass {

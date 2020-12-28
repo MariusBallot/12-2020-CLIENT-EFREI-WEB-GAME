@@ -6,6 +6,7 @@ import Login from '../views/Login.vue'
 import LeaderBoard from '../views/LeaderBoard.vue'
 import Rewards from '../views/Rewards.vue'
 import Tutorial from '../views/Tutorial.vue'
+import SignUp from '../views/SignUp.vue'
 
 Vue.use(VueRouter)
 
@@ -34,6 +35,11 @@ const routes = [
     path: '/Rewards',
     name: 'Rewards',
     component: Rewards
+  },
+  {
+    path: '/SignUp',
+    name: 'SignUp',
+    component: SignUp
   },
   {
     path: '/Tutorial',
