@@ -5,5 +5,8 @@
 <script>
 export default {
   name: "LeaderBoard",
+  mounted() {
+    console.log(this.$store.state.users);
+  },
 };
 </script>
