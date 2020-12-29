@@ -57,7 +57,7 @@
           </div>
 
           <div class="signup_wrapper_infos_buts">
-            <div class="sign_wrapper_infos_buts_go">
+            <div class="signup_wrapper_infos_buts_go">
               <CusButton bCol="gold" bText="Let's go" />
             </div>
           </div>
@@ -120,7 +120,7 @@ export default {
         justify-content: center;
 
         &_go {
-          width: 48%;
+          width: 40%;
           height: 75px;
         }
       }
