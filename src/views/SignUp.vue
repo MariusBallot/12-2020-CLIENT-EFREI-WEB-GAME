@@ -1,5 +1,6 @@
 <template>
   <div class="signup">
+    <Header />
     <div class="signup_wrapper">
       <div class="signup_wrapper_infos">
         <h2>Become the best</h2>
@@ -56,24 +57,30 @@
 
           <div class="signup_wrapper_infos_buts">
             <div class="signup_wrapper_infos_buts_go">
-              <CusButton v-on:click.native="signClick" bCol="gold" bText="Let's go" />
+              <CusButton
+                v-on:click.native="signClick"
+                bCol="gold"
+                bText="Let's go"
+              />
             </div>
           </div>
         </form>
       </div>
     </div>
-    <div class="signup_error">{{signupError}}</div>
+    <div class="signup_error">{{ signupError }}</div>
   </div>
 </template>
 
 <script>
 import CusButton from "@/components/UI/CusButton.vue";
 import IconList from "@/components/SignUp/IconList.vue";
+import Header from "@/components/UI/Header.vue";
 export default {
   name: "Signup",
   components: {
     CusButton,
-    IconList
+    IconList,
+    Header,
   },
   data() {
     return {
@@ -82,17 +89,17 @@ export default {
         gametag: null,
         icon: null,
         pwd: null,
-        cpwd: null
+        cpwd: null,
       },
-      signupError: null
+      signupError: null,
     };
   },
   mounted() {},
   methods: {
-    onSelectedIcon: function(id) {
+    onSelectedIcon: function (id) {
       this.userInfo.icon = id;
     },
-    signClick: async function() {
+    signClick: async function () {
       let signProm = await this.$store.dispatch("register", this.userInfo);
       console.log(signProm);
 
@@ -102,8 +109,8 @@ export default {
       // } else {
       //   this.logInError = logProm.message;
       // }
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="stylus" scoped>

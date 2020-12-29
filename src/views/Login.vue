@@ -1,16 +1,31 @@
 <template>
   <div class="login">
+    <Header />
     <div class="login_wrapper">
       <div class="login_wrapper_infos">
         <h2>WELCOME BACK CAPTAIN</h2>
         <h3>Log into the game</h3>
 
         <form id="login" method="get">
-          <input type="text" v-model="userInfo.textId" id="Uname" placeholder="Email or Game Tag" />
-          <input type="Password" v-model="userInfo.pwd" id="Pass" placeholder="Password" />
+          <input
+            type="text"
+            v-model="userInfo.textId"
+            id="Uname"
+            placeholder="Email or Game Tag"
+          />
+          <input
+            type="Password"
+            v-model="userInfo.pwd"
+            id="Pass"
+            placeholder="Password"
+          />
           <div class="login_wrapper_infos_buts">
             <div class="login_wrapper_infos_buts_log">
-              <CusButton v-on:click.native="logClick" bCol="blue" bText="Login" />
+              <CusButton
+                v-on:click.native="logClick"
+                bCol="blue"
+                bText="Login"
+              />
             </div>
             <div class="login_wrapper_infos_buts_ca">
               <router-link to="/signup">
@@ -27,23 +42,25 @@
 
 <script>
 import CusButton from "@/components/UI/CusButton.vue";
+import Header from "@/components/UI/Header.vue";
 export default {
   name: "Login",
   components: {
-    CusButton
+    CusButton,
+    Header,
   },
   data() {
     return {
       userInfo: {
         textId: null,
-        pwd: null
+        pwd: null,
       },
-      logInError: null
+      logInError: null,
     };
   },
   mounted() {},
   methods: {
-    logClick: async function() {
+    logClick: async function () {
       let logProm = await this.$store.dispatch("login", this.userInfo);
       console.log(logProm);
       if (logProm.loggedIn) {
@@ -52,8 +69,8 @@ export default {
       } else {
         this.logInError = logProm.message;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="stylus" scoped>
