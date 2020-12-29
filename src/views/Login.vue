@@ -10,15 +10,17 @@
         <h4>Log into the game</h4>
         <br />
         <form id="login" method="get">
-          <input type="text" name="Uname" id="Uname" placeholder="Username" />
-          <br /><br />
+          <input type="text" v-model="userInfo.textId" id="Uname" placeholder="Username" />
+          <br />
+          <br />
 
-          <input type="Password" name="Pass" id="Pass" placeholder="Password" />
-          <br /><br />
+          <input type="Password" v-model="userInfo.pwd" id="Pass" placeholder="Password" />
+          <br />
+          <br />
 
           <div class="login_wrapper_infos_buts">
             <div class="login_wrapper_infos_buts_log">
-              <CusButton bCol="blue" bText="Login" />
+              <CusButton v-on:click.native="logClick" bCol="blue" bText="Login" />
             </div>
             <div class="login_wrapper_infos_buts_ca">
               <CusButton bCol="red" bText="Create account" />
@@ -27,6 +29,7 @@
         </form>
       </div>
     </div>
+    <div class="login_error">{{logInError}}</div>
   </div>
 </template>
 
@@ -35,8 +38,30 @@ import CusButton from "@/components/UI/CusButton.vue";
 export default {
   name: "Login",
   components: {
-    CusButton,
+    CusButton
   },
+  data() {
+    return {
+      userInfo: {
+        textId: null,
+        pwd: null
+      },
+      logInError: null
+    };
+  },
+  mounted() {},
+  methods: {
+    logClick: async function() {
+      let logProm = await this.$store.dispatch("login", this.userInfo);
+      console.log(logProm);
+      if (logProm.loggedIn) {
+        this.$router.push("/DashBoard");
+        this.logInError = logProm.message = null;
+      } else {
+        this.logInError = logProm.message;
+      }
+    }
+  }
 };
 </script>
 <style lang="stylus" scoped>
@@ -97,6 +122,15 @@ export default {
     width: 40px;
     height: 40px;
     margin-right: 10px;
+  }
+
+  &_error {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100vw;
+    text-align: center;
+    color: $neonRed;
   }
 }
 </style>
