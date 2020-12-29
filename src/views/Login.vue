@@ -2,12 +2,12 @@
   <div class="login">
     <div class="login_wrapper">
       <div class="login_wrapper_infos">
-        <h2>WELCOME BACK CAPTAIN</h2>
+        <h2>Welcome back captain</h2>
         <h3>Log into the game</h3>
 
         <form id="login" method="get">
-          <input type="text" v-model="userInfo.textId" id="Uname" placeholder="Email or Game Tag" />
-          <input type="Password" v-model="userInfo.pwd" id="Pass" placeholder="Password" />
+          <input type="text" v-model="userInfo.textId" placeholder="Email or Game Tag" />
+          <input type="Password" v-model="userInfo.pwd" placeholder="Password" />
           <div class="login_wrapper_infos_buts">
             <div class="login_wrapper_infos_buts_log">
               <CusButton v-on:click.native="logClick" bCol="blue" bText="Login" />

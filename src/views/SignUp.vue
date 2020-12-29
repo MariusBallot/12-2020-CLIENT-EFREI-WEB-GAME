@@ -35,19 +35,12 @@
 
           <div class="signup_wrapper_infos_third">
             <div class="signup_wrapper_infos_third_pass">
-              <input
-                type="password"
-                name="Pass"
-                id="Pass"
-                v-model="userInfo.pwd"
-                placeholder="Password"
-              />
+              <input type="password" name="Pass" v-model="userInfo.pwd" placeholder="Password" />
             </div>
             <div class="signup_wrapper_infos_third_conf">
               <input
                 type="password"
                 name="Confirm"
-                id="Confirm"
                 v-model="userInfo.cpwd"
                 placeholder="Confirm Password"
               />
