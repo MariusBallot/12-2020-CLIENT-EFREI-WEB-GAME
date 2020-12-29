@@ -152,6 +152,7 @@ export default {
     border: 1px solid $neonBlue;
     border-radius: 10px;
     padding-left: 8px;
+    padding-bottom: 60px;
     background: transparent;
   }
 
