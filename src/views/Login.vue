@@ -1,5 +1,6 @@
 <template>
   <div class="login">
+    <Header />
     <div class="login_wrapper">
       <div class="login_wrapper_infos">
         <h2>Welcome back captain</h2>
@@ -27,10 +28,12 @@
 
 <script>
 import CusButton from "@/components/UI/CusButton.vue";
+import Header from "@/components/UI/Header.vue";
 export default {
   name: "Login",
   components: {
-    CusButton
+    CusButton,
+    Header
   },
   data() {
     return {
