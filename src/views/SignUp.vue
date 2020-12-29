@@ -93,7 +93,6 @@ export default {
       this.userInfo.icon = id;
     },
     signClick: async function() {
-      console.log(this.userInfo);
       let signProm = await this.$store.dispatch("register", this.userInfo);
       console.log(signProm);
 
