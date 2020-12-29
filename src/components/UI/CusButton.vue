@@ -108,6 +108,10 @@ export default {
       &.red {
         background: $neonRed;
       }
+
+      &.gold {
+        background: $neonGold;
+      }
     }
   }
 
@@ -119,6 +123,11 @@ export default {
   .red {
     color: $neonRed;
     border-color: $neonRed;
+  }
+
+  .gold {
+    color: $neonGold;
+    bordel-color: $neonGold;
   }
 }
 </style>
