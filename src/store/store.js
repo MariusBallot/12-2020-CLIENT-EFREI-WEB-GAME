@@ -11,42 +11,7 @@ export const store = new Vuex.Store({
         users: [],
         currUser: {},
         rewards: {
-            icons: [{
-                name: "ghLogo",
-                locked: false,
-                id: 0,
-                url: "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
-                lvl: 0,
-                description: "un logo gh stylay",
-                author: {
-                    name: "@marius.ballot",
-                    url: "https://www.instagram.com/marius.ballot/"
-                }
-            },
-            {
-                name: "ghLogo",
-                locked: false,
-                id: 1,
-                url: "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
-                lvl: 0,
-                description: "un logo gh stylay",
-                author: {
-                    name: "@marius.ballot",
-                    url: "https://www.instagram.com/marius.ballot/"
-                }
-            },
-            {
-                name: "ghLogo",
-                locked: true,
-                id: 2,
-                url: "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
-                lvl: 2,
-                description: "un logo gh stylay",
-                author: {
-                    name: "@marius.ballot",
-                    url: "https://www.instagram.com/marius.ballot/"
-                }
-            }]
+            icons: []
         }
     },
     mutations: {
@@ -54,16 +19,25 @@ export const store = new Vuex.Store({
             const res = await axios.get(url + '/users')
             state.users = res.data
         },
+        onLoadIcons(state, data) {
+            state.rewards.icons = data
+            console.log(state.rewards.icons)
+        }
 
     },
     actions: {
-        async register(req) {
-
+        async register(state, req) {
+            const res = await axios.post(url + '/register', req)
+            return res.data
         },
         async login(state, req) {
             const res = await axios.post(url + '/login', req)
             state.currUser = res.data.currUser
             return res.data
+        },
+        async loadIcons(context, onLoad) {
+            const res = await axios.get(url + '/icons')
+            this.commit('onLoadIcons', res.data)
         },
     }
 }) 

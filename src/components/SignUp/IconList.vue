@@ -7,7 +7,7 @@
         v-on:click="selected(icon.id)"
         :class="{selected:icon.id===selectedId, locked:icon.locked}"
       >
-        <img :src="icon.url" alt />
+        <img :src="icon.image[0].url" alt />
       </li>
     </ul>
   </div>
@@ -20,18 +20,23 @@ export default {
   name: "IconList",
   data() {
     return {
-      icons: this.$store.state.rewards.icons,
       selectedId: null
     };
   },
-  mounted() {},
+  computed: {
+    icons() {
+      return this.$store.state.rewards.icons;
+    }
+  },
+  mounted() {
+    this.$store.dispatch("loadIcons");
+  },
   methods: {
     selected(id) {
       this.selectedId = id;
       this.$emit("selectedIcon", id);
     }
-  },
-  watch: {}
+  }
 };
 </script>
 

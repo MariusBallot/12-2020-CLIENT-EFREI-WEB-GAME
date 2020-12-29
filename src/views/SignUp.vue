@@ -2,43 +2,61 @@
   <div class="signup">
     <div class="signup_wrapper">
       <div class="signup_wrapper_infos">
-        <h2>BECOME THE BEST</h2>
+        <h2>Become the best</h2>
         <h3>Create an account</h3>
-        <br />
 
         <form id="signup" method="get">
           <div class="signup_wrapper_infos_first">
             <div class="signup_wrapper_infos_first_mail">
-              <input type="text" name="Email" id="Email" placeholder="Email" />
+              <input
+                type="text"
+                name="Email"
+                id="Email"
+                v-model="userInfo.mail"
+                placeholder="Email"
+              />
             </div>
             <div class="signup_wrapper_infos_first_tag">
-              <input type="text" name="Gametag" id="Gametag" placeholder="Game tag" />
-              <br />
-              <br />
+              <input
+                type="text"
+                name="Gametag"
+                id="Gametag"
+                v-model="userInfo.gametag"
+                placeholder="Game tag"
+              />
             </div>
           </div>
           <div class="signup_wrapper_infos_second">
             <div class="signup_wrapper_infos_second_icon">
-              <input type="text" name="Icon" id="Icon" placeholder="Choose your icon" />
-              <br />
-              <br />
+              <p>Choose your icon</p>
+              <IconList @selectedIcon="onSelectedIcon" />
             </div>
           </div>
 
           <div class="signup_wrapper_infos_third">
             <div class="signup_wrapper_infos_third_pass">
-              <input type="password" name="Pass" id="Pass" placeholder="Password" />
+              <input
+                type="password"
+                name="Pass"
+                id="Pass"
+                v-model="userInfo.pwd"
+                placeholder="Password"
+              />
             </div>
             <div class="signup_wrapper_infos_third_conf">
-              <input type="password" name="Confirm" id="Confirm" placeholder="Confirm Password" />
-              <br />
-              <br />
+              <input
+                type="password"
+                name="Confirm"
+                id="Confirm"
+                v-model="userInfo.cpwd"
+                placeholder="Confirm Password"
+              />
             </div>
           </div>
 
           <div class="signup_wrapper_infos_buts">
             <div class="signup_wrapper_infos_buts_go">
-              <CusButton bCol="gold" bText="Let's go" />
+              <CusButton v-on:click.native="signClick" bCol="gold" bText="Let's go" />
             </div>
           </div>
         </form>
@@ -61,10 +79,10 @@ export default {
     return {
       userInfo: {
         mail: null,
-        gameTag: null,
+        gametag: null,
         icon: null,
         pwd: null,
-        cpw: null
+        cpwd: null
       },
       signupError: null
     };
@@ -72,16 +90,18 @@ export default {
   mounted() {},
   methods: {
     onSelectedIcon: function(id) {
-      this.icon = id;
+      this.userInfo.icon = id;
     },
     signClick: async function() {
-      // let logProm = await this.$store.dispatch("signup", this.userInfo);
-      // console.log(logProm);
+      console.log(this.userInfo);
+      let signProm = await this.$store.dispatch("register", this.userInfo);
+      console.log(signProm);
+
       // if (logProm.loggedIn) {
       //   this.$router.push("/DashBoard");
-      //   this.signupError = logProm.message = null;
+      //   this.logInError = logProm.message = null;
       // } else {
-      //   this.signupError = logProm.message;
+      //   this.logInError = logProm.message;
       // }
     }
   }
@@ -100,11 +120,48 @@ export default {
     left: 0;
 
     &_infos {
-      &_buts {
+      width: 800px;
+
+      input {
+        width: 100%;
+        height: 100%;
+        classInputs();
+      }
+
+      &_first {
         display: flex;
         justify-content: space-between;
 
-        &_log, &_ca {
+        &_tag, &_mail {
+          width: 49%;
+          height: 75px;
+        }
+      }
+
+      &_second {
+        &_icon {
+          padding: 10px;
+          margin: 15px 0;
+          classInputs();
+        }
+      }
+
+      &_third {
+        display: flex;
+        justify-content: space-between;
+
+        &_pass, &_conf {
+          width: 49%;
+          height: 75px;
+        }
+      }
+
+      &_buts {
+        display: flex;
+        justify-content: center;
+        margin-top: 15px;
+
+        &_go {
           width: 48%;
           height: 75px;
         }
@@ -119,40 +176,11 @@ export default {
   }
 
   h2 {
-    color: $neonRed;
-    text-align: center;
+    signH2();
   }
 
   h3 {
-    color: $neonBlue;
-    text-align: center;
-  }
-
-  #Gametag, #Email {
-    width: 400px;
-    height: 60px;
-    border: 1px solid $neonBlue;
-    border-radius: 10px;
-    padding-left: 8px;
-    background: transparent;
-  }
-
-  #Icon {
-    width: 800 px;
-    height: 120px;
-    border: 1px solid $neonBlue;
-    border-radius: 10px;
-    padding-left: 8px;
-    background: transparent;
-  }
-
-  #Pass, #Confirm {
-    width: 400px;
-    height: 60px;
-    border: 1px solid $neonBlue;
-    border-radius: 10px;
-    padding-left: 8px;
-    background: transparent;
+    signH3();
   }
 
   &_title {

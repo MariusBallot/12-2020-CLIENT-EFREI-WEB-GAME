@@ -1,43 +1,21 @@
 <template>
   <div class="login">
-    <div class="login_title">
-      <img src="assets/images/faces.png" id="img" />
-      <h1 id="title">THE GAME</h1>
-    </div>
     <div class="login_wrapper">
       <div class="login_wrapper_infos">
         <h2>WELCOME BACK CAPTAIN</h2>
         <h3>Log into the game</h3>
-        <br />
+
         <form id="login" method="get">
-          <input
-            type="text"
-            v-model="userInfo.textId"
-            id="Uname"
-            placeholder="Username"
-          />
-          <br />
-          <br />
-
-          <input
-            type="Password"
-            v-model="userInfo.pwd"
-            id="Pass"
-            placeholder="Password"
-          />
-          <br />
-          <br />
-
+          <input type="text" v-model="userInfo.textId" id="Uname" placeholder="Email or Game Tag" />
+          <input type="Password" v-model="userInfo.pwd" id="Pass" placeholder="Password" />
           <div class="login_wrapper_infos_buts">
             <div class="login_wrapper_infos_buts_log">
-              <CusButton
-                v-on:click.native="logClick"
-                bCol="blue"
-                bText="Login"
-              />
+              <CusButton v-on:click.native="logClick" bCol="blue" bText="Login" />
             </div>
             <div class="login_wrapper_infos_buts_ca">
-              <CusButton bCol="red" bText="Create account" />
+              <router-link to="/signup">
+                <CusButton bCol="red" bText="Create account" />
+              </router-link>
             </div>
           </div>
         </form>
@@ -52,20 +30,20 @@ import CusButton from "@/components/UI/CusButton.vue";
 export default {
   name: "Login",
   components: {
-    CusButton,
+    CusButton
   },
   data() {
     return {
       userInfo: {
         textId: null,
-        pwd: null,
+        pwd: null
       },
-      logInError: null,
+      logInError: null
     };
   },
   mounted() {},
   methods: {
-    logClick: async function () {
+    logClick: async function() {
       let logProm = await this.$store.dispatch("login", this.userInfo);
       console.log(logProm);
       if (logProm.loggedIn) {
@@ -74,8 +52,8 @@ export default {
       } else {
         this.logInError = logProm.message;
       }
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="stylus" scoped>
@@ -91,51 +69,34 @@ export default {
     left: 0;
 
     &_infos {
+      width: 50%;
+
+      input {
+        color: white;
+        width: 100%;
+        height: 60px;
+        classInputs();
+        margin-bottom: 15px;
+      }
+
       &_buts {
         display: flex;
         justify-content: space-between;
 
         &_log, &_ca {
-          width: 48%;
+          width: 49%;
           height: 75px;
         }
       }
     }
   }
 
-  &_title {
-    display: flex;
-    margin-left: 10px;
-    padding-top: 10px;
-  }
-
   h2 {
-    color: $neonRed;
-    text-align: center;
+    signH2();
   }
 
   h3 {
-    color: $neonBlue;
-    text-align: center;
-  }
-
-  input {
-    color: white;
-  }
-
-  #Uname, #Pass {
-    width: 400px;
-    height: 60px;
-    border: 1px solid $neonBlue;
-    border-radius: 10px;
-    padding-left: 8px;
-    background: transparent;
-  }
-
-  #img {
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
+    signH3();
   }
 
   &_error {
