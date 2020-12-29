@@ -29,6 +29,7 @@
         </form>
       </div>
     </div>
+    <div class="login_error">{{logInError}}</div>
   </div>
 </template>
 
@@ -44,14 +45,21 @@ export default {
       userInfo: {
         textId: null,
         pwd: null
-      }
+      },
+      logInError: null
     };
   },
   mounted() {},
   methods: {
-    logClick: function() {
-      console.log(this.userInfo);
-      this.$store.dispatch("login", this.userInfo);
+    logClick: async function() {
+      let logProm = await this.$store.dispatch("login", this.userInfo);
+      console.log(logProm);
+      if (logProm.loggedIn) {
+        this.$router.push("/DashBoard");
+        this.logInError = logProm.message = null;
+      } else {
+        this.logInError = logProm.message;
+      }
     }
   }
 };
@@ -114,6 +122,15 @@ export default {
     width: 40px;
     height: 40px;
     margin-right: 10px;
+  }
+
+  &_error {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100vw;
+    text-align: center;
+    color: $neonRed;
   }
 }
 </style>

@@ -12,19 +12,20 @@ export const store = new Vuex.Store({
         currUser: {}
     },
     mutations: {
-        async loadUser() {
+        async loadUser(state) {
             const res = await axios.get(url + '/users')
-            let users = res.data
+            state.users = res.data
         },
 
     },
     actions: {
-        register(req) {
+        async register(req) {
 
         },
         async login(state, req) {
-            const res = await axios.get(url + '/users')
-            console.log(res.data)
+            const res = await axios.post(url + '/login', req)
+            state.currUser = res.data.currUser
+            return res.data
         },
     }
 }) 
