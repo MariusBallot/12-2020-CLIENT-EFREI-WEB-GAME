@@ -2,25 +2,43 @@
   <div class="signup">
     <div class="signup_wrapper">
       <div class="signup_wrapper_infos">
-        <h2>Become the best</h2>
-        <h3>Log into the game</h3>
+        <h2>BECOME THE BEST</h2>
+        <h3>Create an account</h3>
         <br />
+
         <form id="signup" method="get">
-          <div class="signup_wrapper_infos_ids">
-            <input type="text" v-model="userInfo.mail" placeholder="Email" />
-            <input type="Password" v-model="userInfo.gameTag" placeholder="Game Tag" />
+          <div class="signup_wrapper_infos_first">
+            <div class="signup_wrapper_infos_first_mail">
+              <input type="text" name="Email" id="Email" placeholder="Email" />
+            </div>
+            <div class="signup_wrapper_infos_first_tag">
+              <input type="text" name="Gametag" id="Gametag" placeholder="Game tag" />
+              <br />
+              <br />
+            </div>
           </div>
-          <div class="signup_wrapper_infos_icons">
-            <h4>Choose your icon</h4>
-            <IconList @selectedIcon="onSelectedIcon" />
+          <div class="signup_wrapper_infos_second">
+            <div class="signup_wrapper_infos_second_icon">
+              <input type="text" name="Icon" id="Icon" placeholder="Choose your icon" />
+              <br />
+              <br />
+            </div>
           </div>
 
-          <div class="signup_wrapper_infos_pwd">
-            <input type="text" v-model="userInfo.pwd" placeholder="Username" />
-            <input type="text" v-model="userInfo.cpwd" placeholder="Username" />
+          <div class="signup_wrapper_infos_third">
+            <div class="signup_wrapper_infos_third_pass">
+              <input type="password" name="Pass" id="Pass" placeholder="Password" />
+            </div>
+            <div class="signup_wrapper_infos_third_conf">
+              <input type="password" name="Confirm" id="Confirm" placeholder="Confirm Password" />
+              <br />
+              <br />
+            </div>
+          </div>
 
-            <div class="signup_wrapper_infos_buts_log">
-              <CusButton v-on:click.native="signClick" bCol="blue" bText="Let's go" />
+          <div class="signup_wrapper_infos_buts">
+            <div class="signup_wrapper_infos_buts_go">
+              <CusButton bCol="gold" bText="Let's go" />
             </div>
           </div>
         </form>
@@ -110,11 +128,7 @@ export default {
     text-align: center;
   }
 
-  input {
-    color: white;
-  }
-
-  #Uname, #Pass {
+  #Gametag, #Email {
     width: 400px;
     height: 60px;
     border: 1px solid $neonBlue;
@@ -123,19 +137,38 @@ export default {
     background: transparent;
   }
 
+  #Icon {
+    width: 800 px;
+    height: 120px;
+    border: 1px solid $neonBlue;
+    border-radius: 10px;
+    padding-left: 8px;
+    background: transparent;
+  }
+
+  #Pass, #Confirm {
+    width: 400px;
+    height: 60px;
+    border: 1px solid $neonBlue;
+    border-radius: 10px;
+    padding-left: 8px;
+    background: transparent;
+  }
+
+  &_title {
+    display: flex;
+    margin-left: 10px;
+    padding-top: 10px;
+  }
+
   #img {
     width: 40px;
     height: 40px;
     margin-right: 10px;
   }
 
-  &_error {
-    position: absolute;
-    bottom: 10px;
-    left: 0;
-    width: 100vw;
-    text-align: center;
-    color: $neonRed;
+  input {
+    color: white;
   }
 }
 </style>

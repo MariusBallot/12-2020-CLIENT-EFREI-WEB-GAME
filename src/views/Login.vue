@@ -10,17 +10,31 @@
         <h3>Log into the game</h3>
         <br />
         <form id="login" method="get">
-          <input type="text" v-model="userInfo.textId" id="Uname" placeholder="Username" />
+          <input
+            type="text"
+            v-model="userInfo.textId"
+            id="Uname"
+            placeholder="Username"
+          />
           <br />
           <br />
 
-          <input type="Password" v-model="userInfo.pwd" id="Pass" placeholder="Password" />
+          <input
+            type="Password"
+            v-model="userInfo.pwd"
+            id="Pass"
+            placeholder="Password"
+          />
           <br />
           <br />
 
           <div class="login_wrapper_infos_buts">
             <div class="login_wrapper_infos_buts_log">
-              <CusButton v-on:click.native="logClick" bCol="blue" bText="Login" />
+              <CusButton
+                v-on:click.native="logClick"
+                bCol="blue"
+                bText="Login"
+              />
             </div>
             <div class="login_wrapper_infos_buts_ca">
               <CusButton bCol="red" bText="Create account" />
@@ -29,7 +43,7 @@
         </form>
       </div>
     </div>
-    <div class="login_error">{{logInError}}</div>
+    <div class="login_error">{{ logInError }}</div>
   </div>
 </template>
 
@@ -38,20 +52,20 @@ import CusButton from "@/components/UI/CusButton.vue";
 export default {
   name: "Login",
   components: {
-    CusButton
+    CusButton,
   },
   data() {
     return {
       userInfo: {
         textId: null,
-        pwd: null
+        pwd: null,
       },
-      logInError: null
+      logInError: null,
     };
   },
   mounted() {},
   methods: {
-    logClick: async function() {
+    logClick: async function () {
       let logProm = await this.$store.dispatch("login", this.userInfo);
       console.log(logProm);
       if (logProm.loggedIn) {
@@ -60,8 +74,8 @@ export default {
       } else {
         this.logInError = logProm.message;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="stylus" scoped>
