@@ -26,12 +26,34 @@
             </div>
           </div>
           <div class="signup_wrapper_infos_second">
-            <input
-              type="text"
-              name="Icon"
-              id="Icon"
-              placeholder="Choose your icon"
-            />
+            <div class="signup_wrapper_infos_second_icon">
+              <input
+                type="text"
+                name="Icon"
+                id="Icon"
+                placeholder="Choose your icon"
+              /><br /><br />
+            </div>
+          </div>
+
+          <div class="signup_wrapper_infos_third">
+            <div class="signup_wrapper_infos_third_pass">
+              <input
+                type="password"
+                name="Pass"
+                id="Pass"
+                placeholder="Password"
+              />
+            </div>
+            <div class="signup_wrapper_infos_third_conf">
+              <input
+                type="password"
+                name="Confirm"
+                id="Confirm"
+                placeholder="Confirm Password"
+              />
+              <br /><br />
+            </div>
           </div>
 
           <div class="signup_wrapper_infos_buts">
@@ -82,6 +104,26 @@ export default {
         display: flex;
         justify-content: center;
       }
+
+      &_third {
+        display: flex;
+        justify-content: space-between;
+
+        &_pass, &_conf {
+          width: 48%;
+          height: 75px;
+        }
+      }
+
+      &_buts {
+        display: flex;
+        justify-content: center;
+
+        &_go {
+          width: 48%;
+          height: 75px;
+        }
+      }
     }
   }
 
@@ -107,6 +149,15 @@ export default {
   #Icon {
     width: 800 px;
     height: 120px;
+    border: 1px solid $neonBlue;
+    border-radius: 10px;
+    padding-left: 8px;
+    background: transparent;
+  }
+
+  #Pass, #Confirm {
+    width: 400px;
+    height: 60px;
     border: 1px solid $neonBlue;
     border-radius: 10px;
     padding-left: 8px;
