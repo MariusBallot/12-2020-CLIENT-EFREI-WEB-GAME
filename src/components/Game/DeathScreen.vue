@@ -84,8 +84,7 @@ $animTime = 0.3s;
   &_wrapper {
     width: 100%;
     height: 100%;
-    border-radius: 50px;
-    border: solid $neonBlue 2px;
+    neonBorder();
     display: flex;
     flex-direction: column;
     justify-content: center;

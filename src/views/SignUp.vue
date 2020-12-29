@@ -50,30 +50,29 @@
 
           <div class="signup_wrapper_infos_buts">
             <div class="signup_wrapper_infos_buts_go">
-              <CusButton
-                v-on:click.native="signClick"
-                bCol="gold"
-                bText="Let's go"
-              />
+              <CusButton v-on:click.native="signClick" bCol="gold" bText="Let's go" />
             </div>
           </div>
         </form>
       </div>
     </div>
     <div class="signup_error">{{ signupError }}</div>
+    <Validated :name="userInfo.gametag" v-if="registered" />
   </div>
 </template>
 
 <script>
 import CusButton from "@/components/UI/CusButton.vue";
 import IconList from "@/components/SignUp/IconList.vue";
+import Validated from "@/components/SignUp/Validated.vue";
 import Header from "@/components/UI/Header.vue";
 export default {
   name: "Signup",
   components: {
     CusButton,
     IconList,
-    Header,
+    Validated,
+    Header
   },
   data() {
     return {
@@ -82,28 +81,23 @@ export default {
         gametag: null,
         icon: null,
         pwd: null,
-        cpwd: null,
+        cpwd: null
       },
       signupError: null,
+      registered: false
     };
   },
   mounted() {},
   methods: {
-    onSelectedIcon: function (id) {
+    onSelectedIcon: function(id) {
       this.userInfo.icon = id;
     },
-    signClick: async function () {
+    signClick: async function() {
+      if (this.registered) return;
       let signProm = await this.$store.dispatch("register", this.userInfo);
-      console.log(signProm);
-
-      // if (logProm.loggedIn) {
-      //   this.$router.push("/DashBoard");
-      //   this.logInError = logProm.message = null;
-      // } else {
-      //   this.logInError = logProm.message;
-      // }
-    },
-  },
+      this.registered = signProm.registered;
+    }
+  }
 };
 </script>
 <style lang="stylus" scoped>
