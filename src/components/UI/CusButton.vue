@@ -19,41 +19,41 @@
 import { TweenLite } from "gsap";
 
 export default {
-  name: "ProgressBar",
+  name: "CusButton",
   props: {
     bText: null,
-    bCol: null,
+    bCol: null
   },
   mounted() {},
   methods: {
     onMouseIn() {
       TweenLite.to(this.$refs.filler, 0.2, {
-        top: "0",
+        top: "0"
       });
       TweenLite.to(this.$refs.fillerText, 0.2, {
         opacity: "1",
         y: 0,
-        delay: 0.2,
+        delay: 0.2
       });
       TweenLite.to(this.$refs.preText, 0.2, {
-        opacity: "0",
+        opacity: "0"
       });
     },
     onMouseOut() {
       TweenLite.to(this.$refs.filler, 0.2, {
-        top: "100%",
+        top: "100%"
       });
       TweenLite.to(this.$refs.fillerText, 0.2, {
         opacity: "0",
         y: 20,
-        delay: 0.2,
+        delay: 0.2
       });
       TweenLite.to(this.$refs.preText, 0.2, {
-        opacity: "1",
+        opacity: "1"
       });
-    },
+    }
   },
-  watch: {},
+  watch: {}
 };
 </script>
 

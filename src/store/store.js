@@ -9,7 +9,45 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
     state: {
         users: [],
-        currUser: {}
+        currUser: {},
+        rewards: {
+            icons: [{
+                name: "ghLogo",
+                locked: false,
+                id: 0,
+                url: "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
+                lvl: 0,
+                description: "un logo gh stylay",
+                author: {
+                    name: "@marius.ballot",
+                    url: "https://www.instagram.com/marius.ballot/"
+                }
+            },
+            {
+                name: "ghLogo",
+                locked: false,
+                id: 1,
+                url: "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
+                lvl: 0,
+                description: "un logo gh stylay",
+                author: {
+                    name: "@marius.ballot",
+                    url: "https://www.instagram.com/marius.ballot/"
+                }
+            },
+            {
+                name: "ghLogo",
+                locked: true,
+                id: 2,
+                url: "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
+                lvl: 2,
+                description: "un logo gh stylay",
+                author: {
+                    name: "@marius.ballot",
+                    url: "https://www.instagram.com/marius.ballot/"
+                }
+            }]
+        }
     },
     mutations: {
         async loadUser(state) {

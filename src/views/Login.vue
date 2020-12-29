@@ -7,7 +7,7 @@
     <div class="login_wrapper">
       <div class="login_wrapper_infos">
         <h2>WELCOME BACK CAPTAIN</h2>
-        <h4>Log into the game</h4>
+        <h3>Log into the game</h3>
         <br />
         <form id="login" method="get">
           <input type="text" v-model="userInfo.textId" id="Uname" placeholder="Username" />
@@ -100,7 +100,7 @@ export default {
     text-align: center;
   }
 
-  h4 {
+  h3 {
     color: $neonBlue;
     text-align: center;
   }
