@@ -10,11 +10,11 @@ import Header from "@/components/UI/Header.vue";
 
 export default {
   components: {
-    Header,
+    Header
   },
   created() {
-    this.$store.dispatch("loadCurrUser");
-  },
+    // this.$store.dispatch("loadCurrUser");
+  }
 };
 </script>
 
