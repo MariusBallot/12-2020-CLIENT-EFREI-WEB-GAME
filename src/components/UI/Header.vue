@@ -15,16 +15,16 @@ export default {
 .header {
   display: flex;
   justify-content: flex-start;
-}
 
-#img {
-  width: 63px;
-  height: 63px;
-  margin: 20px;
-}
+  #img {
+    width: 63px;
+    height: 63px;
+    margin: 20px;
+  }
 
-h1 {
-  padding-top: 33px;
-  text-transform: uppercase;
+  h1 {
+    padding-top: 33px;
+    text-transform: uppercase;
+  }
 }
 </style>
