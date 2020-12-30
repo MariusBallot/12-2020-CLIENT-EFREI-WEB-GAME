@@ -22,11 +22,11 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.header {
+.header_left {
   display: flex;
   justify-content: flex-start;
 
-  #img {
+  &_logo {
     width: 63px;
     height: 63px;
     margin: 20px;
