@@ -4,7 +4,7 @@
       <img class="header_left_logo" src="/assets/images/faces.png" />
       <h1>the game</h1>
     </div>
-    <div class="header_right">
+    <div v-if="currUser != null" class="header_right">
       <h1>{{ currUser.gametag }}</h1>
     </div>
   </div>

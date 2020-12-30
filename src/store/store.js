@@ -16,8 +16,8 @@ export const store = new Vuex.Store({
     },
     mutations: {
         onLoadCurrUser(state, data) {
-            state.currUser = data.user
-            console.log(state.currUser)
+            state.currUser = data.currUser
+            console.log(state)
         },
         onLoadIcons(state, data) {
             state.rewards.icons = data
@@ -26,21 +26,23 @@ export const store = new Vuex.Store({
 
     },
     actions: {
-        async register(state, req) {
+        async register(context, req) {
             const res = await axios.post(url + '/register', req)
             return res.data
         },
-        async login(state, req) {
+        async login(context, req) {
             const res = await axios.post(url + '/login', req)
-            state.currUser = res.data.currUser
+            // this.commit('onLoadCurrUser', res.data)
+
             return res.data
         },
-        async loadIcons(context, onLoad) {
+        async loadIcons(context) {
             const res = await axios.get(url + '/icons')
             this.commit('onLoadIcons', res.data)
         },
-        async loadCurrUser(context, onLoad) {
+        async loadCurrUser(context) {
             const res = await axios.get(url + '/user')
+            console.log(res.data)
             this.commit('onLoadCurrUser', res.data)
         },
     }

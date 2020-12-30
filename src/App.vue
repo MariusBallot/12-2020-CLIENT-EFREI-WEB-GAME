@@ -12,6 +12,9 @@ export default {
   components: {
     Header,
   },
+  created() {
+    this.$store.dispatch("loadCurrUser");
+  },
 };
 </script>
 

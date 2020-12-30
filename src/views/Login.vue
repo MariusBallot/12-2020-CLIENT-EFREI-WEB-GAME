@@ -1,6 +1,5 @@
 <template>
   <div class="login">
-    <Header />
     <div class="login_wrapper">
       <div class="login_wrapper_infos">
         <h2>Welcome back captain</h2>
@@ -60,11 +59,9 @@ export default {
   methods: {
     logClick: async function () {
       let logProm = await this.$store.dispatch("login", this.userInfo);
-      console.log(logProm);
       if (logProm.loggedIn) {
-        this.$store.dispatch("login", this.userInfo);
-        this.$router.push("/DashBoard");
         this.logInError = logProm.message = null;
+        this.$router.push("/");
       } else {
         this.logInError = logProm.message;
       }
