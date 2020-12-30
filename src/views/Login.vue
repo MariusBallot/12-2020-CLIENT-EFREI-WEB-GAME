@@ -7,11 +7,23 @@
         <h3>Log into the game</h3>
 
         <form id="login" method="get">
-          <input type="text" v-model="userInfo.textId" placeholder="Email or Game Tag" />
-          <input type="Password" v-model="userInfo.pwd" placeholder="Password" />
+          <input
+            type="text"
+            v-model="userInfo.textId"
+            placeholder="Email or Game Tag"
+          />
+          <input
+            type="Password"
+            v-model="userInfo.pwd"
+            placeholder="Password"
+          />
           <div class="login_wrapper_infos_buts">
             <div class="login_wrapper_infos_buts_log">
-              <CusButton v-on:click.native="logClick" bCol="blue" bText="Login" />
+              <CusButton
+                v-on:click.native="logClick"
+                bCol="blue"
+                bText="Login"
+              />
             </div>
             <div class="login_wrapper_infos_buts_ca">
               <router-link to="/signup">
@@ -33,30 +45,31 @@ export default {
   name: "Login",
   components: {
     CusButton,
-    Header
+    Header,
   },
   data() {
     return {
       userInfo: {
         textId: null,
-        pwd: null
+        pwd: null,
       },
-      logInError: null
+      logInError: null,
     };
   },
   mounted() {},
   methods: {
-    logClick: async function() {
+    logClick: async function () {
       let logProm = await this.$store.dispatch("login", this.userInfo);
       console.log(logProm);
       if (logProm.loggedIn) {
+        this.$store.dispatch("login", this.userInfo);
         this.$router.push("/DashBoard");
         this.logInError = logProm.message = null;
       } else {
         this.logInError = logProm.message;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="stylus" scoped>
