@@ -26,7 +26,7 @@ export default {
   display: flex;
   justify-content: flex-start;
 
-  &_logo {
+  #img {
     width: 63px;
     height: 63px;
     margin: 20px;
