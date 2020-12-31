@@ -9,7 +9,7 @@
         <p class="header_right_gt">{{ currUser.gametag }}</p>
         <p class="header_right_setting">Profile settings</p>
       </div>
-      <div>
+      <div class="header_right_icon">
         <img v-if="currUser.iconObj" :src="currUser.iconObj.image[0].url" />
       </div>
     </div>
@@ -57,6 +57,25 @@ export default {
   }
 
   &_right {
+    display: flex;
+    align-items: center;
+
+    &_icon {
+      width: 70px;
+      height: 70px;
+      overflow: hidden;
+      border-radius: 100%;
+      margin-left: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        width: 110%;
+        height: auto;
+      }
+    }
+
     h4 {
       font-weight: 400;
     }

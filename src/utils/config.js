@@ -1,6 +1,6 @@
 const config = {
     matterDebug: false,
-    fakeUser: true
+    fakeUser: false
 }
 
 export default config;
