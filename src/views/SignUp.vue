@@ -1,6 +1,5 @@
 <template>
   <div class="signup">
-    <Header />
     <div class="signup_wrapper">
       <div class="signup_wrapper_infos">
         <h2>Become the best</h2>
@@ -36,7 +35,12 @@
 
           <div class="signup_wrapper_infos_third">
             <div class="signup_wrapper_infos_third_pass">
-              <input type="password" name="Pass" v-model="userInfo.pwd" placeholder="Password" />
+              <input
+                type="password"
+                name="Pass"
+                v-model="userInfo.pwd"
+                placeholder="Password"
+              />
             </div>
             <div class="signup_wrapper_infos_third_conf">
               <input
@@ -50,7 +54,11 @@
 
           <div class="signup_wrapper_infos_buts">
             <div class="signup_wrapper_infos_buts_go">
-              <CusButton v-on:click.native="signClick" bCol="gold" bText="Let's go" />
+              <CusButton
+                v-on:click.native="signClick"
+                bCol="gold"
+                bText="Let's go"
+              />
             </div>
           </div>
         </form>
@@ -72,7 +80,7 @@ export default {
     CusButton,
     IconList,
     Validated,
-    Header
+    Header,
   },
   data() {
     return {
@@ -81,23 +89,23 @@ export default {
         gametag: null,
         icon: null,
         pwd: null,
-        cpwd: null
+        cpwd: null,
       },
       signupError: null,
-      registered: false
+      registered: false,
     };
   },
   mounted() {},
   methods: {
-    onSelectedIcon: function(id) {
+    onSelectedIcon: function (id) {
       this.userInfo.icon = id;
     },
-    signClick: async function() {
+    signClick: async function () {
       if (this.registered) return;
       let signProm = await this.$store.dispatch("register", this.userInfo);
       this.registered = signProm.registered;
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="stylus" scoped>
