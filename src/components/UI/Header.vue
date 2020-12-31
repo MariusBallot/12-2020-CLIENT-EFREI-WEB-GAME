@@ -35,6 +35,9 @@ export default {
 
 <style lang="stylus" scoped>
 .header {
+  position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
   justify-content: space-between;
   width: 100vw;

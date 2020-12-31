@@ -24,38 +24,38 @@ function authValidation(to, from, next) {
 const routes = [
   {
     path: '/',
-    name: 'DashBoard',
+    name: 'dashBoard',
     component: DashBoard,
     beforeEnter: authValidation
   },
   {
-    path: '/Game',
-    name: 'Game',
+    path: '/game',
+    name: 'game',
     component: Game
   },
   {
-    path: '/Login',
-    name: 'Login',
+    path: '/login',
+    name: 'login',
     component: Login
   },
   {
-    path: '/LeaderBoard',
-    name: 'LeaderBoard',
+    path: '/leaderBoard',
+    name: 'leaderBoard',
     component: LeaderBoard
   },
   {
-    path: '/Rewards',
-    name: 'Rewards',
+    path: '/rewards',
+    name: 'rewards',
     component: Rewards
   },
   {
-    path: '/SignUp',
-    name: 'SignUp',
+    path: '/signUp',
+    name: 'signUp',
     component: SignUp
   },
   {
-    path: '/Tutorial',
-    name: 'Tutorial',
+    path: '/tutorial',
+    name: 'tutorial',
     component: Tutorial
   },
 

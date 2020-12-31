@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header />
+    <Header v-if="!(['game'].indexOf($route.name) == 0)" />
     <router-view />
   </div>
 </template>
