@@ -1,13 +1,19 @@
 <template>
-  <div class="header">
+  <header class="header">
     <div class="header_left">
       <img class="header_left_logo" src="/assets/images/faces.png" />
       <h1>the game</h1>
     </div>
     <div v-if="currUser != null" class="header_right">
-      <h1>{{ currUser.gametag }}</h1>
+      <div class="header_right_text">
+        <p class="header_right_gt">{{ currUser.gametag }}</p>
+        <p class="header_right_setting">Profile settings</p>
+      </div>
+      <div>
+        <img v-if="currUser.iconObj" :src="currUser.iconObj.image[0].url" />
+      </div>
     </div>
-  </div>
+  </header>
 </template>
 
 <script>
@@ -17,24 +23,43 @@ export default {
     currUser() {
       return this.$store.state.currUser;
     },
+    icons() {
+      return this.$store.state.rewards.icons;
+    }
   },
+  created() {
+    this.$store.dispatch("loadIcons");
+  }
 };
 </script>
 
 <style lang="stylus" scoped>
-.header_left {
+.header {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
+  width: 100vw;
+  padding: $headerPadding;
 
-  &_logo {
-    width: 63px;
-    height: 63px;
-    margin: 20px;
+  &_left {
+    display: flex;
+    align-items: center;
+
+    &_logo {
+      width: 63px;
+      height: 63px;
+      margin-right: 10px;
+    }
+
+    h1 {
+      text-transform: uppercase;
+      font-weight: 400;
+    }
   }
 
-  h1 {
-    padding-top: 33px;
-    text-transform: uppercase;
+  &_right {
+    h4 {
+      font-weight: 400;
+    }
   }
 }
 </style>
