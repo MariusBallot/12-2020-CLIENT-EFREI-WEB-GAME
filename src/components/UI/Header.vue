@@ -6,8 +6,10 @@
     </div>
     <div v-if="currUser != null" class="header_right">
       <div class="header_right_text">
-        <p class="header_right_gt">{{ currUser.gametag }}</p>
-        <p class="header_right_setting">Profile settings</p>
+        <p class="header_right_text_gt">{{ currUser.gametag }}</p>
+        <p class="header_right_text_setting">
+          <router-link to="/profileSetting">Profile settings</router-link>
+        </p>
       </div>
       <div class="header_right_icon">
         <img v-if="currUser.iconObj" :src="currUser.iconObj.image[0].url" />
@@ -62,6 +64,22 @@ export default {
   &_right {
     display: flex;
     align-items: center;
+
+    &_text {
+      &_gt {
+        font-size: 2em;
+      }
+
+      &_setting {
+        text-align: right;
+        color: $neonRed;
+        text-decoration: underline;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
 
     &_icon {
       width: 70px;

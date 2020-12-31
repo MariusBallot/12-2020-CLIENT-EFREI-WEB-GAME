@@ -9,11 +9,11 @@ import LeaderBoard from '../views/LeaderBoard.vue'
 import Rewards from '../views/Rewards.vue'
 import Tutorial from '../views/Tutorial.vue'
 import SignUp from '../views/SignUp.vue'
+import ProfileSettings from '../views/ProfileSettings.vue'
 
 Vue.use(VueRouter)
 
 function authValidation(to, from, next) {
-  console.log(store.state.currUser)
   if (store.state.currUser.id == undefined) {
     next('Login')
   } else {
@@ -23,6 +23,16 @@ function authValidation(to, from, next) {
 
 const routes = [
   {
+    path: '/login',
+    name: 'login',
+    component: Login
+  },
+  {
+    path: '/signUp',
+    name: 'signUp',
+    component: SignUp
+  },
+  {
     path: '/',
     name: 'dashBoard',
     component: DashBoard,
@@ -31,32 +41,35 @@ const routes = [
   {
     path: '/game',
     name: 'game',
-    component: Game
-  },
-  {
-    path: '/login',
-    name: 'login',
-    component: Login
+    component: Game,
+    beforeEnter: authValidation
+
   },
   {
     path: '/leaderBoard',
     name: 'leaderBoard',
-    component: LeaderBoard
+    component: LeaderBoard,
+    beforeEnter: authValidation
+
   },
   {
     path: '/rewards',
     name: 'rewards',
-    component: Rewards
+    component: Rewards,
+    beforeEnter: authValidation
+
   },
-  {
-    path: '/signUp',
-    name: 'signUp',
-    component: SignUp
-  },
+
   {
     path: '/tutorial',
     name: 'tutorial',
     component: Tutorial
+  },
+  {
+    path: '/profileSetting',
+    name: 'profileSetting',
+    component: ProfileSettings,
+    beforeEnter: authValidation
   },
 
 ]

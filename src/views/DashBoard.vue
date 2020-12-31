@@ -4,7 +4,8 @@
       <div class="dashboard_wrapper_title">
         <h2>dashboard</h2>
         <h3>Lets' get involved</h3>
-        <br /><br />
+        <br />
+        <br />
       </div>
       <div class="dashboard_wrapper_infos">
         <div class="dashboard_wrapper_infos_profil">
@@ -13,15 +14,19 @@
           </div>
           <div class="dashboard_wrapper_infos_profil_prog">
             <div class="dashboard_wrapper_infos_profil_prog_oui">
-              <span>Identity : </span><br />
-              <span>Level : </span><br />
-              <span>Progress : </span><br />
-              <span>Personal Best : </span>
+              <span>Identity :</span>
+              <br />
+              <span>Level :</span>
+              <br />
+              <span>Progress :</span>
+              <br />
+              <span>Personal Best :</span>
             </div>
           </div>
         </div>
       </div>
-      <br /><br />
+      <br />
+      <br />
       <div class="dashboard_wrapper_buts">
         <div class="dashboard_wrapper_buts_lead">
           <CusButton bCol="blue" bText="Leaderboard" />
@@ -42,8 +47,8 @@ import CusButton from "@/components/UI/CusButton.vue";
 export default {
   name: "DashBoard",
   components: {
-    CusButton,
-  },
+    CusButton
+  }
 };
 </script>
 
@@ -56,9 +61,6 @@ export default {
     flex-direction: column;
     height: 100vh;
     width: 100vw;
-    position: absolute;
-    top: 0;
-    left: 0;
 
     &_infos {
       &_profil {
