@@ -14,7 +14,7 @@ import ProfileSettings from '../views/ProfileSettings.vue'
 Vue.use(VueRouter)
 
 function authValidation(to, from, next) {
-  if (store.state.currUser.id == undefined) {
+  if (store.state.currUser == null) {
     next('Login')
   } else {
     next()
