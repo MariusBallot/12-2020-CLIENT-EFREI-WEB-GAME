@@ -49,6 +49,7 @@ export const store = new Vuex.Store({
             if (!userRes.data.loggedIn)
                 return
             let currUser = userRes.data.currUser
+            console.log("coucou");
             const userIconRes = await axios.get(url + '/icon/' + currUser.icon)
             currUser.iconObj = userIconRes.data
             this.commit('onLoadCurrUser', currUser)
