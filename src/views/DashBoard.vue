@@ -14,13 +14,13 @@
           </div>
           <div class="dashboard_wrapper_infos_profil_prog">
             <div class="dashboard_wrapper_infos_profil_prog_oui">
-              <span>Identity :</span>
+              <span>Identity : {{ currUser.gametag }}</span>
               <br />
-              <span>Level :</span>
+              <span>Level : {{ currUser.level }}</span>
               <br />
               <span>Progress :</span>
               <br />
-              <span>Personal Best :</span>
+              <span>Personal Best : {{ currUser.personalbest }}</span>
             </div>
           </div>
         </div>
@@ -46,9 +46,14 @@
 import CusButton from "@/components/UI/CusButton.vue";
 export default {
   name: "DashBoard",
+  computed: {
+    currUser() {
+      return this.$store.state.currUser;
+    },
+  },
   components: {
-    CusButton
-  }
+    CusButton,
+  },
 };
 </script>
 
@@ -77,7 +82,7 @@ export default {
     &_buts {
       display: flex;
       justify-content: space-between;
-      width: 40%;
+      width: 80vw;
 
       &_lead, &_play, &_rewards {
         height: 75px;
