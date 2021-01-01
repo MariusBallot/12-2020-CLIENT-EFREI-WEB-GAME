@@ -43,7 +43,9 @@
         <a href="#">How to play</a>
       </div>
       <div class="dashboard_wrapper_bot">
-        <span>Disconnect</span><span>|</span><span>Credits</span>
+        <div class="dashboard_wrapper_bot_right">
+          <span>Disconnect</span><span>|</span><span>Credits</span>
+        </div>
       </div>
     </div>
   </div>
@@ -110,14 +112,13 @@ export default {
       justify-content: flex-end;
       align-items: flex-end;
       width: 100vw;
-      height: 100vh;
-      position: absolute;
       color: $neonRed;
-      margin-bottom: 20px;
-      margin-right: 20px;
+      margin-right: 75px;
 
-      span {
-        margin: 3px;
+      &_right {
+        span {
+          margin: 3px;
+        }
       }
     }
   }
