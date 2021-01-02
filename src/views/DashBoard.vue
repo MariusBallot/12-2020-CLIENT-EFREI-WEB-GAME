@@ -41,7 +41,6 @@
       <br />
       <div class="dashboard_wrapper_htp">
         <a href="#">How to play</a>
-        <br /><br /><br /><br />
       </div>
 
       <div class="dashboard_wrapper_bot">
