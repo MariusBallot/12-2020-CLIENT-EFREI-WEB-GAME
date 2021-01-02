@@ -2,15 +2,18 @@
   <div id="app">
     <Header v-if="!(['game'].indexOf($route.name) == 0)" />
     <router-view />
+    <Footer v-if="!(['game'].indexOf($route.name) == 0)" />
   </div>
 </template>
 
 <script>
 import Header from "@/components/UI/Header.vue";
+import Footer from "@/components/UI/Footer.vue";
 
 export default {
   components: {
-    Header
+    Header,
+    Footer
   },
   created() {}
 };
