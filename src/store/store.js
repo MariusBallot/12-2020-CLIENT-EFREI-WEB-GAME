@@ -20,6 +20,9 @@ export const store = new Vuex.Store({
 
         onLoadIcons(state, data) {
             state.rewards.icons = data
+        },
+        onLogOut(state) {
+            state.currUser = null
         }
 
     },
@@ -52,6 +55,13 @@ export const store = new Vuex.Store({
             const userIconRes = await axios.get('/api/icon/' + currUser.icon)
             currUser.iconObj = userIconRes.data
             this.commit('onLoadCurrUser', currUser)
+        },
+        async logOut(context) {
+            const userRes = await axios.post('/api/logout')
+            if (!userRes.data.loggedOut)
+                return
+            this.commit('onLogOut')
+            return userRes.data
         },
     }
 })

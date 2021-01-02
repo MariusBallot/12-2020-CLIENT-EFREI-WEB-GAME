@@ -1,7 +1,13 @@
 <template>
   <footer class="footer">
     <nav class="footer_nav">
-      <router-link to class="footer_nav_logout">Log out</router-link>
+      <router-link
+        v-if="!(currUser == null)"
+        @click.native="logOut"
+        to
+        class="footer_nav_logout navChild"
+      >Log out</router-link>
+      <span v-if="!(currUser == null)" class="navChild">|</span>
       <router-link to class="footer_nav_credits">Credits</router-link>
     </nav>
   </footer>
@@ -15,6 +21,12 @@ export default {
       return this.$store.state.currUser;
     }
   },
+  methods: {
+    logOut: async function() {
+      let prom = await this.$store.dispatch("logOut");
+      if (prom.loggedOut) this.$router.push("/login");
+    }
+  },
   created() {}
 };
 </script>
@@ -26,5 +38,17 @@ export default {
   right: 0;
   padding: $headerPadding;
   color: $neonRed;
+
+  &_nav {
+    display: flex;
+
+    a {
+      text-decoration: underline;
+    }
+
+    .navChild {
+      margin-right: 10px;
+    }
+  }
 }
 </style>

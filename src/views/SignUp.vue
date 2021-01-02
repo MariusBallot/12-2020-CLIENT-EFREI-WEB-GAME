@@ -35,12 +35,7 @@
 
           <div class="signup_wrapper_infos_third">
             <div class="signup_wrapper_infos_third_pass">
-              <input
-                type="password"
-                name="Pass"
-                v-model="userInfo.pwd"
-                placeholder="Password"
-              />
+              <input type="password" name="Pass" v-model="userInfo.pwd" placeholder="Password" />
             </div>
             <div class="signup_wrapper_infos_third_conf">
               <input
@@ -54,11 +49,7 @@
 
           <div class="signup_wrapper_infos_buts">
             <div class="signup_wrapper_infos_buts_go">
-              <CusButton
-                v-on:click.native="signClick"
-                bCol="gold"
-                bText="Let's go"
-              />
+              <CusButton v-on:click.native="signClick" bCol="gold" bText="Let's go" />
             </div>
           </div>
         </form>
@@ -80,7 +71,7 @@ export default {
     CusButton,
     IconList,
     Validated,
-    Header,
+    Header
   },
   data() {
     return {
@@ -89,23 +80,24 @@ export default {
         gametag: null,
         icon: null,
         pwd: null,
-        cpwd: null,
+        cpwd: null
       },
       signupError: null,
-      registered: false,
+      registered: false
     };
   },
   mounted() {},
   methods: {
-    onSelectedIcon: function (id) {
+    onSelectedIcon: function(id) {
       this.userInfo.icon = id;
     },
-    signClick: async function () {
+    signClick: async function() {
       if (this.registered) return;
       let signProm = await this.$store.dispatch("register", this.userInfo);
       this.registered = signProm.registered;
-    },
-  },
+      this.signupError = signProm.msg;
+    }
+  }
 };
 </script>
 <style lang="stylus" scoped>
@@ -198,6 +190,15 @@ export default {
 
   input {
     color: white;
+  }
+
+  &_error {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100vw;
+    text-align: center;
+    color: $neonRed;
   }
 }
 </style>
