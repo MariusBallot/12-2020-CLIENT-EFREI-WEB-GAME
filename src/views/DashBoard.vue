@@ -38,6 +38,17 @@
           <CusButton bCol="gold" bText="Rewards" />
         </div>
       </div>
+      <br />
+      <div class="dashboard_wrapper_htp">
+        <a href="#">How to play</a>
+        <br /><br /><br /><br />
+      </div>
+
+      <div class="dashboard_wrapper_bot">
+        <div class="dashboard_wrapper_bot_right">
+          <span>Disconnect</span><span>|</span><span>Credits</span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -82,10 +93,34 @@ export default {
     &_buts {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       width: 80vw;
 
-      &_lead, &_play, &_rewards {
+      &_lead, &_rewards {
         height: 75px;
+        width: 300px;
+      }
+
+      &_play {
+        height: 100px;
+        width: 400px;
+        font-weight: bold;
+        font-size: 39.3103px;
+      }
+    }
+
+    &_bot {
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-end;
+      width: 100vw;
+      color: $neonRed;
+      margin-right: 75px;
+
+      &_right {
+        span {
+          margin: 3px;
+        }
       }
     }
   }
