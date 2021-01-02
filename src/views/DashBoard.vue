@@ -1,5 +1,5 @@
 <template>
-  <div class="dashboard">
+  <div v-if="!(currUser == null)" class="dashboard">
     <div class="dashboard_wrapper">
       <div class="dashboard_wrapper_title">
         <h2>dashboard</h2>
@@ -41,12 +41,7 @@
       <br />
       <div class="dashboard_wrapper_htp">
         <a href="#">How to play</a>
-      </div>
-
-      <div class="dashboard_wrapper_bot">
-        <div class="dashboard_wrapper_bot_right">
-          <span>Disconnect</span><span>|</span><span>Credits</span>
-        </div>
+        HEAD
       </div>
     </div>
   </div>
