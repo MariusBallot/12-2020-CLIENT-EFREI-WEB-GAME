@@ -41,10 +41,7 @@
       <br />
       <div class="dashboard_wrapper_htp">
         <a href="#">How to play</a>
-        <br />
-        <br />
-        <br />
-        <br />
+        HEAD
       </div>
     </div>
   </div>
@@ -57,11 +54,11 @@ export default {
   computed: {
     currUser() {
       return this.$store.state.currUser;
-    }
+    },
   },
   components: {
-    CusButton
-  }
+    CusButton,
+  },
 };
 </script>
 
