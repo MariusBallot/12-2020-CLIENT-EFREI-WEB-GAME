@@ -15,7 +15,7 @@ Vue.use(VueRouter)
 
 async function authValidation(to, from, next) {
   await store.dispatch("loadCurrUser");
-
+  console.log('here')
   if (store.state.currUser == null) {
     next('Login')
   } else {

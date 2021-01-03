@@ -16,6 +16,7 @@ export const store = new Vuex.Store({
     mutations: {
         onLoadCurrUser(state, data) {
             state.currUser = data
+            console.log(state.currUser)
         },
 
         onLoadIcons(state, data) {

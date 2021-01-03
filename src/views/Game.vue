@@ -1,5 +1,6 @@
 <template>
   <div class="game">
+    <FirstGame v-if="currUser.ngames == 0" />
     <div class="hud">
       <div class="hud_time">
         <p>
@@ -42,6 +43,7 @@ import DeathScreen from "@/components/Game/DeathScreen";
 import ProgressBar from "@/components/UI/ProgressBar";
 import MainGame from "@/classes/game/MainGame";
 import GameNotification from "@/components/Game/GameNotification";
+import FirstGame from "@/components/Game/FirstGame";
 
 export default {
   name: "Game",
@@ -49,7 +51,8 @@ export default {
     GameCanvas,
     ProgressBar,
     GameNotification,
-    DeathScreen
+    DeathScreen,
+    FirstGame
   },
   data() {
     return {
@@ -60,6 +63,11 @@ export default {
       score: null,
       time: null
     };
+  },
+  computed: {
+    currUser() {
+      return this.$store.state.currUser;
+    }
   },
   mounted() {
     MainGame.setClock(this.$refs.clock);
