@@ -63,11 +63,7 @@ class MainGame {
         this.walls = new Walls(this.engine, this.ctx)
         Obstacles.init(this.engine, this.ctx, this.player.pBody)
 
-        this.bonusInt = setInterval(() => {
-            gameConfig.obstacle.speed += 1
-            this.bonus += 15
-            this.bonusCallBack("10S STREAK!", 15)
-        }, 10000);
+
 
         Matter.Events.on(this.engine, 'collisionStart', (event) => {
             if (event.pairs[0].bodyA.gameType == "obs" || event.pairs[0].bodyB.gameType == "obs") {
@@ -81,6 +77,17 @@ class MainGame {
             }
 
         })
+
+
+    }
+
+    start() {
+
+        this.bonusInt = setInterval(() => {
+            gameConfig.obstacle.speed += 1
+            this.bonus += 15
+            this.bonusCallBack("10S STREAK!", 15)
+        }, 10000);
 
         RAF.subscribe("gameUpadate", this.update)
         this.startTime = Date.now()
@@ -121,6 +128,8 @@ class MainGame {
         this.resize = this.resize.bind(this)
         this.setClock = this.setClock.bind(this)
         this.setScore = this.setScore.bind(this)
+        this.start = shis.start.bind(this)
+        this.stop = this.stop.bind(this)
     }
 }
 
