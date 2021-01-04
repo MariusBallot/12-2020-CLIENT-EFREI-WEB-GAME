@@ -128,7 +128,7 @@ class MainGame {
         this.resize = this.resize.bind(this)
         this.setClock = this.setClock.bind(this)
         this.setScore = this.setScore.bind(this)
-        this.start = shis.start.bind(this)
+        this.start = this.start.bind(this)
         this.stop = this.stop.bind(this)
     }
 }
