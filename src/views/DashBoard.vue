@@ -10,7 +10,7 @@
       <div class="dashboard_wrapper_infos">
         <div class="dashboard_wrapper_infos_profil">
           <div class="dashboard_wrapper_infos_profil_icon">
-            <img src="/assets/images/pizza.png" id="pp" />
+            <img :src="currUser.iconObj.image[0].url" id="pp" />
           </div>
           <div class="dashboard_wrapper_infos_profil_prog">
             <div class="dashboard_wrapper_infos_profil_prog_oui">

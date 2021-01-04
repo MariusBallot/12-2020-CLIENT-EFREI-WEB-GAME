@@ -158,7 +158,7 @@ var store = new _vuex["default"].Store({
       }, null, this);
     },
     loadUsers: function loadUsers(context) {
-      var usersRes;
+      var usersRes, users, iconsRes, icons;
       return regeneratorRuntime.async(function loadUsers$(_context5) {
         while (1) {
           switch (_context5.prev = _context5.next) {
@@ -168,10 +168,24 @@ var store = new _vuex["default"].Store({
 
             case 2:
               usersRes = _context5.sent;
-              console.log(usersRes.data);
+              users = usersRes.data;
+              _context5.next = 6;
+              return regeneratorRuntime.awrap(_axios["default"].get('/api/icons/'));
+
+            case 6:
+              iconsRes = _context5.sent;
+              icons = iconsRes.data;
+              users.forEach(function (user) {
+                icons.forEach(function (icon) {
+                  if (icon.id == user.icon) {
+                    user.iconObj = icon;
+                  }
+                });
+              });
+              console.log(users);
               this.commit('onLoadUsers', usersRes.data);
 
-            case 5:
+            case 11:
             case "end":
               return _context5.stop();
           }

@@ -71,7 +71,7 @@ export const store = new Vuex.Store({
             let icons = iconsRes.data
             users.forEach(user => {
                 icons.forEach(icon => {
-                    if (icon.id = user.id) {
+                    if (icon.id == user.icon) {
                         user.iconObj = icon
                     }
                 })
