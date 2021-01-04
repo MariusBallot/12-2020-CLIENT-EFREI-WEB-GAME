@@ -18,12 +18,15 @@ export const store = new Vuex.Store({
             state.currUser = data
             console.log(state.currUser)
         },
-
         onLoadIcons(state, data) {
             state.rewards.icons = data
         },
         onLogOut(state) {
             state.currUser = null
+        },
+        onNewGame(state) {
+            state.currUser.ngames++
+            console.log(state.currUser)
         }
 
     },
@@ -63,6 +66,16 @@ export const store = new Vuex.Store({
                 return
             this.commit('onLogOut')
             return userRes.data
+        },
+        async newGame(context) {
+            const newNgames = context.state.currUser.ngames + 1
+            const userRes = await axios.put('/api/user', {
+                ngames: newNgames
+            })
+            this.commit('onNewGame')
+        },
+        async gameFinished(context) {
+
         },
     }
 })

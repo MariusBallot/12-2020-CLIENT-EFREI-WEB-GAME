@@ -10,7 +10,7 @@
           <CusButton bCol="blue" bText="Tutorial" />
         </router-link>
         <div class="firstGame_wrapper_nav_play">
-          <CusButton bCol="red" bText="Play now" />
+          <CusButton @click.native="onPlayNow()" bCol="red" bText="Play now" />
         </div>
       </div>
     </div>
@@ -19,17 +19,23 @@
 
 <script>
 import CusButton from "@/components/UI/CusButton";
+import MainGame from "@/classes/game/MainGame";
 
 export default {
   name: "FirstGame",
 
   components: {
-    CusButton
+    CusButton,
   },
   data() {
     return {};
   },
-  methods: {}
+  methods: {
+    onPlayNow() {
+      this.$store.dispatch("newGame");
+      MainGame.start();
+    },
+  },
 };
 </script>
 
