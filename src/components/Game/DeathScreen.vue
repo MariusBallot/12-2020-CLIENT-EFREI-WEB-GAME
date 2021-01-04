@@ -1,23 +1,24 @@
 <template>
-  <div class="deathScreen" :class="{ on:death}">
+  <div class="deathScreen" :class="{ on: death }">
     <div class="deathScreen_wrapper">
       <div class="deathScreen_wrapper_head">
         <h2>Not bad dude</h2>
         <h3>Better luck next time</h3>
       </div>
-      <div class="deathScreen_wrapper_score" :class="{ on:death}">
+      <div class="deathScreen_wrapper_score" :class="{ on: death }">
         <h4>
           score
-          <span class="deathScreen_wrapper_score_number">{{score}}</span>
+          <span class="deathScreen_wrapper_score_number">{{ score }}</span>
         </h4>
       </div>
-      <div class="deathScreen_wrapper_time" :class="{ on:death}">
+      <div class="deathScreen_wrapper_time" :class="{ on: death }">
         <p>
           In game time
-          <span class="deathScreen_wrapper_time_number">{{time}}</span>s
+          <span class="deathScreen_wrapper_time_number">{{ time }}</span
+          >s
         </p>
       </div>
-      <div class="deathScreen_wrapper_level" :class="{ on:death}">
+      <div class="deathScreen_wrapper_level" :class="{ on: death }">
         <p>Level</p>
         <div class="deathScreen_wrapper_level_status">
           <p class="deathScreen_wrapper_level_status_from">31</p>
@@ -27,7 +28,7 @@
           <p class="deathScreen_wrapper_level_status_to">32</p>
         </div>
       </div>
-      <div class="deathScreen_wrapper_nav" :class="{ on:death}">
+      <div class="deathScreen_wrapper_nav" :class="{ on: death }">
         <div class="deathScreen_wrapper_nav_dash">
           <CusButton bCol="blue" bText="Dash board" />
         </div>
@@ -47,16 +48,17 @@ export default {
   props: {
     death: false,
     score: false,
-    time: false
+    time: false,
   },
   components: {
     ProgressBar,
-    CusButton
+    CusButton,
   },
+
   data() {
     return {};
   },
-  methods: {}
+  methods: {},
 };
 </script>
 

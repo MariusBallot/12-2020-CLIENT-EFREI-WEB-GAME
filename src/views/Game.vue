@@ -89,8 +89,14 @@ export default {
       this.score = data.score;
       this.time = data.time;
 
+      let ndata = {};
       const nLevel =
         this.currUser.level + (data.score * 0.01) / 1 + this.currUser.level;
+      ndata.level = nLevel;
+      if (this.score > this.currUser.personalbest) {
+        ndata.personalbest = data.score;
+      }
+      console.log(ndata);
       this.death = true;
     },
   },
