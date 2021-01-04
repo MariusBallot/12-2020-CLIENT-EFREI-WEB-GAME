@@ -43,7 +43,11 @@ export default {
       logInError: null
     };
   },
-  mounted() {},
+  mounted() {
+    window.addEventListener("keydown", e => {
+      if (e.keyCode == 13) this.logClick();
+    });
+  },
   methods: {
     logClick: async function() {
       let logProm = await this.$store.dispatch("login", this.userInfo);
