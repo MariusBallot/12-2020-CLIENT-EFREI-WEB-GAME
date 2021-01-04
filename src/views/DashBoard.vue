@@ -28,15 +28,15 @@
       <br />
       <br />
       <div class="dashboard_wrapper_buts">
-        <div class="dashboard_wrapper_buts_lead">
+        <router-link to class="dashboard_wrapper_buts_lead">
           <CusButton bCol="blue" bText="Leaderboard" />
-        </div>
-        <div class="dashboard_wrapper_buts_play">
+        </router-link>
+        <router-link to="/game" class="dashboard_wrapper_buts_play">
           <CusButton bCol="red" bText="PLAY" />
-        </div>
-        <div class="dashboard_wrapper_buts_rewards">
+        </router-link>
+        <router-link to="/rewards" class="dashboard_wrapper_buts_rewards">
           <CusButton bCol="gold" bText="Rewards" />
-        </div>
+        </router-link>
       </div>
       <br />
       <div class="dashboard_wrapper_htp">
