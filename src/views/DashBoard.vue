@@ -41,7 +41,6 @@
       <br />
       <div class="dashboard_wrapper_htp">
         <a href="#">How to play</a>
-        HEAD
       </div>
     </div>
   </div>
@@ -100,21 +99,6 @@ export default {
         width: 400px;
         font-weight: bold;
         font-size: 39.3103px;
-      }
-    }
-
-    &_bot {
-      display: flex;
-      justify-content: flex-end;
-      align-items: flex-end;
-      width: 100vw;
-      color: $neonRed;
-      margin-right: 75px;
-
-      &_right {
-        span {
-          margin: 3px;
-        }
       }
     }
   }
