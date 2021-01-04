@@ -37,6 +37,7 @@ class MainGame {
         this.deathCallBack = cb
     }
 
+
     init(domCanvas, debugCanvas) {
         this.domCanvas = domCanvas
         this.debugCanvas = debugCanvas
@@ -69,10 +70,13 @@ class MainGame {
             if (event.pairs[0].bodyA.gameType == "obs" || event.pairs[0].bodyB.gameType == "obs") {
                 gameConfig.obstacle.speed = 0
                 this.lost = true
-                this.deathCallBack(this.score, this.time * 0.001)
                 this.engine.world.gravity.y = 1;
                 this.player.pBody.frictionAir = 0;
-
+                let data = {
+                    score: this.score,
+                    time: this.time * 0.001
+                }
+                this.deathCallBack(data)
                 clearInterval(this.bonusInt)
             }
 

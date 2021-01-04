@@ -14,13 +14,21 @@ export default {
   name: "GameCanvas",
   data() {
     return {
-      config: config
+      config: config,
     };
+  },
+  computed: {
+    currUser() {
+      return this.$store.state.currUser;
+    },
   },
   mounted() {
     Controls.start();
     MainGame.init(this.$refs.gameCanvas, this.$refs.debugCanvas);
-  }
+    if (this.currUser.ngames > 0) {
+      MainGame.start();
+    }
+  },
 };
 </script>
 

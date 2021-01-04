@@ -15,7 +15,11 @@
         </p>
       </div>
       <div class="hud_notification">
-        <GameNotification :animTrig="animTrig" :nTitle="nTitle" :bPoints="bPoints" />
+        <GameNotification
+          :animTrig="animTrig"
+          :nTitle="nTitle"
+          :bPoints="bPoints"
+        />
       </div>
       <div class="hud_pb">
         Personnal best
@@ -29,7 +33,7 @@
         Next Rival
         <span ref="pb" class="rival_content_user">G@merGuy393YaNow</span>
         <div class="rival_content_progressBar">
-          <ProgressBar :progress=".2" />
+          <ProgressBar :progress="0.2" />
         </div>
       </div>
     </div>
@@ -52,7 +56,7 @@ export default {
     ProgressBar,
     GameNotification,
     DeathScreen,
-    FirstGame
+    FirstGame,
   },
   data() {
     return {
@@ -61,13 +65,13 @@ export default {
       animTrig: 0,
       death: false,
       score: null,
-      time: null
+      time: null,
     };
   },
   computed: {
     currUser() {
       return this.$store.state.currUser;
-    }
+    },
   },
   mounted() {
     MainGame.setClock(this.$refs.clock);
@@ -76,17 +80,20 @@ export default {
     MainGame.setDeathCallback(this.onDeath);
   },
   methods: {
-    onBonus: function(title, pts) {
+    onBonus: function (title, pts) {
       this.animTrig++;
       this.nTitle = title;
       this.bPoints = pts;
     },
-    onDeath: function(score, time) {
-      this.score = score;
-      this.time = time;
+    onDeath: function (data) {
+      this.score = data.score;
+      this.time = data.time;
+
+      const nLevel =
+        this.currUser.level + (data.score * 0.01) / 1 + this.currUser.level;
       this.death = true;
-    }
-  }
+    },
+  },
 };
 </script>
 
