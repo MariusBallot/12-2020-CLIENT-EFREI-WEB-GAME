@@ -28,7 +28,7 @@
       <br />
       <br />
       <div class="dashboard_wrapper_buts">
-        <router-link to class="dashboard_wrapper_buts_lead">
+        <router-link to="/leaderboard" class="dashboard_wrapper_buts_lead">
           <CusButton bCol="blue" bText="Leaderboard" />
         </router-link>
         <router-link to="/game" class="dashboard_wrapper_buts_play">

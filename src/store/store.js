@@ -16,7 +16,11 @@ export const store = new Vuex.Store({
     mutations: {
         onLoadCurrUser(state, data) {
             state.currUser = data
-            console.log(state.currUser)
+            
+        },
+        onLoadUsers(state, data) {
+            state.users = data
+            
         },
         onLoadIcons(state, data) {
             state.rewards.icons = data
@@ -26,7 +30,7 @@ export const store = new Vuex.Store({
         },
         onNewGame(state) {
             state.currUser.ngames++
-            console.log(state.currUser)
+            
         }
 
     },
@@ -60,6 +64,12 @@ export const store = new Vuex.Store({
             currUser.iconObj = userIconRes.data
             this.commit('onLoadCurrUser', currUser)
         },
+        async loadUsers(context) {
+            const usersRes = await axios.get('/api/users')
+           console.log(usersRes.data)
+           this.commit('onLoadUsers', usersRes.data)
+        },
+
         async logOut(context) {
             const userRes = await axios.post('/api/logout')
             if (!userRes.data.loggedOut)
