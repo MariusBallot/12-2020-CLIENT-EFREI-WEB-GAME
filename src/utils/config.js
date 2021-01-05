@@ -1,5 +1,5 @@
 const config = {
-    matterDebug: false,
+    matterDebug: true,
 }
 
 export default config;

@@ -6,16 +6,25 @@ export default class Objstacle {
     constructor(engine, ctx, i) {
         this.ctx = ctx
         this.engine = engine
+        this.index = i
+        this.startPos = {}
 
 
         this.params = gameConfig.obstacle
-        this.params.startPos.x = gameConfig.obstacles.space * i + gameConfig.obstacles.startSpace
-        this.params.startPos.y = gameConfig.walls.vertMargin + gameConfig.walls.thickness + this.params.height / 2
+        this.startPos.x = gameConfig.obstacles.space * this.index + gameConfig.obstacles.startSpace
+        this.startPos.y = gameConfig.walls.vertMargin + gameConfig.walls.thickness + this.params.height / 2
             + Math.random() * (window.innerHeight - 2 * (gameConfig.walls.vertMargin + gameConfig.walls.thickness + this.params.height / 2))
 
-        this.oBody = Matter.Bodies.rectangle(this.params.startPos.x, this.params.startPos.y, this.params.width, this.params.height, { isStatic: true })
+        this.oBody = Matter.Bodies.rectangle(this.startPos.x, this.startPos.y, this.params.width, this.params.height, { isStatic: true })
         this.oBody.gameType = `obs`
         Matter.World.add(this.engine.world, this.oBody)
+    }
+
+    reset() {
+        Matter.Body.setPosition(this.oBody, {
+            x: this.startPos.x,
+            y: this.startPos.y,
+        })
     }
 
     update() {
@@ -51,5 +60,6 @@ export default class Objstacle {
         this.update = this.update.bind(this)
         this.draw = this.draw.bind(this)
         this.init = this.init.bind(this)
+        this.reset = this.reset.bind(this)
     }
 }

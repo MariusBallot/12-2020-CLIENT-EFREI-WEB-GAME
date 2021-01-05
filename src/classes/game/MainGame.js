@@ -22,6 +22,7 @@ class MainGame {
         this.scoreDom
         this.bonusCallBack
         this.deathCallBack
+        this.resetCallBack
     }
 
     setClock(el) {
@@ -35,6 +36,9 @@ class MainGame {
     }
     setDeathCallback(cb) {
         this.deathCallBack = cb
+    }
+    setResetCallback(cb) {
+        this.resetCallBack = cb
     }
 
 
@@ -70,6 +74,7 @@ class MainGame {
             if (event.pairs[0].bodyA.gameType == "obs" || event.pairs[0].bodyB.gameType == "obs") {
                 gameConfig.obstacle.speed = 0
                 this.lost = true
+                this.player.lost = true
                 this.engine.world.gravity.y = 1;
                 this.player.pBody.frictionAir = 0;
                 let data = {
@@ -81,12 +86,27 @@ class MainGame {
             }
 
         })
+    }
 
-
+    reset() {
+        Obstacles.reset()
+        this.player.reset()
+        this.lost = false;
+        this.engine.world.gravity.y = 0;
+        gameConfig.obstacle.speed = gameConfig.obstacle.startSpeed
+        this.bonusInt = setInterval(() => {
+            gameConfig.obstacle.speed += 1
+            this.bonus += 15
+            this.bonusCallBack("10S STREAK!", 15)
+        }, 10000);
+        this.startTime = Date.now()
+        this.score = 0
+        this.bonus = 0
+        this.resetCallBack()
     }
 
     start() {
-
+        gameConfig.obstacle.speed = gameConfig.obstacle.startSpeed
         this.bonusInt = setInterval(() => {
             gameConfig.obstacle.speed += 1
             this.bonus += 15
@@ -105,7 +125,8 @@ class MainGame {
 
         Matter.Engine.update(this.engine);
 
-        this.player.update()
+        if (!this.lost)
+            this.player.update()
         Obstacles.update()
         this.draw()
     }
@@ -118,6 +139,13 @@ class MainGame {
     }
 
     stop() {
+        this.time = 0
+        this.bonus = 0
+        this.score = 0
+        this.startTime = 0;
+        this.lost = false
+        Obstacles.stop()
+        RAF.unsubscribe("gameUpadate")
     }
 
     resize() {
@@ -134,6 +162,7 @@ class MainGame {
         this.setScore = this.setScore.bind(this)
         this.start = this.start.bind(this)
         this.stop = this.stop.bind(this)
+        this.reset = this.reset.bind(this)
     }
 }
 

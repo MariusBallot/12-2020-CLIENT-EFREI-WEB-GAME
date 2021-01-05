@@ -21,6 +21,18 @@ class Objstacles {
 
     }
 
+    reset() {
+        let i = 0;
+        while (i < this.params.number) {
+            this.group[i].reset()
+            i++
+        }
+    }
+
+    stop() {
+        this.group = []
+    }
+
     update() {
         let i = 0;
         while (i < this.params.number) {
@@ -40,6 +52,8 @@ class Objstacles {
     bind() {
         this.update = this.update.bind(this)
         this.init = this.init.bind(this)
+        this.reset = this.reset.bind(this)
+        this.stop = this.stop.bind(this)
     }
 }
 

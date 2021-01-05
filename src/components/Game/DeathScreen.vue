@@ -14,8 +14,7 @@
       <div class="deathScreen_wrapper_time" :class="{ on: death }">
         <p>
           In game time
-          <span class="deathScreen_wrapper_time_number">{{ time }}</span
-          >s
+          <span class="deathScreen_wrapper_time_number">{{ time }}</span>s
         </p>
       </div>
       <div class="deathScreen_wrapper_level" :class="{ on: death }">
@@ -29,11 +28,11 @@
         </div>
       </div>
       <div class="deathScreen_wrapper_nav" :class="{ on: death }">
-        <div class="deathScreen_wrapper_nav_dash">
+        <router-link to="/" class="deathScreen_wrapper_nav_dash">
           <CusButton bCol="blue" bText="Dash board" />
-        </div>
+        </router-link>
         <div class="deathScreen_wrapper_nav_play">
-          <CusButton bCol="red" bText="Play again ⏎" />
+          <CusButton @click.native="resetGame" bCol="red" bText="Play again ⏎" />
         </div>
       </div>
     </div>
@@ -43,22 +42,27 @@
 <script>
 import ProgressBar from "@/components/UI/ProgressBar";
 import CusButton from "@/components/UI/CusButton";
+import MainGame from "@/classes/game/MainGame";
 export default {
   name: "DeathScreen",
   props: {
     death: false,
     score: false,
-    time: false,
+    time: false
   },
   components: {
     ProgressBar,
-    CusButton,
+    CusButton
   },
 
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    resetGame() {
+      MainGame.reset();
+    }
+  }
 };
 </script>
 

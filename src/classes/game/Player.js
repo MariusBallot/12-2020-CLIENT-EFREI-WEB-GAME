@@ -7,6 +7,7 @@ export default class Player {
         this.bind()
         this.engine = engine
         this.ctx = ctx
+        this.lost = false
 
         this.params = {
             width: 100,
@@ -20,6 +21,14 @@ export default class Player {
         Matter.World.add(this.engine.world, this.pBody)
 
     }
+    reset() {
+        this.pBody.frictionAir = 0.2
+        this.lost = false
+        Matter.Body.setPosition(this.pBody, {
+            x: this.params.startPos.x,
+            y: this.params.startPos.y
+        })
+    }
 
     update() {
         if (Controls.inputs.up)
@@ -27,7 +36,8 @@ export default class Player {
         if (Controls.inputs.down)
             Matter.Body.applyForce(this.pBody, this.pBody.position, { x: 0, y: .1 })
 
-        Matter.Body.setAngle(this.pBody, this.pBody.velocity.y * 0.01)
+        if (!this.lost)
+            Matter.Body.setAngle(this.pBody, this.pBody.velocity.y * 0.01)
     }
 
     draw() {
@@ -36,7 +46,7 @@ export default class Player {
 
         //Center rotation
         this.ctx.translate(this.pBody.position.x, this.pBody.position.y)
-        this.ctx.rotate(this.pBody.velocity.y * 0.01)
+        this.ctx.rotate(this.pBody.angle)
         this.ctx.translate(-this.pBody.position.x, -this.pBody.position.y)
 
         //Center origin
@@ -57,5 +67,6 @@ export default class Player {
     bind() {
         this.update = this.update.bind(this)
         this.draw = this.draw.bind(this)
+        this.reset = this.reset.bind(this)
     }
 }

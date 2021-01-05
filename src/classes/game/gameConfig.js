@@ -16,7 +16,8 @@ const gameConfig = {
     obstacle: {
         width: 40,
         height: 200,
-        speed: 10,
+        startSpeed: 10,
+        speed: 0,
         startPos: {
             x: null,
             y: null

@@ -10,10 +10,10 @@ export default class Walls {
         this.params = gameConfig.walls
 
         this.topBody = Matter.Bodies.rectangle(window.innerWidth / 2, this.params.vertMargin + this.params.thickness / 2,
-            window.innerWidth - this.params.vertMargin * 2, this.params.thickness,
+            window.innerWidth - this.params.vertMargin / 4, this.params.thickness,
             { isStatic: true })
         this.botBody = Matter.Bodies.rectangle(window.innerWidth / 2, window.innerHeight - this.params.vertMargin - this.params.thickness / 2,
-            window.innerWidth - this.params.vertMargin * 2, this.params.thickness,
+            window.innerWidth - this.params.vertMargin / 4, this.params.thickness,
             { isStatic: true })
 
 
@@ -45,6 +45,6 @@ export default class Walls {
     }
 
     bind() {
-
+        this.draw = this.draw.bind(this)
     }
 }
