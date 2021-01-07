@@ -4,6 +4,8 @@
       <div class="leaderboard_wrapper_title">
         <h2>leaderboard</h2>
         <h3>For the champions of the champions</h3>
+      </div>
+      <div class="leaderboard_wrapper_infos">
         <UserRank v-for="user in users" :key="user.id" :user="user" />
       </div>
     </div>
@@ -37,6 +39,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     height: 100vh;
     width: 100vw;
 
@@ -56,7 +59,10 @@ export default {
         glow($neonBlue, 10px);
         signH3;
       }
+
+      margin-bottom: 30px;
     }
   }
 }
 </style>
+px
