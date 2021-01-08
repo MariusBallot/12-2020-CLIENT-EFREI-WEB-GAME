@@ -13,7 +13,7 @@
             <img :src="currUser.iconObj.image[0].url" id="pp" />
           </div>
           <div class="dashboard_wrapper_infos_profil_prog">
-            <div class="dashboard_wrapper_infos_profil_prog_oui">
+            <div class="dashboard_wrapper_infos_profil_prog_pers">
               <span>Identity : {{ currUser.gametag }}</span>
               <br />
               <span>Level : {{ currUser.level }}</span>
@@ -76,7 +76,7 @@ export default {
         display: flex;
 
         &_prog {
-          &_oui {
+          &_pers {
             margin-top: 15px;
           }
         }
