@@ -24,9 +24,7 @@
               <p class="dBlue">
                 Author:
                 <a :href="icon.authorInfo.socialUrl" target="_blank">
-                  {{
-                  icon.authorInfo.name
-                  }}
+                  {{ icon.authorInfo.name }}
                 </a>
               </p>
               <p class="dBlue">
@@ -47,7 +45,12 @@
                 bCol="gold"
                 class="selected"
               />
-              <CusButton v-else bText="select" @click.native="selectIcon(icon.id)" bCol="gold" />
+              <CusButton
+                v-else
+                bText="select"
+                @click.native="selectIcon(icon.id)"
+                bCol="gold"
+              />
             </div>
           </div>
         </div>
@@ -62,7 +65,7 @@ import CusButton from "@/components/UI/CusButton";
 export default {
   name: "Rewards",
   components: {
-    CusButton
+    CusButton,
   },
   computed: {
     icons() {
@@ -70,7 +73,7 @@ export default {
     },
     currUser() {
       return this.$store.state.currUser;
-    }
+    },
   },
   mounted() {
     this.$store.dispatch("loadIcons");
@@ -78,8 +81,8 @@ export default {
   methods: {
     selectIcon(iconId) {
       this.$store.dispatch("changedIcon", iconId);
-    }
-  }
+    },
+  },
 };
 </script>
 
