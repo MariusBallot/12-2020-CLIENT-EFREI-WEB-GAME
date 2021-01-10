@@ -6,7 +6,18 @@
         <h3>For the champions of the champions</h3>
       </div>
       <div class="leaderboard_wrapper_infos">
-        <UserRank v-for="user in users" :key="user.id" :user="user" />
+        <div class="leaderboard_wrapper_infos_title">
+          <p class="leaderboard_wrapper_infos_title_gametag">Player tag</p>
+          <div class="leaderboard_wrapper_infos_title_right">
+            <p class="leaderboard_wrapper_infos_title_right_pb">
+              Personal best
+            </p>
+            <p class="leaderboard_wrapper_infos_title_right_level">Level</p>
+          </div>
+        </div>
+        <div class="leaderboard_wrapper_infos_info">
+          <UserRank v-for="user in users" :key="user.id" :user="user" />
+        </div>
       </div>
     </div>
   </div>
@@ -42,8 +53,11 @@ export default {
     flex-direction: column;
     height: 100vh;
     width: 100vw;
+    padding-bottom: 50px;
 
     &_title {
+      margin-top: 100px;
+
       h2 {
         font-weight: 500;
         font-size: 63.5393px;
@@ -58,9 +72,50 @@ export default {
         text-align: center;
         glow($neonBlue, 10px);
         signH3;
+        margin-bottom: 15px;
+      }
+    }
+
+    &_infos {
+      margin-top: 20px;
+
+      &_title {
+        display: flex;
+        justify-content: space-between;
+        font-size: 10px;
+        padding-right: 30px;
+        padding-left: 125px;
+        padding-bottom: 0;
+        color: $neonRed;
+
+        &_gametag {
+        }
+
+        &_right {
+          display: flex;
+          justify-content: space-between;
+
+          &_pb {
+          }
+
+          &_level {
+            text-align: right;
+            width: 100px;
+            margin-left: 50px;
+          }
+        }
       }
 
-      margin-bottom: 30px;
+      &_info {
+        margin-top: 5px;
+        neonBorder();
+        padding: 30px 20px;
+
+        +below(800px) {
+          margin-top: 80px;
+          border: none;
+        }
+      }
     }
   }
 }

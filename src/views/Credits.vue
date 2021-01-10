@@ -3,7 +3,7 @@
     <div class="credits_wrapper">
       <div class="credits_wrapper_dev adr">
         <img src="assets/images/adrienBW.png" alt />
-        <h2>Adrien Camesnil</h2>
+        <h2>Adrien Calmesnil</h2>
         <p>Front end enthousiast</p>
         <p>Happiness Manager</p>
       </div>
@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  name: "Credits"
+  name: "Credits",
 };
 </script>
 

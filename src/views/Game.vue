@@ -15,11 +15,15 @@
         </p>
       </div>
       <div class="hud_notification">
-        <GameNotification :animTrig="animTrig" :nTitle="nTitle" :bPoints="bPoints" />
+        <GameNotification
+          :animTrig="animTrig"
+          :nTitle="nTitle"
+          :bPoints="bPoints"
+        />
       </div>
       <div class="hud_pb">
         Personnal best
-        <span ref="pb" class="hud_pb_number">10</span>
+        <span ref="pb" class="hud_pb_number">{{ currUser.personalbest }}</span>
       </div>
     </div>
     <GameCanvas />
@@ -61,7 +65,7 @@ export default {
     ProgressBar,
     GameNotification,
     DeathScreen,
-    FirstGame
+    FirstGame,
   },
   data() {
     return {
@@ -72,13 +76,13 @@ export default {
       score: null,
       time: null,
       pb: false,
-      nData: {}
+      nData: {},
     };
   },
   computed: {
     currUser() {
       return this.$store.state.currUser;
-    }
+    },
   },
   mounted() {
     MainGame.setClock(this.$refs.clock);
@@ -88,12 +92,12 @@ export default {
     MainGame.setResetCallback(this.onReset);
   },
   methods: {
-    onBonus: function(title, pts) {
+    onBonus: function (title, pts) {
       this.animTrig++;
       this.nTitle = title;
       this.bPoints = pts;
     },
-    onDeath: function(data) {
+    onDeath: function (data) {
       this.score = data.score;
       this.time = data.time;
 
@@ -110,8 +114,8 @@ export default {
     },
     onReset() {
       this.death = false;
-    }
-  }
+    },
+  },
 };
 </script>
 
