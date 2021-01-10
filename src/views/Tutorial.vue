@@ -20,10 +20,12 @@
             <strong>deadly red obstacles</strong> coming for you ! The longer you go the quicker the become.
           </p>
           <p>
-            At the end of each run you win levels with which you can earn multiple
+            At the end of each run you win levels with which you can earn
+            multiple
             <strong
               class="gold"
-            >rewards</strong> and maybe one day be the very best captain on the top of the leader board.
+            >rewards</strong> and maybe one day be the very
+            best captain on the top of the leader board.
           </p>
           <p>Good luck captain</p>
         </div>
