@@ -16,7 +16,10 @@ Vue.use(VueRouter)
 async function authValidation(to, from, next) {
   await store.dispatch("loadCurrUser");
 
-  if (store.state.currUser == null) {
+  if (to.name == "game" && window.browser.mobile == true) {
+    next('/')
+  }
+  else if (store.state.currUser == null) {
     next('Login')
   } else {
     next()
