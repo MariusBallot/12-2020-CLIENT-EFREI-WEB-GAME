@@ -6,10 +6,17 @@
     </div>
     <div v-if="currUser != null" class="header_right">
       <div class="header_right_text">
-        <p class="header_right_text_gt">{{ currUser.gametag }}</p>
-        <p class="header_right_text_setting">
-          <router-link to="/profileSetting">Profile settings</router-link>
+        <p class="header_right_text_gt">
+          GameTag :
+          <strong>{{ currUser.gametag }}</strong>
         </p>
+        <p class="header_right_text_lvl">
+          level :
+          <strong>{{ Math.floor(currUser.level) }}</strong>
+        </p>
+        <!-- <p class="header_right_text_setting">
+          <router-link to="/profileSetting">Profile settings</router-link>
+        </p>-->
       </div>
       <div class="header_right_icon">
         <img v-if="currUser.iconObj" :src="currUser.iconObj.image[0].url" />
@@ -69,7 +76,9 @@ export default {
     }
 
     .back {
-      margin-top: 20px;
+      position: absolute;
+      top: 80px;
+      left: 30px;
       cursor: pointer;
       font-size: 2em;
       width: 70px;
@@ -92,8 +101,18 @@ export default {
     align-items: center;
 
     &_text {
+      strong {
+        color: $neonRed;
+        font-weight: inherit;
+      }
+
       &_gt {
         font-size: 2em;
+      }
+
+      &_lvl {
+        text-align: right;
+        font-size: 1.4em;
       }
 
       &_setting {

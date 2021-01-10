@@ -14,14 +14,13 @@ export const store = new Vuex.Store({
     },
     mutations: {
         onLoadCurrUser(state, data) {
-            console.log(data)
             state.currUser = data
         },
         onLoadUsers(state, data) {
+            console.log(data)
             state.users = data
         },
         onLoadIcons(state, data) {
-            console.log(data)
             state.rewards.icons = data
         },
         onLogOut(state) {
@@ -40,7 +39,6 @@ export const store = new Vuex.Store({
         async login(context, req) {
             const userRes = await axios.post('/api/login', req)
             let currUser = userRes.data.currUser
-            console.log(userRes.data)
             if (!userRes.data.loggedIn)
                 return userRes.data
 
@@ -96,8 +94,9 @@ export const store = new Vuex.Store({
             })
             this.commit('onNewGame')
         },
-        async gameFinished(context) {
-
+        async gameFinished(context, ndata) {
+            const userRes = await axios.put('/api/user', ndata)
+            this.dispatch('loadCurrUser')
         },
     }
 })

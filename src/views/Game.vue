@@ -24,7 +24,8 @@
     </div>
     <GameCanvas />
 
-    <div class="rival">
+    <!-- TODO : Get Next rival in leaderboard -->
+    <!-- <div class="rival">
       <div class="rival_content">
         Next Rival
         <span ref="pb" class="rival_content_user">G@merGuy393YaNow</span>
@@ -32,8 +33,16 @@
           <ProgressBar :progress="0.2" />
         </div>
       </div>
-    </div>
-    <DeathScreen :death="death" :score="score" :time="time" />
+    </div>-->
+    <DeathScreen
+      v-if="death"
+      :currUser="currUser"
+      :nData="nData"
+      :death="death"
+      :score="score"
+      :time="time"
+      :pb="pb"
+    />
   </div>
 </template>
 
@@ -61,7 +70,9 @@ export default {
       animTrig: 0,
       death: false,
       score: null,
-      time: null
+      time: null,
+      pb: false,
+      nData: {}
     };
   },
   computed: {
@@ -86,15 +97,16 @@ export default {
       this.score = data.score;
       this.time = data.time;
 
-      let ndata = {};
-      const nLevel =
-        this.currUser.level + (data.score * 0.01) / 1 + this.currUser.level;
-      ndata.level = nLevel;
+      const currLevel = parseFloat(this.currUser.level);
+      const nLevel = currLevel + (data.score * 0.01) / (1 + currLevel / 3);
+      this.nData.level = nLevel;
       if (this.score > this.currUser.personalbest) {
-        ndata.personalbest = data.score;
+        this.nData.personalbest = data.score;
+        this.pb = true;
       }
-      console.log(ndata);
       this.death = true;
+      console.log(this.nData);
+      this.$store.dispatch("gameFinished", this.nData);
     },
     onReset() {
       this.death = false;
