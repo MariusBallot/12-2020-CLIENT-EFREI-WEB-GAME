@@ -41,7 +41,7 @@ export default {
   &_person {
     display: flex;
     justify-content: space-between;
-    width: 70vw;
+    width: 100%;
 
     &_gametag {
     }
