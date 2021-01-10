@@ -7,16 +7,14 @@
       </div>
       <div class="leaderboard_wrapper_infos">
         <div class="leaderboard_wrapper_infos_title">
-          <p class="leaderboard_wrapper_infos_title_gametag">Player tag</p>
+          <p class="leaderboard_wrapper_infos_title_gametag">#Rank | Player tag</p>
           <div class="leaderboard_wrapper_infos_title_right">
-            <p class="leaderboard_wrapper_infos_title_right_pb">
-              Personal best
-            </p>
+            <p class="leaderboard_wrapper_infos_title_right_pb">Personal best</p>
             <p class="leaderboard_wrapper_infos_title_right_level">Level</p>
           </div>
         </div>
         <div class="leaderboard_wrapper_infos_info">
-          <UserRank v-for="user in users" :key="user.id" :user="user" />
+          <UserRank v-for="(user, i) in users" :key="user.id" :user="user" :rank="i+1" />
         </div>
       </div>
     </div>
@@ -28,7 +26,7 @@ import UserRank from "@/components/LeaderBoard/UserRank.vue";
 export default {
   name: "LeaderBoard",
   components: {
-    UserRank,
+    UserRank
   },
   computed: {
     currUser() {
@@ -36,11 +34,11 @@ export default {
     },
     users() {
       return this.$store.state.users;
-    },
+    }
   },
   mounted() {
     this.$store.dispatch("loadUsers");
-  },
+  }
 };
 </script>
 
@@ -48,10 +46,8 @@ export default {
 .leaderboard {
   &_wrapper {
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 100vh;
     width: 100vw;
     padding-bottom: 50px;
 
@@ -59,20 +55,15 @@ export default {
       margin-top: 100px;
 
       h2 {
-        font-weight: 500;
-        font-size: 63.5393px;
-        line-height: 75px;
-        glow($neonRed, 10px);
-        signH2();
+        mainH2($neonRed);
       }
 
       h3 {
-        font-size: 20px;
-        line-height: 28px;
-        text-align: center;
-        glow($neonBlue, 10px);
-        signH3;
-        margin-bottom: 15px;
+        mainH3();
+      }
+
+      +below(800px) {
+        display: none;
       }
     }
 
@@ -82,11 +73,15 @@ export default {
       &_title {
         display: flex;
         justify-content: space-between;
-        font-size: 10px;
+        // font-size: 1em;
         padding-right: 30px;
         padding-left: 125px;
         padding-bottom: 0;
         color: $neonRed;
+
+        +below(800px) {
+          display: none;
+        }
 
         &_gametag {
         }
@@ -110,6 +105,7 @@ export default {
         margin-top: 5px;
         neonBorder();
         padding: 30px 20px;
+        width: 800px;
 
         +below(800px) {
           margin-top: 80px;

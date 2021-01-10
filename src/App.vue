@@ -33,6 +33,8 @@ body {
   color: $neonBlue;
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 
 * {
