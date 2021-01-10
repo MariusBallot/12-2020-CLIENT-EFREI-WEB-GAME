@@ -5,41 +5,48 @@
         <h2>how to play</h2>
         <h3>What you need to know</h3>
       </div>
-      <div class="tutorial_wrapper_lors">
-        <p>
-          DU LORS
-          <br />
-          <br />Du bon gros lors pour raconter une histoire tsé gore le user il est
-          intrigué tu vois sque jveude ? Du bon gros lors pour raconter une
-          histoire tsé gore le user il est intrigué tu vois sque jveude ? Du bon
-          gros lors pour raconter une histoire tsé gore le user il est intrigué
-          tu vois sque jveude ? Du bon gros lors pour raconter une histoire tsé
-          gore le user il est intrigué tu vois sque jveude ? Du bon gros lors
-          pour raconter une histoire tsé gore le user il est intrigué tu vois
-          sque jveude ?
-        </p>
-        <img src />
-      </div>
-      <div class="tutorial_wrapper_htp">
-        <p>
-          TUTORIAL
-          <br />
-          <br />With your keyboard, navigate up and down to to dodge incoming With
-          your keyboard, navigate up and down to to dodge incoming obstacles.
-          The more you travel, the harder it is going to get. Enemies can
-          randomly spawn. , but you also have the oportinuty to destroy em’ with
-          your LASER. Whitch can bring you sh*t tons of points and XP. That XP
-          will alow you to gain levels to then customize your profil, spaceship
-          and much more !
-        </p>
+      <div class="tutorial_wrapper_instru">
+        <div class="tutorial_wrapper_instru_illus">
+          <img src="assets/images/tutoKeys.png" alt />
+          <img src="assets/images/tutoMove.png" alt />
+        </div>
+        <div class="tutorial_wrapper_instru_text">
+          <h3>Become the best</h3>
+          <p>You play as a space ship going through quite an adventure !</p>
+          <p>
+            Using your
+            <strong>Z</strong> and
+            <strong>S</strong> keys on your keyboard, pilote your ship and go as far as possible ! But be aware of the
+            <strong>deadly red obstacles</strong> comming for you ! The longer you go the quicker the become.
+          </p>
+          <p>
+            At the end of each run you win levels with which you can earn multiple
+            <strong
+              class="gold"
+            >rewards</strong> and maybe one day be the very best captain on the top of the leader board.
+          </p>
+          <p>Good luck captain</p>
+        </div>
+        <router-link to="game" class="tutorial_wrapper_instru_but">
+          <CusButton bText="Play" bCol="red" />
+        </router-link>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import CusButton from "@/components/UI/CusButton";
 export default {
-  name: "Tutorial"
+  name: "Tutorial",
+  components: {
+    CusButton
+  },
+  computed: {
+    currUser() {
+      return this.$store.state.currUser;
+    }
+  }
 };
 </script>
 <style lang="stylus" scoped>
@@ -51,6 +58,7 @@ export default {
     flex-direction: column;
     height: 100vh;
     width: 100vw;
+    padding: 20px;
 
     &_title {
       h2 {
@@ -62,27 +70,78 @@ export default {
       }
 
       margin-bottom: 30px;
-    }
 
-    &_lors {
-      display: flex;
-      justify-content: flex-start;
-      width: 100vw;
-      padding-left: 50px;
-
-      p {
-        width: 40vw;
+      +below(800px) {
+        display: none;
       }
     }
 
-    &_htp {
+    &_instru {
       display: flex;
-      justify-content: flex-end;
-      width: 100vw;
-      padding-right: 50px;
+      flex-direction: column;
+      align-items: center;
 
-      p {
-        width: 40vw;
+      &_illus {
+        width: 700px;
+        height: 250px;
+        display: flex;
+        justify-content: space-between;
+
+        +below(700px) {
+          width: 100%;
+          height: 200px;
+        }
+
+        +below(500px) {
+          height: 100px;
+          justify-content: center;
+        }
+
+        img {
+          height: 100%;
+          width: auto;
+        }
+      }
+
+      &_text {
+        width: 800px;
+        font-size: 1.4em;
+
+        +below(800px) {
+          width: 100%;
+          font-size: inherit;
+        }
+
+        p {
+          margin-top: 20px;
+        }
+
+        strong {
+          color: $neonRed;
+
+          &.gold {
+            color: $neonGold;
+          }
+        }
+
+        h3 {
+          margin-top: 20px;
+          color: $neonRed;
+          text-transform: uppercase;
+          font-weight: 400;
+          font-size: 2.5em;
+          text-align: center;
+        }
+      }
+
+      &_but {
+        width: 100px;
+        height: 75px;
+        font-size: 1.5em;
+
+        +below(800px) {
+          display: none;
+        }
       }
     }
   }
