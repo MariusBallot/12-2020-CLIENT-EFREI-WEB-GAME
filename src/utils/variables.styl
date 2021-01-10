@@ -2,6 +2,7 @@ $neonBlue=#5EF7FF;
 $neonRed=#D14036;
 $neonGold=#EFE24C;
 $bgBlue=#211F3A;
+$darkBlue = #282645;
 $headerPadding=32px;
 $butHeight=75px;
 $butWidth=200px;
@@ -34,3 +35,18 @@ center()
     display: flex
     justify-content: center
     align-items: center
+
+mainH2(color)
+    font-size 4em
+    color: color;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight bold
+    glow(color, 10px);
+
+
+mainH3()
+    color: $neonBlue;
+    text-align: center;
+    font-weight 400
+    margin-bottom 15px

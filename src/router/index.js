@@ -16,7 +16,6 @@ Vue.use(VueRouter)
 async function authValidation(to, from, next) {
   await store.dispatch("loadCurrUser");
 
-  console.log('here')
   if (store.state.currUser == null) {
     next('Login')
   } else {
@@ -49,8 +48,8 @@ const routes = [
 
   },
   {
-    path: '/leaderBoard',
-    name: 'leaderBoard',
+    path: '/leaderboard',
+    name: 'leaderboard',
     component: LeaderBoard,
     beforeEnter: authValidation
 

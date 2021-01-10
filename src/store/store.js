@@ -1,7 +1,6 @@
 import Vue from "vue"
 import Vuex from "vuex"
 import axios from "axios"
-import config from "../utils/config"
 
 Vue.use(Vuex)
 
@@ -15,14 +14,14 @@ export const store = new Vuex.Store({
     },
     mutations: {
         onLoadCurrUser(state, data) {
+            console.log(data)
             state.currUser = data
-
         },
         onLoadUsers(state, data) {
             state.users = data
-
         },
         onLoadIcons(state, data) {
+            console.log(data)
             state.rewards.icons = data
         },
         onLogOut(state) {
@@ -30,7 +29,6 @@ export const store = new Vuex.Store({
         },
         onNewGame(state) {
             state.currUser.ngames++
-
         }
 
     },
@@ -76,17 +74,20 @@ export const store = new Vuex.Store({
                     }
                 })
             });
-            console.log(users)
-
             this.commit('onLoadUsers', usersRes.data)
         },
-
         async logOut(context) {
             const userRes = await axios.post('/api/logout')
             if (!userRes.data.loggedOut)
                 return
             this.commit('onLogOut')
             return userRes.data
+        },
+        async changedIcon(context, iconId) {
+            const userRes = await axios.put('/api/user', {
+                icon: iconId
+            })
+            this.dispatch('loadCurrUser')
         },
         async newGame(context) {
             const newNgames = context.state.currUser.ngames + 1
