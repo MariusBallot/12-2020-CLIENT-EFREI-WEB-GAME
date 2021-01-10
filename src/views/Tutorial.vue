@@ -7,8 +7,9 @@
       </div>
       <div class="tutorial_wrapper_lors">
         <p>
-          DU LORS <br /><br />
-          Du bon gros lors pour raconter une histoire tsé gore le user il est
+          DU LORS
+          <br />
+          <br />Du bon gros lors pour raconter une histoire tsé gore le user il est
           intrigué tu vois sque jveude ? Du bon gros lors pour raconter une
           histoire tsé gore le user il est intrigué tu vois sque jveude ? Du bon
           gros lors pour raconter une histoire tsé gore le user il est intrigué
@@ -17,12 +18,13 @@
           pour raconter une histoire tsé gore le user il est intrigué tu vois
           sque jveude ?
         </p>
-        <img src="" />
+        <img src />
       </div>
       <div class="tutorial_wrapper_htp">
         <p>
-          TUTORIAL<br /><br />
-          With your keyboard, navigate up and down to to dodge incoming With
+          TUTORIAL
+          <br />
+          <br />With your keyboard, navigate up and down to to dodge incoming With
           your keyboard, navigate up and down to to dodge incoming obstacles.
           The more you travel, the harder it is going to get. Enemies can
           randomly spawn. , but you also have the oportinuty to destroy em’ with
@@ -37,7 +39,7 @@
 
 <script>
 export default {
-  name: "Tutorial",
+  name: "Tutorial"
 };
 </script>
 <style lang="stylus" scoped>
@@ -52,19 +54,11 @@ export default {
 
     &_title {
       h2 {
-        font-weight: 500;
-        font-size: 63.5393px;
-        line-height: 75px;
-        glow($neonRed, 10px);
-        signH2();
+        mainH2($neonRed);
       }
 
       h3 {
-        font-size: 20px;
-        line-height: 28px;
-        text-align: center;
-        glow($neonBlue, 10px);
-        signH3;
+        mainH3();
       }
 
       margin-bottom: 30px;

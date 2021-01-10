@@ -73,9 +73,14 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
+    padding: $headerPadding;
 
     &_infos {
       width: 50%;
+
+      +below(800px) {
+        width: 100%;
+      }
 
       input {
         color: white;

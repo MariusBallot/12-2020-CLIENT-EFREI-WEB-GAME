@@ -90,6 +90,14 @@ export default {
       justify-content: center;
       transition: transform 0.2s;
 
+      +below(800px) {
+        top: 25px;
+        left: inherit;
+        right: 25px;
+        width: 50px;
+        height: 50px;
+      }
+
       &:hover {
         transform: scale(1.1);
       }
@@ -99,6 +107,10 @@ export default {
   &_right {
     display: flex;
     align-items: center;
+
+    +below(800px) {
+      display: none;
+    }
 
     &_text {
       strong {

@@ -28,7 +28,7 @@
           </div>
           <div class="signup_wrapper_infos_second">
             <div class="signup_wrapper_infos_second_icon">
-              <p>Choose your icon</p>
+              <p>Choose your starter icon</p>
               <IconList @selectedIcon="onSelectedIcon" />
             </div>
           </div>
@@ -111,9 +111,14 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
+    padding: $headerPadding;
 
     &_infos {
       width: 800px;
+
+      +below(800px) {
+        width: 100%;
+      }
 
       input {
         width: 100%;
@@ -129,6 +134,19 @@ export default {
           width: 49%;
           height: 75px;
         }
+
+        +below(800px) {
+          display: block;
+
+          &_tag {
+            margin-top: 15px;
+          }
+
+          &_tag, &_mail {
+            width: 100%;
+            height: 50px;
+          }
+        }
       }
 
       &_second {
@@ -136,6 +154,10 @@ export default {
           padding: 10px;
           margin: 15px 0;
           classInputs();
+
+          p {
+            margin-bottom: 10px;
+          }
         }
       }
 
@@ -146,6 +168,19 @@ export default {
         &_pass, &_conf {
           width: 49%;
           height: 75px;
+        }
+
+        +below(800px) {
+          display: block;
+
+          &_conf {
+            margin-top: 15px;
+          }
+
+          &_pass, &_conf {
+            width: 100%;
+            height: 50px;
+          }
         }
       }
 

@@ -23,7 +23,12 @@ export default {
   },
   computed: {
     icons() {
-      return this.$store.state.rewards.icons;
+      let icons = [];
+      this.$store.state.rewards.icons.forEach((icon, i) => {
+        if (parseInt(icon.level) == 0) icons.push(icon);
+      });
+      console.log(icons);
+      return icons;
     }
   },
   mounted() {
@@ -42,6 +47,7 @@ export default {
 .iconList {
   ul {
     display: flex;
+    overflow: scroll;
 
     li {
       margin: 0 10px;

@@ -23,9 +23,11 @@
               <h5>{{ icon.name }}</h5>
               <p class="dBlue">
                 Author:
-                <a :href="icon.authorInfo.socialUrl" target="_blank">{{
+                <a :href="icon.authorInfo.socialUrl" target="_blank">
+                  {{
                   icon.authorInfo.name
-                }}</a>
+                  }}
+                </a>
               </p>
               <p class="dBlue">
                 Required Level:
@@ -45,12 +47,7 @@
                 bCol="gold"
                 class="selected"
               />
-              <CusButton
-                v-else
-                bText="select"
-                @click.native="selectIcon(icon.id)"
-                bCol="gold"
-              />
+              <CusButton v-else bText="select" @click.native="selectIcon(icon.id)" bCol="gold" />
             </div>
           </div>
         </div>
@@ -65,7 +62,7 @@ import CusButton from "@/components/UI/CusButton";
 export default {
   name: "Rewards",
   components: {
-    CusButton,
+    CusButton
   },
   computed: {
     icons() {
@@ -73,7 +70,7 @@ export default {
     },
     currUser() {
       return this.$store.state.currUser;
-    },
+    }
   },
   mounted() {
     this.$store.dispatch("loadIcons");
@@ -81,8 +78,8 @@ export default {
   methods: {
     selectIcon(iconId) {
       this.$store.dispatch("changedIcon", iconId);
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -90,7 +87,6 @@ export default {
 .rewards {
   &_wrapper {
     display: flex;
-    // justify-content: center;
     align-items: center;
     flex-direction: column;
     width: 100vw;
@@ -106,12 +102,21 @@ export default {
       h3 {
         mainH3();
       }
+
+      +below(800px) {
+        display: none;
+      }
     }
 
     &_content {
       margin-top: 20px;
       neonBorder();
       padding: 30px 20px;
+
+      +below(800px) {
+        margin-top: 80px;
+        border: none;
+      }
 
       &_header {
         margin-bottom: 20px;
@@ -132,6 +137,10 @@ export default {
           border-bottom: solid $neonBlue 1px;
           padding-bottom: 10px;
           margin-bottom: 20px;
+
+          +below(800px) {
+            width: 100%;
+          }
 
           &:last-child {
             border-bottom: none;
@@ -171,6 +180,12 @@ export default {
 
             a {
               text-decoration: underline;
+            }
+
+            +below(800px) {
+              h5 {
+                font-size: 1.3em;
+              }
             }
           }
 

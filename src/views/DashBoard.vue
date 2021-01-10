@@ -15,7 +15,7 @@
           <div class="dashboard_wrapper_infos_profil_prog">
             <div class="dashboard_wrapper_infos_profil_prog_pers">
               <div>
-                Identity :
+                Game tag :
                 <strong>{{ currUser.gametag }}</strong>
               </div>
               <div>
@@ -44,7 +44,8 @@
           <CusButton bCol="blue" bText="Leaderboard" />
         </router-link>
         <router-link to="/game" class="dashboard_wrapper_buts_play">
-          <CusButton bCol="red" bText="PLAY" />
+          <CusButton class="on" bCol="red" bText="PLAY" />
+          <CusButton class="off" bCol="red" bText="Desktop only" />
         </router-link>
         <router-link to="/rewards" class="dashboard_wrapper_buts_rewards">
           <CusButton bCol="gold" bText="Rewards" />
@@ -93,6 +94,10 @@ export default {
       h3 {
         mainH3();
       }
+
+      +below(800px) {
+        display: none;
+      }
     }
 
     &_infos {
@@ -107,10 +112,26 @@ export default {
           margin-right: 20px;
         }
 
+        +below(800px) {
+          flex-direction: column;
+
+          img {
+            height: 200px;
+            width: auto;
+            margin: 20px 0;
+          }
+        }
+
         &_prog {
           &_pers {
             color: $darkBlue;
             font-size: 1.5em;
+
+            +below(800px) {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+            }
 
             strong {
               color: $neonBlue;
@@ -154,6 +175,38 @@ export default {
         width: 300px;
         font-weight: bold;
         font-size: 39.3103px;
+
+        .off {
+          display: none;
+        }
+      }
+
+      +below(800px) {
+        width: 100%;
+        flex-direction: column;
+
+        &_play, &_rewards {
+          margin-top: 10px;
+        }
+
+        &_lead, &_play, &_rewards {
+          height: 75px;
+          width: 200px;
+          font-size: inherit;
+        }
+
+        .on {
+          display: none;
+        }
+
+        &_play {
+          pointer-events: none;
+        }
+
+        .off {
+          display: block;
+          opacity: 0.3;
+        }
       }
     }
 
