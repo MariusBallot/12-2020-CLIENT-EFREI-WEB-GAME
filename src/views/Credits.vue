@@ -4,7 +4,7 @@
       <div class="credits_wrapper_dev adr">
         <img src="assets/images/adrienBW.png" alt />
         <h2>Adrien Calmesnil</h2>
-        <p>Front end enthousiast</p>
+        <p>Front end enthusiast</p>
         <p>Happiness Manager</p>
       </div>
       <div class="credits_wrapper_dev mari">
