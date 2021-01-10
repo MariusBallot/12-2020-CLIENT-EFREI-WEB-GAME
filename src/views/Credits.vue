@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  name: "Credits",
+  name: "Credits"
 };
 </script>
 
@@ -32,8 +32,20 @@ export default {
     justify-content: center;
     align-items: center;
 
+    +below(800px) {
+      margin-top: 80px;
+      height: auto;
+      justify-content: start;
+      flex-direction: column;
+    }
+
     &_dev {
       text-align: center;
+
+      +below(800px) {
+        width: 100%;
+        padding: 30px;
+      }
 
       h2 {
         color: $neonRed;
@@ -44,11 +56,19 @@ export default {
 
       &.mari {
         margin-left: 30px;
+
+        +below(800px) {
+          margin-left: 0;
+        }
       }
 
       img {
         width: 400px;
         height: auto;
+
+        +below(800px) {
+          width: 100%;
+        }
       }
     }
   }

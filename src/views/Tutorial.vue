@@ -84,6 +84,10 @@ export default {
       flex-direction: column;
       align-items: center;
 
+      +below(800px) {
+        margin-top: 100px;
+      }
+
       &_illus {
         width: 700px;
         height: 250px;

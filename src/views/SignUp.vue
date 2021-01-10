@@ -113,11 +113,18 @@ export default {
     left: 0;
     padding: $headerPadding;
 
+    +below(800px) {
+      width: 100%;
+      height: auto;
+      justify-content: start;
+    }
+
     &_infos {
       width: 800px;
 
       +below(800px) {
         width: 100%;
+        margin-top: 70px;
       }
 
       input {

@@ -108,6 +108,7 @@ export default {
         width: 800px;
 
         +below(800px) {
+          width: 100%;
           margin-top: 80px;
           border: none;
         }

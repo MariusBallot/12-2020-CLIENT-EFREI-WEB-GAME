@@ -86,6 +86,12 @@ export default {
     height: 100vh;
     width: 100vw;
 
+    +below(800px) {
+      width: 100%;
+      height: auto;
+      justify-content: start;
+    }
+
     &_title {
       h2 {
         mainH2($neonRed);
@@ -101,6 +107,10 @@ export default {
     }
 
     &_infos {
+      +below(800px) {
+        margin-top: 70px;
+      }
+
       &_profil {
         display: flex;
         align-items: center;

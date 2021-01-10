@@ -46,15 +46,16 @@ export default {
     border-bottom: none;
   }
 
-  +below(800px) {
-    width: 100%;
-  }
-
   &_person {
     display: flex;
     justify-content: space-between;
     width: 100%;
     font-size: 1.5em;
+
+    +below(600px) {
+      margin-left: 10px;
+      font-size: inherit;
+    }
 
     &.me {
       color: $neonRed;
@@ -79,6 +80,16 @@ export default {
         text-align: right;
         width: 100px;
         margin-left: 70px;
+
+        +below(800px) {
+          width: 50px;
+          margin-left: 30px;
+        }
+
+        +below(500px) {
+          width: auto;
+          margin-left: 10px;
+        }
       }
     }
   }
