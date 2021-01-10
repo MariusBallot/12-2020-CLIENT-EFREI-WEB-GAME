@@ -15,15 +15,16 @@
           <p>You play as a space ship going through quite an adventure !</p>
           <p>
             Using your
-            <strong>Z</strong> and
-            <strong>S</strong> keys on your keyboard, pilote your ship and go as far as possible ! But be aware of the
-            <strong>deadly red obstacles</strong> comming for you ! The longer you go the quicker the become.
+            <strong>Z</strong> and <strong>S</strong> keys on your keyboard,
+            pilote your ship and go as far as possible ! But be aware of the
+            <strong>deadly red obstacles</strong> comming for you ! The longer
+            you go the quicker the become.
           </p>
           <p>
-            At the end of each run you win levels with which you can earn multiple
-            <strong
-              class="gold"
-            >rewards</strong> and maybe one day be the very best captain on the top of the leader board.
+            At the end of each run you win levels with which you can earn
+            multiple
+            <strong class="gold">rewards</strong> and maybe one day be the very
+            best captain on the top of the leader board.
           </p>
           <p>Good luck captain</p>
         </div>
@@ -40,13 +41,13 @@ import CusButton from "@/components/UI/CusButton";
 export default {
   name: "Tutorial",
   components: {
-    CusButton
+    CusButton,
   },
   computed: {
     currUser() {
       return this.$store.state.currUser;
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="stylus" scoped>
