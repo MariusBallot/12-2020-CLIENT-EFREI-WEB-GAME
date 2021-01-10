@@ -8,7 +8,7 @@
         class="footer_nav_logout navChild"
       >Log out</router-link>
       <span v-if="!(currUser == null)" class="navChild">|</span>
-      <router-link to class="footer_nav_credits">Credits</router-link>
+      <router-link to="/credits" class="footer_nav_credits">Credits</router-link>
     </nav>
   </footer>
 </template>

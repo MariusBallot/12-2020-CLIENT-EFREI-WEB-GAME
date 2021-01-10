@@ -10,6 +10,7 @@ import Rewards from '../views/Rewards.vue'
 import Tutorial from '../views/Tutorial.vue'
 import SignUp from '../views/SignUp.vue'
 import ProfileSettings from '../views/ProfileSettings.vue'
+import Credits from '../views/Credits.vue'
 
 Vue.use(VueRouter)
 
@@ -75,6 +76,11 @@ const routes = [
     name: 'profileSetting',
     component: ProfileSettings,
     beforeEnter: authValidation
+  },
+  {
+    path: '/credits',
+    name: 'credits',
+    component: Credits,
   },
 
 ]

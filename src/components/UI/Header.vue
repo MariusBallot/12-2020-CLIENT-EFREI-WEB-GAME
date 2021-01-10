@@ -1,7 +1,9 @@
 <template>
   <header class="header">
     <div class="header_left">
-      <h1>the game</h1>
+      <router-link to="/">
+        <h1>the game</h1>
+      </router-link>
       <router-link v-if="checkRoute()" to="/" class="back"><</router-link>
     </div>
     <div v-if="currUser != null" class="header_right">
@@ -50,6 +52,9 @@ export default {
           r = true;
           break;
         case "tutorial":
+          r = true;
+          break;
+        case "credits":
           r = true;
           break;
       }
