@@ -54,14 +54,15 @@ export default {
 .tutorial {
   &_wrapper {
     display: flex;
-    justify-content: center;
+    // justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 100vh;
     width: 100vw;
     padding: 20px;
 
     &_title {
+      margin-top: 100px;
+
       h2 {
         mainH2($neonRed);
       }
