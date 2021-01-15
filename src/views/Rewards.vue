@@ -5,7 +5,10 @@
         <h2>rewards</h2>
         <h3>Collectibles baby!</h3>
       </div>
-      <div class="rewards_wrapper_content">
+      <div v-if="icons.length == 0" class="rewards_wrapper_loader">
+        <Loader />
+      </div>
+      <div v-else class="rewards_wrapper_content">
         <div class="rewards_wrapper_content_header">
           <h4>icons</h4>
         </div>
@@ -23,9 +26,10 @@
               <h5>{{ icon.name }}</h5>
               <p class="dBlue">
                 Author:
-                <a :href="icon.authorInfo.socialUrl" target="_blank">
-                  {{ icon.authorInfo.name }}
-                </a>
+                <a
+                  :href="icon.authorInfo.socialUrl"
+                  target="_blank"
+                >{{ icon.authorInfo.name }}</a>
               </p>
               <p class="dBlue">
                 Required Level:
@@ -45,12 +49,7 @@
                 bCol="gold"
                 class="selected"
               />
-              <CusButton
-                v-else
-                bText="select"
-                @click.native="selectIcon(icon.id)"
-                bCol="gold"
-              />
+              <CusButton v-else bText="select" @click.native="selectIcon(icon.id)" bCol="gold" />
             </div>
           </div>
         </div>
@@ -61,11 +60,13 @@
 
 <script>
 import CusButton from "@/components/UI/CusButton";
+import Loader from "@/components/UI/Loader";
 
 export default {
   name: "Rewards",
   components: {
     CusButton,
+    Loader
   },
   computed: {
     icons() {
@@ -73,7 +74,7 @@ export default {
     },
     currUser() {
       return this.$store.state.currUser;
-    },
+    }
   },
   mounted() {
     this.$store.dispatch("loadIcons");
@@ -81,8 +82,8 @@ export default {
   methods: {
     selectIcon(iconId) {
       this.$store.dispatch("changedIcon", iconId);
-    },
-  },
+    }
+  }
 };
 </script>
 

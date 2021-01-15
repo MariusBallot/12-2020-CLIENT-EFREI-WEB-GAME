@@ -5,7 +5,10 @@
         <h2>leaderboard</h2>
         <h3>For the champions of the champions</h3>
       </div>
-      <div class="leaderboard_wrapper_infos">
+      <div v-if="users.length == 0" class="rewards_wrapper_loader">
+        <Loader />
+      </div>
+      <div v-else class="leaderboard_wrapper_infos">
         <div class="leaderboard_wrapper_infos_title">
           <p class="leaderboard_wrapper_infos_title_gametag">#Rank | Player tag</p>
           <div class="leaderboard_wrapper_infos_title_right">
@@ -23,10 +26,12 @@
 
 <script>
 import UserRank from "@/components/LeaderBoard/UserRank.vue";
+import Loader from "@/components/UI/Loader.vue";
 export default {
   name: "LeaderBoard",
   components: {
-    UserRank
+    UserRank,
+    Loader
   },
   computed: {
     currUser() {
