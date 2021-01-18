@@ -72,17 +72,7 @@ class MainGame {
         }
 
         this.player = new Player(this.engine, this.stage)
-
-        // this.vessel = PIXI.Sprite.from('assets/images/skinTest.jpg')
-        // this.vessel.texture.baseTexture.on('loaded', () => {
-        //     let vAR = this.vessel.height / this.vessel.width
-        //     // this.vessel.anchor.set(0.5);
-        //     this.vessel.position.set(300, 300)
-        //     // this.vessel.width = this.renderer.width / 10
-        //     // this.vessel.height = this.vessel.width * vAR
-        //     this.stage.addChild(this.vessel)
-        // });
-        // this.walls = new Walls(this.engine, this.ctx)
+        this.walls = new Walls(this.engine, this.stage)
         // Obstacles.init(this.engine, this.ctx, this.player.pBody)
 
 
@@ -103,6 +93,9 @@ class MainGame {
         //     }
 
         // })
+
+        window.addEventListener('resize', this.resize)
+
     }
 
     reset() {
@@ -166,8 +159,13 @@ class MainGame {
     }
 
     resize() {
-        this.cWidth = this.ctx.canvas.width = window.innerWidth
-        this.cHeight = this.ctx.canvas.height = window.innerHeight
+        gameConfig.viewer.w = window.innerWidth;
+        gameConfig.viewer.h = window.innerHeight;
+
+        //this part resizes the canvas but keeps ratio the same
+        this.renderer.view.style.width = gameConfig.viewer.w + "px";
+        this.renderer.view.style.height = gameConfig.viewer.h + "px"
+        this.renderer.resize(gameConfig.viewer.w, gameConfig.viewer.h);
     }
 
     bind() {

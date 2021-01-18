@@ -1,10 +1,14 @@
 <template>
   <div class="gameCanvas">
-    <div class="gameContainer" ref="gameCanvas"></div>
     <div
       v-if="gameConfig.matterDebug"
       class="debugCanvas"
       ref="debugCanvas"
+    ></div>
+    <div
+      class="gameContainer"
+      ref="gameCanvas"
+      :class="{ debug: gameConfig.matterDebug }"
     ></div>
   </div>
 </template>
@@ -53,7 +57,10 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    opacity: 0.5;
+
+    &.debug {
+      opacity: 0.3;
+    }
   }
 
   .debugCanvas {
