@@ -16,17 +16,24 @@
       <div class="deathScreen_wrapper_time" :class="{ on: death }">
         <p>
           In game time
-          <span class="deathScreen_wrapper_time_number">{{ time.toFixed(3) }}</span>s
+          <span class="deathScreen_wrapper_time_number">{{
+            time.toFixed(3)
+          }}</span
+          >s
         </p>
       </div>
       <div class="deathScreen_wrapper_level" :class="{ on: death }">
         <p>Level</p>
         <div class="deathScreen_wrapper_level_status">
-          <p class="deathScreen_wrapper_level_status_from">{{Math.floor(nData.level)}}</p>
+          <p class="deathScreen_wrapper_level_status_from">
+            {{ Math.floor(nData.level) }}
+          </p>
           <div class="deathScreen_wrapper_level_status_bar">
             <ProgressBar :progress="progress" />
           </div>
-          <p class="deathScreen_wrapper_level_status_to">{{Math.floor(nData.level)+1}}</p>
+          <p class="deathScreen_wrapper_level_status_to">
+            {{ Math.floor(nData.level) + 1 }}
+          </p>
         </div>
       </div>
       <div class="deathScreen_wrapper_nav" :class="{ on: death }">
@@ -34,7 +41,11 @@
           <CusButton bCol="blue" bText="Dash board" />
         </router-link>
         <div class="deathScreen_wrapper_nav_play">
-          <CusButton @click.native="resetGame" bCol="red" bText="Play again ⏎" />
+          <CusButton
+            @click.native="resetGame"
+            bCol="red"
+            bText="Play again ⏎"
+          />
         </div>
       </div>
     </div>
@@ -54,23 +65,24 @@ export default {
     pb: false,
     time: false,
     nData: null,
-    currUser: null
+    currUser: null,
   },
   components: {
     ProgressBar,
-    CusButton
+    CusButton,
   },
 
   data() {
     return {
       progress: 0,
-      lvlUp: false
+      lvlUp: false,
     };
   },
 
   mounted() {
     this.progressAnim();
     this.getLvlUp();
+    //coucou eleno
   },
   methods: {
     resetGame() {
@@ -84,10 +96,10 @@ export default {
     progressAnim() {
       TweenLite.to(this, 0.5, {
         delay: 0.5,
-        progress: this.nData.level - Math.floor(this.nData.level)
+        progress: this.nData.level - Math.floor(this.nData.level),
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
