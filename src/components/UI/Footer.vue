@@ -8,7 +8,7 @@
         class="footer_nav_logout navChild"
       >Log out</router-link>
       <span v-if="!(currUser == null)" class="navChild">|</span>
-      <router-link to class="footer_nav_credits">Credits</router-link>
+      <router-link to="/credits" class="footer_nav_credits">Credits</router-link>
     </nav>
   </footer>
 </template>
@@ -33,7 +33,7 @@ export default {
 
 <style lang="stylus" scoped>
 .footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   right: 0;
   padding: $headerPadding;

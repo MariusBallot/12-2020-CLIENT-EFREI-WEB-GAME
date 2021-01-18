@@ -10,26 +10,23 @@
           score
           <span class="deathScreen_wrapper_score_number">{{ score }}</span>
         </h4>
+        <p v-if="pb" class="deathScreen_wrapper_score_pb">New record!</p>
+        <p v-if="lvlUp" class="deathScreen_wrapper_score_lvlUp">Level up!</p>
       </div>
       <div class="deathScreen_wrapper_time" :class="{ on: death }">
         <p>
           In game time
-          <span class="deathScreen_wrapper_time_number">{{ time }}</span
-          >s
+          <span class="deathScreen_wrapper_time_number">{{ time.toFixed(3) }}</span>s
         </p>
       </div>
       <div class="deathScreen_wrapper_level" :class="{ on: death }">
         <p>Level</p>
         <div class="deathScreen_wrapper_level_status">
-          <p class="deathScreen_wrapper_level_status_from">
-            {{ Math.floor(currUser.level) }}
-          </p>
+          <p class="deathScreen_wrapper_level_status_from">{{Math.floor(nData.level)}}</p>
           <div class="deathScreen_wrapper_level_status_bar">
             <ProgressBar :progress="progress" />
           </div>
-          <p class="deathScreen_wrapper_level_status_to">
-            {{ Math.floor(currUser.level) + 1 }}
-          </p>
+          <p class="deathScreen_wrapper_level_status_to">{{Math.floor(nData.level)+1}}</p>
         </div>
       </div>
       <div class="deathScreen_wrapper_nav" :class="{ on: death }">
@@ -37,11 +34,7 @@
           <CusButton bCol="blue" bText="Dash board" />
         </router-link>
         <div class="deathScreen_wrapper_nav_play">
-          <CusButton
-            @click.native="resetGame"
-            bCol="red"
-            bText="Play again ⏎"
-          />
+          <CusButton @click.native="resetGame" bCol="red" bText="Play again ⏎" />
         </div>
       </div>
     </div>
@@ -58,42 +51,43 @@ export default {
   props: {
     death: false,
     score: false,
+    pb: false,
     time: false,
-    nLevel: null,
-    currUser: null,
+    nData: null,
+    currUser: null
   },
   components: {
     ProgressBar,
-    CusButton,
+    CusButton
   },
 
   data() {
     return {
       progress: 0,
+      lvlUp: false
     };
+  },
+
+  mounted() {
+    this.progressAnim();
+    this.getLvlUp();
   },
   methods: {
     resetGame() {
       MainGame.reset();
     },
-    startAnimProgress(nLevel) {
-      console.log(
-        this.currUser.level - Math.floor(this.currUser.level),
-        nLevel
-      );
-      TweenLite.fromTo(
-        this,
-        0.5,
-        {
-          progress: this.currUser.level - Math.floor(this.currUser.level),
-        },
-        {
-          delay: 1,
-          progress: nLevel - Math.floor(nLevel),
-        }
-      );
+    getLvlUp() {
+      if (Math.floor(this.nData.level) > Math.floor(this.currUser.level)) {
+        this.lvlUp = true;
+      }
     },
-  },
+    progressAnim() {
+      TweenLite.to(this, 0.5, {
+        delay: 0.5,
+        progress: this.nData.level - Math.floor(this.nData.level)
+      });
+    }
+  }
 };
 </script>
 
@@ -173,6 +167,15 @@ $animTime = 0.3s;
       &.on {
         opacity: 1;
         transform: translate3d(0, 0, 0);
+      }
+
+      &_pb, &_lvlUp {
+        color: $neonGold;
+        glow($neonGold, 10px);
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 2em;
+        font-weight: 700;
       }
     }
 

@@ -10,14 +10,17 @@ import Rewards from '../views/Rewards.vue'
 import Tutorial from '../views/Tutorial.vue'
 import SignUp from '../views/SignUp.vue'
 import ProfileSettings from '../views/ProfileSettings.vue'
+import Credits from '../views/Credits.vue'
 
 Vue.use(VueRouter)
 
 async function authValidation(to, from, next) {
   await store.dispatch("loadCurrUser");
 
-  console.log('here')
-  if (store.state.currUser == null) {
+  if (to.name == "game" && window.browser.mobile == true) {
+    next('/')
+  }
+  else if (store.state.currUser == null) {
     next('Login')
   } else {
     next()
@@ -49,8 +52,8 @@ const routes = [
 
   },
   {
-    path: '/leaderBoard',
-    name: 'leaderBoard',
+    path: '/leaderboard',
+    name: 'leaderboard',
     component: LeaderBoard,
     beforeEnter: authValidation
 
@@ -73,6 +76,11 @@ const routes = [
     name: 'profileSetting',
     component: ProfileSettings,
     beforeEnter: authValidation
+  },
+  {
+    path: '/credits',
+    name: 'credits',
+    component: Credits,
   },
 
 ]

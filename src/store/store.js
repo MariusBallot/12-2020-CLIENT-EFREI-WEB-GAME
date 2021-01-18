@@ -1,7 +1,6 @@
 import Vue from "vue"
 import Vuex from "vuex"
 import axios from "axios"
-import config from "../utils/config"
 
 Vue.use(Vuex)
 
@@ -16,11 +15,10 @@ export const store = new Vuex.Store({
     mutations: {
         onLoadCurrUser(state, data) {
             state.currUser = data
-
         },
         onLoadUsers(state, data) {
+            console.log(data)
             state.users = data
-
         },
         onLoadIcons(state, data) {
             state.rewards.icons = data
@@ -30,7 +28,6 @@ export const store = new Vuex.Store({
         },
         onNewGame(state) {
             state.currUser.ngames++
-
         }
 
     },
@@ -42,7 +39,6 @@ export const store = new Vuex.Store({
         async login(context, req) {
             const userRes = await axios.post('/api/login', req)
             let currUser = userRes.data.currUser
-            console.log(userRes.data)
             if (!userRes.data.loggedIn)
                 return userRes.data
 
@@ -76,17 +72,20 @@ export const store = new Vuex.Store({
                     }
                 })
             });
-            console.log(users)
-
             this.commit('onLoadUsers', usersRes.data)
         },
-
         async logOut(context) {
             const userRes = await axios.post('/api/logout')
             if (!userRes.data.loggedOut)
                 return
             this.commit('onLogOut')
             return userRes.data
+        },
+        async changedIcon(context, iconId) {
+            const userRes = await axios.put('/api/user', {
+                icon: iconId
+            })
+            this.dispatch('loadCurrUser')
         },
         async newGame(context) {
             const newNgames = context.state.currUser.ngames + 1
@@ -95,8 +94,9 @@ export const store = new Vuex.Store({
             })
             this.commit('onNewGame')
         },
-        async gameFinished(context) {
-
+        async gameFinished(context, ndata) {
+            const userRes = await axios.put('/api/user', ndata)
+            this.dispatch('loadCurrUser')
         },
     }
 })
