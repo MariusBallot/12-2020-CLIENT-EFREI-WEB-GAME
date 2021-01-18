@@ -1,25 +1,36 @@
 import Matter from 'matter-js'
+import * as PIXI from "pixi.js"
 import Controls from './Controls'
 import gameConfig from './gameConfig'
 
+
 export default class Player {
-    constructor(engine, ctx) {
+    constructor(engine, stage) {
         this.bind()
         this.engine = engine
-        this.ctx = ctx
+        this.stage = stage
         this.lost = false
+        this.loader = PIXI.Loader.shared
 
-        this.params = {
-            width: 100,
-            height: 50,
-            rot: 0,
-            startPos: { x: 200, y: window.innerHeight / 2 }
-        }
-        this.pBody = Matter.Bodies.rectangle(this.params.startPos.x, this.params.startPos.y, this.params.width, this.params.height);
+        this.params = gameConfig.player
+        this.pBody = Matter.Bodies.rectangle(this.params.startPos.x, this.params.startPos.y, this.params.width, this.params.width * this.params.aR);
         this.pBody.frictionAir = 0.2
         this.pBody.gameType = "player"
         Matter.World.add(this.engine.world, this.pBody)
 
+        this.loader.add('pSkin', 'assets/images/skinTest.jpg')
+        this.loader.load(this.onLoaded)
+
+    }
+
+    onLoaded(loader, resources) {
+        console.log(resources)
+        this.pSkin = new PIXI.Sprite(resources.pSkin.texture)
+        this.pSkin.anchor.set(.5, .5)
+        this.pSkin.width = this.params.width
+        this.pSkin.height = this.params.width * this.params.aR
+        this.pSkin.position.set(this.pBody.position.x, this.pBody.position.y)
+        this.stage.addChild(this.pSkin)
     }
     reset() {
         this.pBody.frictionAir = 0.2
@@ -31,6 +42,9 @@ export default class Player {
     }
 
     update() {
+        if (this.pSkin == undefined)
+            return
+
         if (Controls.inputs.up)
             Matter.Body.applyForce(this.pBody, this.pBody.position, { x: 0, y: -.1 })
         if (Controls.inputs.down)
@@ -38,28 +52,33 @@ export default class Player {
 
         if (!this.lost)
             Matter.Body.setAngle(this.pBody, this.pBody.velocity.y * 0.01)
+
+        this.pSkin.position.set(this.pBody.position.x, this.pBody.position.y)
+        this.pSkin.rotation = this.pBody.angle
+
+
     }
 
     draw() {
-        this.ctx.beginPath()
-        this.ctx.save()
+        this.stage.beginPath()
+        this.stage.save()
 
         //Center rotation
-        this.ctx.translate(this.pBody.position.x, this.pBody.position.y)
-        this.ctx.rotate(this.pBody.angle)
-        this.ctx.translate(-this.pBody.position.x, -this.pBody.position.y)
+        this.stage.translate(this.pBody.position.x, this.pBody.position.y)
+        this.stage.rotate(this.pBody.angle)
+        this.stage.translate(-this.pBody.position.x, -this.pBody.position.y)
 
         //Center origin
-        this.ctx.translate(-this.params.width / 2, -this.params.height / 2)
-        this.ctx.translate(this.pBody.position.x, this.pBody.position.y)
+        this.stage.translate(-this.params.width / 2, -this.params.height / 2)
+        this.stage.translate(this.pBody.position.x, this.pBody.position.y)
 
-        this.ctx.rect(0, 0, this.params.width, this.params.height)
-        this.ctx.strokeStyle = gameConfig.neonBlue
-        this.ctx.lineWidth = gameConfig.lineWidth
-        this.ctx.stroke()
-        this.ctx.restore()
+        this.stage.rect(0, 0, this.params.width, this.params.height)
+        this.stage.strokeStyle = gameConfig.neonBlue
+        this.stage.lineWidth = gameConfig.lineWidth
+        this.stage.stroke()
+        this.stage.restore()
 
-        this.ctx.closePath()
+        this.stage.closePath()
 
         this.params.rot += 0.01
     }
@@ -68,5 +87,6 @@ export default class Player {
         this.update = this.update.bind(this)
         this.draw = this.draw.bind(this)
         this.reset = this.reset.bind(this)
+        this.onLoaded = this.onLoaded.bind(this)
     }
 }
