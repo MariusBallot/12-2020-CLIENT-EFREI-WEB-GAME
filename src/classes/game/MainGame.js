@@ -1,12 +1,13 @@
 import RAF from '@/utils/RAF'
 import Matter from "matter-js"
+import * as PIXI from "pixi.js"
 import config from "@/utils/config";
-import { TweenLite } from 'gsap'
 
 import Player from './Player'
 import Walls from './Walls'
 import Obstacles from './Obstacles'
 import gameConfig from './gameConfig';
+
 
 
 class MainGame {

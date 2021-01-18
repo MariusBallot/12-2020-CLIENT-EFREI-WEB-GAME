@@ -14,17 +14,22 @@
       <div class="deathScreen_wrapper_time" :class="{ on: death }">
         <p>
           In game time
-          <span class="deathScreen_wrapper_time_number">{{ time }}</span>s
+          <span class="deathScreen_wrapper_time_number">{{ time }}</span
+          >s
         </p>
       </div>
       <div class="deathScreen_wrapper_level" :class="{ on: death }">
         <p>Level</p>
         <div class="deathScreen_wrapper_level_status">
-          <p class="deathScreen_wrapper_level_status_from">31</p>
+          <p class="deathScreen_wrapper_level_status_from">
+            {{ Math.floor(currUser.level) }}
+          </p>
           <div class="deathScreen_wrapper_level_status_bar">
-            <ProgressBar progress=".2" />
+            <ProgressBar :progress="progress" />
           </div>
-          <p class="deathScreen_wrapper_level_status_to">32</p>
+          <p class="deathScreen_wrapper_level_status_to">
+            {{ Math.floor(currUser.level) + 1 }}
+          </p>
         </div>
       </div>
       <div class="deathScreen_wrapper_nav" :class="{ on: death }">
@@ -32,7 +37,11 @@
           <CusButton bCol="blue" bText="Dash board" />
         </router-link>
         <div class="deathScreen_wrapper_nav_play">
-          <CusButton @click.native="resetGame" bCol="red" bText="Play again ⏎" />
+          <CusButton
+            @click.native="resetGame"
+            bCol="red"
+            bText="Play again ⏎"
+          />
         </div>
       </div>
     </div>
@@ -43,26 +52,48 @@
 import ProgressBar from "@/components/UI/ProgressBar";
 import CusButton from "@/components/UI/CusButton";
 import MainGame from "@/classes/game/MainGame";
+import { TweenLite } from "gsap";
 export default {
   name: "DeathScreen",
   props: {
     death: false,
     score: false,
-    time: false
+    time: false,
+    nLevel: null,
+    currUser: null,
   },
   components: {
     ProgressBar,
-    CusButton
+    CusButton,
   },
 
   data() {
-    return {};
+    return {
+      progress: 0,
+    };
   },
   methods: {
     resetGame() {
       MainGame.reset();
-    }
-  }
+    },
+    startAnimProgress(nLevel) {
+      console.log(
+        this.currUser.level - Math.floor(this.currUser.level),
+        nLevel
+      );
+      TweenLite.fromTo(
+        this,
+        0.5,
+        {
+          progress: this.currUser.level - Math.floor(this.currUser.level),
+        },
+        {
+          delay: 1,
+          progress: nLevel - Math.floor(nLevel),
+        }
+      );
+    },
+  },
 };
 </script>
 

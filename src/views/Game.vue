@@ -15,7 +15,11 @@
         </p>
       </div>
       <div class="hud_notification">
-        <GameNotification :animTrig="animTrig" :nTitle="nTitle" :bPoints="bPoints" />
+        <GameNotification
+          :animTrig="animTrig"
+          :nTitle="nTitle"
+          :bPoints="bPoints"
+        />
       </div>
       <div class="hud_pb">
         Personnal best
@@ -33,7 +37,14 @@
         </div>
       </div>
     </div>
-    <DeathScreen :death="death" :score="score" :time="time" />
+    <DeathScreen
+      :currUser="currUser"
+      :death="death"
+      :score="score"
+      :time="time"
+      :nLevel="nLevel"
+      ref="deathScreen"
+    />
   </div>
 </template>
 
@@ -52,7 +63,7 @@ export default {
     ProgressBar,
     GameNotification,
     DeathScreen,
-    FirstGame
+    FirstGame,
   },
   data() {
     return {
@@ -61,13 +72,14 @@ export default {
       animTrig: 0,
       death: false,
       score: null,
-      time: null
+      time: null,
+      nLevel: null,
     };
   },
   computed: {
     currUser() {
       return this.$store.state.currUser;
-    }
+    },
   },
   mounted() {
     MainGame.setClock(this.$refs.clock);
@@ -77,19 +89,21 @@ export default {
     MainGame.setResetCallback(this.onReset);
   },
   methods: {
-    onBonus: function(title, pts) {
+    onBonus: function (title, pts) {
       this.animTrig++;
       this.nTitle = title;
       this.bPoints = pts;
     },
-    onDeath: function(data) {
+    onDeath: function (data) {
       this.score = data.score;
       this.time = data.time;
 
       let ndata = {};
-      const nLevel =
+      this.nLevel =
         this.currUser.level + (data.score * 0.01) / 1 + this.currUser.level;
-      ndata.level = nLevel;
+      this.$refs.deathScreen.startAnimProgress(this.nLevel);
+
+      ndata.level = this.nLevel;
       if (this.score > this.currUser.personalbest) {
         ndata.personalbest = data.score;
       }
@@ -98,8 +112,8 @@ export default {
     },
     onReset() {
       this.death = false;
-    }
-  }
+    },
+  },
 };
 </script>
 
