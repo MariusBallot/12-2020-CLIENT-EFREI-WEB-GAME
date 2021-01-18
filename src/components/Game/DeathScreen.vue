@@ -82,9 +82,14 @@ export default {
   mounted() {
     this.progressAnim();
     this.getLvlUp();
-    //coucou eleno
+    window.addEventListener("keydown", this.onKeyDown);
   },
   methods: {
+    onKeyDown(e) {
+      if (e.keyCode == 13) {
+        this.resetGame();
+      }
+    },
     resetGame() {
       MainGame.reset();
     },
@@ -99,6 +104,9 @@ export default {
         progress: this.nData.level - Math.floor(this.nData.level),
       });
     },
+  },
+  destroyed() {
+    window.removeEventListener("keydown", this.onKeyDown);
   },
 };
 </script>
