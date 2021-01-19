@@ -16,9 +16,9 @@
           level :
           <strong>{{ Math.floor(currUser.level) }}</strong>
         </p>
-        <!-- <p class="header_right_text_setting">
-          <router-link to="/profileSetting">Profile settings</router-link>
-        </p>-->
+        <p class="header_right_text_setting">
+          <router-link to="/profile-settings">Profile settings</router-link>
+        </p>
       </div>
       <div class="header_right_icon">
         <img v-if="currUser.iconObj" :src="currUser.iconObj.image[0].url" />
