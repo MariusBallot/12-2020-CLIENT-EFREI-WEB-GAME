@@ -57,6 +57,7 @@ import ProgressBar from "@/components/UI/ProgressBar";
 import CusButton from "@/components/UI/CusButton";
 import MainGame from "@/classes/game/MainGame";
 import { TweenLite } from "gsap";
+
 export default {
   name: "DeathScreen",
   props: {
