@@ -15,20 +15,17 @@
         </p>
       </div>
       <div class="hud_notification">
-        <GameNotification
-          :animTrig="animTrig"
-          :nTitle="nTitle"
-          :bPoints="bPoints"
-        />
+        <GameNotification :animTrig="animTrig" :nTitle="nTitle" :bPoints="bPoints" />
       </div>
       <div class="hud_pb">
         Personnal best
-        <span ref="pb" class="hud_pb_number">10</span>
+        <span ref="pb" class="hud_pb_number">{{ currUser.personalbest }}</span>
       </div>
     </div>
     <GameCanvas />
 
-    <div class="rival">
+    <!-- TODO : Get Next rival in leaderboard -->
+    <!-- <div class="rival">
       <div class="rival_content">
         Next Rival
         <span ref="pb" class="rival_content_user">G@merGuy393YaNow</span>
@@ -36,14 +33,15 @@
           <ProgressBar :progress="0.2" />
         </div>
       </div>
-    </div>
+    </div>-->
     <DeathScreen
+      v-if="death"
       :currUser="currUser"
+      :nData="nData"
       :death="death"
       :score="score"
       :time="time"
-      :nLevel="nLevel"
-      ref="deathScreen"
+      :pb="pb"
     />
   </div>
 </template>
@@ -63,7 +61,7 @@ export default {
     ProgressBar,
     GameNotification,
     DeathScreen,
-    FirstGame,
+    FirstGame
   },
   data() {
     return {
@@ -73,13 +71,14 @@ export default {
       death: false,
       score: null,
       time: null,
-      nLevel: null,
+      pb: false,
+      nData: {}
     };
   },
   computed: {
     currUser() {
       return this.$store.state.currUser;
-    },
+    }
   },
   mounted() {
     MainGame.setClock(this.$refs.clock);
@@ -89,31 +88,30 @@ export default {
     MainGame.setResetCallback(this.onReset);
   },
   methods: {
-    onBonus: function (title, pts) {
+    onBonus: function(title, pts) {
       this.animTrig++;
       this.nTitle = title;
       this.bPoints = pts;
     },
-    onDeath: function (data) {
+    onDeath: function(data) {
       this.score = data.score;
       this.time = data.time;
 
-      let ndata = {};
-      this.nLevel =
-        this.currUser.level + (data.score * 0.01) / 1 + this.currUser.level;
-      this.$refs.deathScreen.startAnimProgress(this.nLevel);
-
-      ndata.level = this.nLevel;
+      const currLevel = parseFloat(this.currUser.level);
+      const nLevel = currLevel + (data.score * 0.01) / (1 + currLevel / 3);
+      this.nData.level = nLevel;
       if (this.score > this.currUser.personalbest) {
-        ndata.personalbest = data.score;
+        this.nData.personalbest = data.score;
+        this.pb = true;
       }
-      console.log(ndata);
       this.death = true;
+      console.log(this.nData);
+      this.$store.dispatch("gameFinished", this.nData);
     },
     onReset() {
       this.death = false;
-    },
-  },
+    }
+  }
 };
 </script>
 

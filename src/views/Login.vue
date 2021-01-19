@@ -21,18 +21,21 @@
         </form>
       </div>
     </div>
+    <div class="login_loader">
+      <Loader v-if="loading" />
+    </div>
     <div class="login_error">{{ logInError }}</div>
   </div>
 </template>
 
 <script>
 import CusButton from "@/components/UI/CusButton.vue";
-import Header from "@/components/UI/Header.vue";
+import Loader from "@/components/UI/Loader.vue";
 export default {
   name: "Login",
   components: {
     CusButton,
-    Header
+    Loader
   },
   data() {
     return {
@@ -40,7 +43,8 @@ export default {
         textId: null,
         pwd: null
       },
-      logInError: null
+      logInError: null,
+      loading: false
     };
   },
   mounted() {
@@ -50,14 +54,16 @@ export default {
   },
   methods: {
     logClick: async function() {
+      this.loading = true;
       let logProm = await this.$store.dispatch("login", this.userInfo);
-      console.log(logProm);
       if (logProm.loggedIn) {
         this.logInError = logProm.msg = null;
         this.$router.push("/");
+        console.log(logProm);
       } else {
         this.logInError = logProm.msg;
       }
+      this.loading = false;
     }
   }
 };
@@ -73,9 +79,14 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
+    padding: $headerPadding;
 
     &_infos {
       width: 50%;
+
+      +below(800px) {
+        width: 100%;
+      }
 
       input {
         color: white;
@@ -112,6 +123,15 @@ export default {
     width: 100vw;
     text-align: center;
     color: $neonRed;
+  }
+
+  &_loader {
+    width: 100vw;
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    display: flex;
+    justify-content: center;
   }
 }
 </style>

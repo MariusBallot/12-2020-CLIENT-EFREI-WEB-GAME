@@ -20,6 +20,12 @@ export default {
 </script>
 
 <style lang="stylus">
+body {
+  background: linear-gradient(116.87deg, #211F3A 0%, #131220 100.59%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
 #app {
   font-family: 'Rubik', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -27,7 +33,8 @@ export default {
   color: $neonBlue;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(116.87deg, #211F3A 0%, #131220 100.59%);
+  overflow: hidden;
+  overflow-y: scroll;
 }
 
 * {

@@ -1,7 +1,18 @@
 <template>
   <div class="userrank">
-    <img :src="user.iconObj.image[0].url" />
-    <div class="userrank_person">{{ user.gametag }} {{ user.level }}</div>
+    <div class="userrank_image">
+      <img :src="user.iconObj.image[0].url" />
+    </div>
+    <div class="userrank_person" :class="{first: rank==1, me: currUser.id == user.id}">
+      <p class="userrank_person_gametag">
+        <strong>#{{rank}}</strong>
+        {{ user.gametag }}
+      </p>
+      <div class="userrank_person_right">
+        <p class="userrank_person_right_pb">{{ user.personalbest }}</p>
+        <p class="userrank_person_right_level">{{ Math.floor(user.level) }}</p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -10,24 +21,91 @@ export default {
   name: "UserRank",
   props: {
     user: null,
+    rank: null
   },
-  mounted() {},
+  computed: {
+    currUser() {
+      return this.$store.state.currUser;
+    }
+  }
 };
 </script>
 
 <style lang="stylus" scoped>
 .userrank {
   display: flex;
+  align-items: center;
+  width: 100%;
+  border-bottom: solid $neonBlue 1px;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
 
-  &_person {
-    border-bottom: 1px solid #AFAFAF;
+  &:last-child {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: none;
   }
 
-  img {
+  &_person {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 1.5em;
+
+    +below(600px) {
+      margin-left: 10px;
+      font-size: inherit;
+    }
+
+    &.me {
+      color: $neonRed;
+    }
+
+    &.first {
+      color: $neonGold;
+      glow($neonGold, 5px);
+    }
+
+    &_gametag {
+    }
+
+    &_right {
+      display: flex;
+      justify-content: space-between;
+
+      &_pb {
+      }
+
+      &_level {
+        text-align: right;
+        width: 100px;
+        margin-left: 70px;
+
+        +below(800px) {
+          width: 50px;
+          margin-left: 30px;
+        }
+
+        +below(500px) {
+          width: auto;
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+
+  &_image {
+    margin-right: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 50px;
     height: 50px;
-    border-radius: 100%;
-    margin-right: 20px;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
   }
 }
 </style>
