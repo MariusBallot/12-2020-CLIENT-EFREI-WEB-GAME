@@ -8,6 +8,7 @@
               Change gametag
             </p>
             <input
+              id="pseudo"
               type="text"
               v-model="userInfo.textId"
               :placeholder="[[currUser.gametag]]"
@@ -17,13 +18,15 @@
             <p class="profileSettings_wrapper_infos_second_changepwd">
               Change password
             </p>
-            <input
-              type="Password"
-              v-model="userInfo.pwd"
-              placeholder="Old password"
-            />
-            <input type="Password" placeholder="New password" />
-            <input type="Password" placeholder="Confirm new password" />
+            <div class="profileSettings_wrapper_infos_second_input">
+              <input
+                type="Password"
+                v-model="userInfo.pwd"
+                placeholder="Old password"
+              />
+              <input type="Password" placeholder="New password" />
+              <input type="Password" placeholder="Confirm new password" />
+            </div>
           </div>
           <div class="profileSettings_wrapper_infos_buts">
             <div class="profileSettings_wrapper_infos_buts_submit">
@@ -79,10 +82,33 @@ export default {
     padding: $headerPadding;
 
     &_infos {
+      padding-top: 120px;
       width: 50%;
 
       +below(800px) {
         width: 100%;
+      }
+
+      &_first {
+        &_changegt {
+          padding-left: 10px;
+        }
+
+        #pseudo {
+          margin-top: 5px;
+        }
+      }
+
+      &_second {
+        margin-top: 10px;
+
+        p {
+          padding-left: 10px;
+        }
+
+        &_input {
+          margin-top: 5px;
+        }
       }
 
       input {
@@ -90,10 +116,11 @@ export default {
         width: 100%;
         height: 60px;
         classInputs();
-        margin-bottom: 15px;
+        margin-bottom: 5px;
       }
 
       &_buts {
+        margin-top: 25px;
         display: flex;
         justify-content: center;
 
@@ -106,6 +133,8 @@ export default {
       &_da {
         display: flex;
         justify-content: center;
+        align-items: flex-end;
+        height: 100px;
         color: $neonRed;
       }
     }
