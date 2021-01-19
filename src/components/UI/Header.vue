@@ -36,7 +36,7 @@ export default {
     },
     icons() {
       return this.$store.state.rewards.icons;
-    }
+    },
   },
   created() {
     this.$store.dispatch("loadIcons");
@@ -57,10 +57,13 @@ export default {
         case "credits":
           r = true;
           break;
+        case "profile-settings":
+          r = true;
+          break;
       }
       return r;
-    }
-  }
+    },
+  },
 };
 </script>
 

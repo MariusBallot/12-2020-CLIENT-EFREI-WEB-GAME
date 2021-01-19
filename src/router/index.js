@@ -72,8 +72,8 @@ const routes = [
     component: Tutorial
   },
   {
-    path: '/profileSetting',
-    name: 'profileSetting',
+    path: '/profile-settings',
+    name: 'profile-settings',
     component: ProfileSettings,
     beforeEnter: authValidation
   },
