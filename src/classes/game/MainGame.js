@@ -48,7 +48,7 @@ class MainGame {
         this.renderer = new PIXI.autoDetectRenderer({
             width: gameConfig.viewer.w,
             height: gameConfig.viewer.h,
-            // transparent: true
+            transparent: true
         })
         this.stage = new PIXI.Container()
         this.gameContainer.appendChild(this.renderer.view)
@@ -60,10 +60,10 @@ class MainGame {
         this.debugRender = Matter.Render.create({
             engine: this.engine,
             element: this.debugCanvas,
-            // options: {
-            //     width: window.innerWidth,
-            //     height: window.innerHeight
-            // }
+            options: {
+                width: window.innerWidth,
+                height: window.innerHeight
+            }
         })
 
         if (gameConfig.matterDebug) {
@@ -168,7 +168,11 @@ class MainGame {
         console.log("hey")
         this.renderer.resize(gameConfig.viewer.w, gameConfig.viewer.h);
 
+        this.debugRender.canvas.width = gameConfig.viewer.w
+        this.debugRender.canvas.height = gameConfig.viewer.h
+
         this.walls.resize()
+        this.player.resize()
     }
 
     bind() {

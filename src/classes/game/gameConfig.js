@@ -7,7 +7,7 @@ const gameConfig = {
     viewer: viewer,
     neonBlue: 0x5EF7FF,
     neonRed: 0xD14036,
-    matterDebug: false,
+    matterDebug: true,
     lineWidth: 3,
     player: {
         width: viewer.w * 0.07,
@@ -16,9 +16,9 @@ const gameConfig = {
         startPos: { x: 200, y: window.innerHeight / 2 }
     },
     walls: {
-        thickness: 10,
-        vertMargin: 100,
-        horMargin: 10,
+        thickness: viewer.h * 0.03,
+        vertMargin: viewer.h * 0.09,
+        horMargin: viewer.h * 0.03,
     },
     obstacles: {
         number: 5,

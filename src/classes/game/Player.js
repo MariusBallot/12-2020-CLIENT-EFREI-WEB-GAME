@@ -22,6 +22,10 @@ export default class Player {
         this.loader.add('pSkin', 'assets/images/skinTest.jpg')
         this.loader.load(this.onLoaded)
 
+        this.prevW = {
+            w: window.innerWidth,
+            h: window.innerHeight
+        }
     }
 
     onLoaded(loader, resources) {
@@ -60,34 +64,19 @@ export default class Player {
 
     }
 
-    draw() {
-        this.stage.beginPath()
-        this.stage.save()
+    resize() {
+        // console.log(window.innerWidth / this.prevW.w)
+        // this.prevW = {
+        //     w: window.innerWidth,
+        //     h: window.innerHeight
+        // }
 
-        //Center rotation
-        this.stage.translate(this.pBody.position.x, this.pBody.position.y)
-        this.stage.rotate(this.pBody.angle)
-        this.stage.translate(-this.pBody.position.x, -this.pBody.position.y)
-
-        //Center origin
-        this.stage.translate(-this.params.width / 2, -this.params.height / 2)
-        this.stage.translate(this.pBody.position.x, this.pBody.position.y)
-
-        this.stage.rect(0, 0, this.params.width, this.params.height)
-        this.stage.strokeStyle = gameConfig.neonBlue
-        this.stage.lineWidth = gameConfig.lineWidth
-        this.stage.stroke()
-        this.stage.restore()
-
-        this.stage.closePath()
-
-        this.params.rot += 0.01
     }
 
     bind() {
         this.update = this.update.bind(this)
-        this.draw = this.draw.bind(this)
         this.reset = this.reset.bind(this)
+        this.resize = this.resize.bind(this)
         this.onLoaded = this.onLoaded.bind(this)
     }
 }
