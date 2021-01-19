@@ -5,8 +5,8 @@ const viewer = {
 
 const gameConfig = {
     viewer: viewer,
-    neonBlue: "#5EF7FF",
-    neonRed: "#D14036",
+    neonBlue: 0x5EF7FF,
+    neonRed: 0xD14036,
     matterDebug: false,
     lineWidth: 3,
     player: {

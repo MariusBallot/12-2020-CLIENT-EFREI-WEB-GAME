@@ -60,10 +60,10 @@ class MainGame {
         this.debugRender = Matter.Render.create({
             engine: this.engine,
             element: this.debugCanvas,
-            options: {
-                width: window.innerWidth,
-                height: window.innerHeight
-            }
+            // options: {
+            //     width: window.innerWidth,
+            //     height: window.innerHeight
+            // }
         })
 
         if (gameConfig.matterDebug) {
@@ -165,7 +165,10 @@ class MainGame {
         //this part resizes the canvas but keeps ratio the same
         this.renderer.view.style.width = gameConfig.viewer.w + "px";
         this.renderer.view.style.height = gameConfig.viewer.h + "px"
+        console.log("hey")
         this.renderer.resize(gameConfig.viewer.w, gameConfig.viewer.h);
+
+        this.walls.resize()
     }
 
     bind() {
