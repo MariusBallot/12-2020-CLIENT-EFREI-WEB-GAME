@@ -70,7 +70,6 @@ export default class Objstacle {
     }
 
     resize() {
-        console.log(this.prevConfig.obstacle.width, this.availHeight, this.prevConfig)
         Matter.Body.scale(this.oBody, 1 / (this.prevConfig.obstacle.width), 1 / (this.availHeight / this.prevConfig.obstacles.vertNumber))
         this.availHeight = GameConfig.viewer.h - (2 * GameConfig.walls.vertMargin + 2 * GameConfig.walls.thickness)
         Matter.Body.scale(this.oBody, GameConfig.obstacle.width, this.availHeight / GameConfig.obstacles.vertNumber)
