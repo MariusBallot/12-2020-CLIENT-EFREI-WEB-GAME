@@ -1,14 +1,14 @@
 <template>
   <div class="gameCanvas">
     <div
-      v-if="gameConfig.matterDebug"
+      v-if="GameConfig.matterDebug"
       class="debugCanvas"
       ref="debugCanvas"
     ></div>
     <div
       class="gameContainer"
       ref="gameCanvas"
-      :class="{ debug: gameConfig.matterDebug }"
+      :class="{ debug: GameConfig.matterDebug }"
     ></div>
   </div>
 </template>
@@ -16,13 +16,13 @@
 <script>
 import MainGame from "../../classes/game/MainGame";
 import Controls from "../../classes/game/Controls";
-import gameConfig from "@/classes/game/gameConfig";
+import GameConfig from "@/classes/game/GameConfig";
 
 export default {
   name: "GameCanvas",
   data() {
     return {
-      gameConfig: gameConfig,
+      GameConfig: GameConfig,
     };
   },
   computed: {

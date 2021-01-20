@@ -13,9 +13,9 @@ import Footer from "@/components/UI/Footer.vue";
 export default {
   components: {
     Header,
-    Footer
+    Footer,
   },
-  created() {}
+  created() {},
 };
 </script>
 
@@ -34,7 +34,7 @@ body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  overflow-y: scroll;
+  // overflow-y: scroll;
 }
 
 * {

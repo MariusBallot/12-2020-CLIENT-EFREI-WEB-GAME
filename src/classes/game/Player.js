@@ -1,7 +1,7 @@
 import Matter from 'matter-js'
 import * as PIXI from "pixi.js"
 import Controls from './Controls'
-import gameConfig from './gameConfig'
+import GameConfig from './GameConfig'
 
 
 export default class Player {
@@ -12,8 +12,7 @@ export default class Player {
         this.lost = false
         this.loader = PIXI.Loader.shared
 
-        this.params = gameConfig.player
-        this.pBody = Matter.Bodies.rectangle(this.params.startPos.x, this.params.startPos.y, this.params.width, this.params.width * this.params.aR);
+        this.pBody = Matter.Bodies.rectangle(GameConfig.player.startPos.x, GameConfig.player.startPos.y, GameConfig.player.width, GameConfig.player.width * GameConfig.player.aR);
         this.pBody.frictionAir = 0.2
         this.pBody.mass = 10
         this.pBody.gameType = "player"
@@ -22,9 +21,12 @@ export default class Player {
         this.loader.add('pSkin', 'assets/images/skinTest.jpg')
         this.loader.load(this.onLoaded)
 
-        this.prevW = {
-            w: window.innerWidth,
-            h: window.innerHeight
+        this.prevConfig = {
+            viewer: {
+                w: GameConfig.viewer.w,
+                h: GameConfig.viewer.h
+            },
+            player: GameConfig.player
         }
     }
 
@@ -32,8 +34,8 @@ export default class Player {
         console.log(resources)
         this.pSkin = new PIXI.Sprite(resources.pSkin.texture)
         this.pSkin.anchor.set(.5, .5)
-        this.pSkin.width = this.params.width
-        this.pSkin.height = this.params.width * this.params.aR
+        this.pSkin.width = GameConfig.player.width
+        this.pSkin.height = GameConfig.player.width * GameConfig.player.aR
         this.pSkin.position.set(this.pBody.position.x, this.pBody.position.y)
         this.stage.addChild(this.pSkin)
     }
@@ -41,8 +43,8 @@ export default class Player {
         this.pBody.frictionAir = 0.2
         this.lost = false
         Matter.Body.setPosition(this.pBody, {
-            x: this.params.startPos.x,
-            y: this.params.startPos.y
+            x: GameConfig.player.startPos.x,
+            y: GameConfig.player.startPos.y
         })
     }
 
@@ -55,8 +57,11 @@ export default class Player {
         if (Controls.inputs.down)
             Matter.Body.applyForce(this.pBody, this.pBody.position, { x: 0, y: .1 })
 
-        if (!this.lost)
+        if (!this.lost) {
+            // this.pBody.position.x = 300
+            Matter.Body.setPosition(this.pBody, { x: GameConfig.player.startPos.x, y: this.pBody.position.y })
             Matter.Body.setAngle(this.pBody, this.pBody.velocity.y * 0.01)
+        }
 
         this.pSkin.position.set(this.pBody.position.x, this.pBody.position.y)
         this.pSkin.rotation = this.pBody.angle
@@ -65,11 +70,22 @@ export default class Player {
     }
 
     resize() {
-        // console.log(window.innerWidth / this.prevW.w)
-        // this.prevW = {
-        //     w: window.innerWidth,
-        //     h: window.innerHeight
-        // }
+
+        Matter.Body.scale(this.pBody, 1 / (this.prevConfig.player.width), 1 / (this.prevConfig.player.width * this.prevConfig.player.aR))
+        Matter.Body.scale(this.pBody, GameConfig.player.width, GameConfig.player.width * GameConfig.player.aR)
+
+        this.pSkin.width = GameConfig.player.width
+        this.pSkin.height = GameConfig.player.width * GameConfig.player.aR
+
+        this.pBody.mass = 10
+
+        this.prevConfig = {
+            viewer: {
+                w: GameConfig.viewer.w,
+                h: GameConfig.viewer.h
+            },
+            player: GameConfig.player
+        }
 
     }
 

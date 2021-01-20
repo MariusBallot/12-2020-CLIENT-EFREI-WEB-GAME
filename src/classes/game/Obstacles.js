@@ -1,21 +1,19 @@
 import Obstacle from './Obstacle'
-import gameConfig from './gameConfig'
+import GameConfig from './GameConfig'
 
 class Objstacles {
     constructor() {
         this.bind()
 
         this.group = []
-        this.params = gameConfig.obstacles
     }
 
-    init(engine, ctx, pBody) {
+    init(engine, stage) {
         this.engine = engine
-        this.ctx = ctx
-        this.pBody = pBody
+        this.stage = stage
 
-        for (let i = 0; i < this.params.number; i++) {
-            let obs = new Obstacle(this.engine, this.ctx, i)
+        for (let i = 0; i < GameConfig.obstacles.horNumber; i++) {
+            let obs = new Obstacle(this.engine, this.stage, i)
             this.group.push(obs)
         }
 
@@ -23,7 +21,7 @@ class Objstacles {
 
     reset() {
         let i = 0;
-        while (i < this.params.number) {
+        while (i < GameConfig.obstacles.horNumber) {
             this.group[i].reset()
             i++
         }
@@ -35,16 +33,16 @@ class Objstacles {
 
     update() {
         let i = 0;
-        while (i < this.params.number) {
+        while (i < GameConfig.obstacles.horNumber) {
             this.group[i].update()
             i++
         }
     }
 
-    draw() {
+    resize() {
         let i = 0;
-        while (i < this.params.number) {
-            this.group[i].draw()
+        while (i < GameConfig.obstacles.horNumber) {
+            this.group[i].resize()
             i++
         }
     }
@@ -53,6 +51,7 @@ class Objstacles {
         this.update = this.update.bind(this)
         this.init = this.init.bind(this)
         this.reset = this.reset.bind(this)
+        this.resize = this.resize.bind(this)
         this.stop = this.stop.bind(this)
     }
 }

@@ -5,7 +5,7 @@ import * as PIXI from "pixi.js"
 import Player from './Player'
 import Walls from './Walls'
 import Obstacles from './Obstacles'
-import gameConfig from './gameConfig';
+import GameConfig from './GameConfig';
 
 
 
@@ -43,11 +43,12 @@ class MainGame {
 
 
     init(gameContainer, debugCanvas) {
+        GameConfig.updateValues()
         this.gameContainer = gameContainer
         this.debugCanvas = debugCanvas
         this.renderer = new PIXI.autoDetectRenderer({
-            width: gameConfig.viewer.w,
-            height: gameConfig.viewer.h,
+            width: GameConfig.viewer.w,
+            height: GameConfig.viewer.h,
             transparent: true
         })
         this.stage = new PIXI.Container()
@@ -66,33 +67,33 @@ class MainGame {
             }
         })
 
-        if (gameConfig.matterDebug) {
+        if (GameConfig.matterDebug) {
 
             Matter.Render.run(this.debugRender)
         }
 
         this.player = new Player(this.engine, this.stage)
         this.walls = new Walls(this.engine, this.stage)
-        // Obstacles.init(this.engine, this.ctx, this.player.pBody)
+        Obstacles.init(this.engine, this.stage)
 
 
 
-        // Matter.Events.on(this.engine, 'collisionStart', (event) => {
-        //     if (event.pairs[0].bodyA.gameType == "obs" || event.pairs[0].bodyB.gameType == "obs") {
-        //         gameConfig.obstacle.speed = 0
-        //         this.lost = true
-        //         this.player.lost = true
-        //         this.engine.world.gravity.y = 1;
-        //         this.player.pBody.frictionAir = 0;
-        //         let data = {
-        //             score: this.score,
-        //             time: this.time * 0.001
-        //         }
-        //         this.deathCallBack(data)
-        //         clearInterval(this.bonusInt)
-        //     }
+        Matter.Events.on(this.engine, 'collisionStart', (event) => {
+            if (event.pairs[0].bodyA.gameType == "obs" || event.pairs[0].bodyB.gameType == "obs") {
+                GameConfig.speed = 0
+                this.lost = true
+                this.player.lost = true
+                this.engine.world.gravity.y = 1;
+                this.player.pBody.frictionAir = 0;
+                let data = {
+                    score: this.score,
+                    time: this.time * 0.001
+                }
+                this.deathCallBack(data)
+                clearInterval(this.bonusInt)
+            }
 
-        // })
+        })
 
         window.addEventListener('resize', this.resize)
 
@@ -103,9 +104,9 @@ class MainGame {
         this.player.reset()
         this.lost = false;
         this.engine.world.gravity.y = 0;
-        gameConfig.obstacle.speed = gameConfig.obstacle.startSpeed
+        GameConfig.speed = GameConfig.startSpeed
         this.bonusInt = setInterval(() => {
-            gameConfig.obstacle.speed += 1
+            GameConfig.speed += 1
             this.bonus += 15
             this.bonusCallBack("10S STREAK!", 15)
         }, 10000);
@@ -116,9 +117,10 @@ class MainGame {
     }
 
     start() {
-        gameConfig.obstacle.speed = gameConfig.obstacle.startSpeed
+
+        GameConfig.speed = GameConfig.startSpeed
         this.bonusInt = setInterval(() => {
-            gameConfig.obstacle.speed += 1
+            GameConfig.speed += 1
             this.bonus += 15
             this.bonusCallBack("10S STREAK!", 15)
         }, 10000);
@@ -129,23 +131,17 @@ class MainGame {
 
     update() {
         this.renderer.render(this.stage)
-        // if (!this.lost) this.time = Date.now() - this.startTime
-        // this.clockDom.innerHTML = this.time / 1000
-        // this.score = Math.floor(this.time / 1000) + this.bonus
-        // this.scoreDom.innerHTML = this.score
+        if (!this.lost) this.time = Date.now() - this.startTime
+        this.clockDom.innerHTML = this.time / 1000
+        this.score = Math.floor(this.time / 1000) + this.bonus
+        this.scoreDom.innerHTML = this.score
 
         Matter.Engine.update(this.engine);
 
-        if (!this.lost)
-            this.player.update()
-        // Obstacles.update()
-        // this.draw()
-    }
-
-    draw() {
-        this.ctx.clearRect(0, 0, this.cWidth, this.cHeight);
-        this.walls.draw()
-        Obstacles.draw()
+        this.player.update()
+        if (!this.lost) {
+            Obstacles.update()
+        }
     }
 
     stop() {
@@ -159,25 +155,24 @@ class MainGame {
     }
 
     resize() {
-        gameConfig.viewer.w = window.innerWidth;
-        gameConfig.viewer.h = window.innerHeight;
+        GameConfig.updateValues()
+
 
         //this part resizes the canvas but keeps ratio the same
-        this.renderer.view.style.width = gameConfig.viewer.w + "px";
-        this.renderer.view.style.height = gameConfig.viewer.h + "px"
-        console.log("hey")
-        this.renderer.resize(gameConfig.viewer.w, gameConfig.viewer.h);
+        this.renderer.view.style.width = GameConfig.viewer.w + "px";
+        this.renderer.view.style.height = GameConfig.viewer.h + "px"
+        this.renderer.resize(GameConfig.viewer.w, GameConfig.viewer.h);
 
-        this.debugRender.canvas.width = gameConfig.viewer.w
-        this.debugRender.canvas.height = gameConfig.viewer.h
+        this.debugRender.canvas.width = GameConfig.viewer.w
+        this.debugRender.canvas.height = GameConfig.viewer.h
 
         this.walls.resize()
         this.player.resize()
+        Obstacles.resize()
     }
 
     bind() {
         this.update = this.update.bind(this)
-        this.draw = this.draw.bind(this)
         this.init = this.init.bind(this)
         this.resize = this.resize.bind(this)
         this.setClock = this.setClock.bind(this)

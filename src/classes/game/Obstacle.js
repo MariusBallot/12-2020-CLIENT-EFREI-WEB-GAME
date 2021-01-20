@@ -1,65 +1,105 @@
 import RAF from '../../utils/RAF'
 import Matter from 'matter-js'
-import gameConfig from './gameConfig'
+import * as PIXI from "pixi.js"
+import GameConfig from './GameConfig'
 
 export default class Objstacle {
-    constructor(engine, ctx, i) {
-        this.ctx = ctx
+    constructor(engine, stage, i) {
+        this.bind()
+        this.stage = stage
         this.engine = engine
         this.index = i
-        this.startPos = {}
+        this.currPos = {}
 
 
-        this.params = gameConfig.obstacle
-        this.startPos.x = gameConfig.obstacles.space * this.index + gameConfig.obstacles.startSpace
-        this.startPos.y = gameConfig.walls.vertMargin + gameConfig.walls.thickness + this.params.height / 2
-            + Math.random() * (window.innerHeight - 2 * (gameConfig.walls.vertMargin + gameConfig.walls.thickness + this.params.height / 2))
+        this.currPos.x = GameConfig.obstacles.space * this.index + GameConfig.obstacles.startSpace
+        // this.currPos.x = 300
 
-        this.oBody = Matter.Bodies.rectangle(this.startPos.x, this.startPos.y, this.params.width, this.params.height, { isStatic: true })
+        this.availHeight = GameConfig.viewer.h - (2 * GameConfig.walls.vertMargin + 2 * GameConfig.walls.thickness)
+        this.seed = Math.round(Math.random() * (GameConfig.obstacles.vertNumber - 1))
+        this.currPos.y = (GameConfig.walls.vertMargin + GameConfig.walls.thickness + (this.availHeight / GameConfig.obstacles.vertNumber) / 2)
+            + (this.availHeight / GameConfig.obstacles.vertNumber) * this.seed
+
+        this.oBody = Matter.Bodies.rectangle(this.currPos.x, this.currPos.y, GameConfig.obstacle.width, this.availHeight / GameConfig.obstacles.vertNumber, { isStatic: true })
         this.oBody.gameType = `obs`
+
+        this.oSkin = new PIXI.Container()
+        const graph = new PIXI.Graphics()
+        graph.beginFill(GameConfig.neonRed)
+        graph.drawRect(-0.5, -0.5, 1, 1)
+        graph.endFill()
+        this.oSkin.addChild(graph)
+        this.oSkin.width = GameConfig.obstacle.width;
+        this.oSkin.height = this.availHeight / GameConfig.obstacles.vertNumber;
+        this.stage.addChild(this.oSkin)
         Matter.World.add(this.engine.world, this.oBody)
+
+        this.prevConfig = {
+            viewer: {
+                w: GameConfig.viewer.w,
+                h: GameConfig.viewer.h
+            },
+            obstacle: GameConfig.obstacle,
+            obstacles: GameConfig.obstacles,
+        }
     }
 
     reset() {
         Matter.Body.setPosition(this.oBody, {
-            x: this.startPos.x,
-            y: this.startPos.y,
+            x: this.currPos.x,
+            y: this.currPos.y,
         })
     }
 
     update() {
-        Matter.Body.setPosition(this.oBody, { x: this.oBody.position.x - this.params.speed * RAF.dt, y: this.oBody.position.y })
+        Matter.Body.setPosition(this.oBody, { x: this.oBody.position.x - GameConfig.speed * RAF.dt, y: this.oBody.position.y })
 
-        if (this.oBody.position.x <= 0 - this.params.width) {
+        if (this.oBody.position.x <= 0 - GameConfig.obstacle.width) {
+            this.currPos.x = GameConfig.obstacles.space * GameConfig.obstacles.horNumber
+            this.seed = Math.round(Math.random() * (GameConfig.obstacles.vertNumber - 1))
+            this.currPos.y = (GameConfig.walls.vertMargin + GameConfig.walls.thickness + (this.availHeight / GameConfig.obstacles.vertNumber) / 2)
+                + (this.availHeight / GameConfig.obstacles.vertNumber) * this.seed
             Matter.Body.setPosition(this.oBody, {
-                x: gameConfig.obstacles.space * gameConfig.obstacles.number,
-                y: gameConfig.walls.vertMargin + gameConfig.walls.thickness + this.params.height / 2
-                    + Math.random() * (window.innerHeight - 2 * (gameConfig.walls.vertMargin + gameConfig.walls.thickness + this.params.height / 2))
+                x: this.currPos.x,
+                y: this.currPos.y
             })
+        }
+
+        this.oSkin.position.set(this.oBody.position.x, this.oBody.position.y)
+
+    }
+
+    resize() {
+        console.log(this.prevConfig.obstacle.width, this.availHeight, this.prevConfig)
+        Matter.Body.scale(this.oBody, 1 / (this.prevConfig.obstacle.width), 1 / (this.availHeight / this.prevConfig.obstacles.vertNumber))
+        this.availHeight = GameConfig.viewer.h - (2 * GameConfig.walls.vertMargin + 2 * GameConfig.walls.thickness)
+        Matter.Body.scale(this.oBody, GameConfig.obstacle.width, this.availHeight / GameConfig.obstacles.vertNumber)
+        // Matter.Body.scale(this.oBody, this.prevConfig.obstacle.width, this.availHeight / this.prevConfig.obstacles.vertNumber)
+
+        this.currPos.y = (GameConfig.walls.vertMargin + GameConfig.walls.thickness + (this.availHeight / GameConfig.obstacles.vertNumber) / 2)
+            + (this.availHeight / GameConfig.obstacles.vertNumber) * this.seed
+        Matter.Body.setPosition(this.oBody, {
+            x: this.oBody.position.x,
+            y: this.currPos.y
+        })
+
+        this.oSkin.width = GameConfig.obstacle.width;
+        this.oSkin.height = this.availHeight / GameConfig.obstacles.vertNumber;
+
+        this.prevConfig = {
+            viewer: {
+                w: GameConfig.viewer.w,
+                h: GameConfig.viewer.h
+            },
+            obstacle: GameConfig.obstacle,
+            obstacles: GameConfig.obstacles,
         }
     }
 
-    draw() {
-
-        this.ctx.beginPath()
-        this.ctx.save()
-
-        //Center origin
-        this.ctx.translate(-this.params.width / 2, -this.params.height / 2)
-        this.ctx.translate(this.oBody.position.x, this.oBody.position.y)
-
-        this.ctx.rect(0, 0, this.params.width, this.params.height)
-        this.ctx.fillStyle = gameConfig.neonRed
-        this.ctx.fill()
-        this.ctx.restore()
-
-        this.ctx.closePath()
-    }
 
     bind() {
         this.update = this.update.bind(this)
-        this.draw = this.draw.bind(this)
-        this.init = this.init.bind(this)
+        this.resize = this.resize.bind(this)
         this.reset = this.reset.bind(this)
     }
 }
