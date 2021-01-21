@@ -7,8 +7,6 @@ import Walls from './Walls'
 import Obstacles from './Obstacles'
 import GameConfig from './GameConfig';
 
-
-
 class MainGame {
     constructor() {
         this.bind()

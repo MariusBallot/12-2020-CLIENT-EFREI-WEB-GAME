@@ -62,8 +62,6 @@ export default class Walls {
             GameConfig.viewer.h - GameConfig.walls.thickness - GameConfig.walls.vertMargin,
             GameConfig.viewer.w - GameConfig.walls.horMargin * 2,
             GameConfig.walls.thickness)
-
-        console.log(GameConfig.walls.thickness)
         Matter.Body.scale(this.topBody, GameConfig.viewer.w - GameConfig.walls.horMargin * 2,
             GameConfig.walls.thickness)
         Matter.Body.setPosition(this.topBody, {

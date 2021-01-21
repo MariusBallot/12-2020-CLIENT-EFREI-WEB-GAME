@@ -52,21 +52,17 @@ export default class Player {
         if (this.pSkin == undefined)
             return
 
-        if (Controls.inputs.up)
-            Matter.Body.applyForce(this.pBody, this.pBody.position, { x: 0, y: -.1 })
-        if (Controls.inputs.down)
-            Matter.Body.applyForce(this.pBody, this.pBody.position, { x: 0, y: .1 })
-
         if (!this.lost) {
-            // this.pBody.position.x = 300
+            if (Controls.inputs.up)
+                Matter.Body.applyForce(this.pBody, this.pBody.position, { x: 0, y: -.1 })
+            if (Controls.inputs.down)
+                Matter.Body.applyForce(this.pBody, this.pBody.position, { x: 0, y: .1 })
             Matter.Body.setPosition(this.pBody, { x: GameConfig.player.startPos.x, y: this.pBody.position.y })
             Matter.Body.setAngle(this.pBody, this.pBody.velocity.y * 0.01)
         }
 
         this.pSkin.position.set(this.pBody.position.x, this.pBody.position.y)
         this.pSkin.rotation = this.pBody.angle
-
-
     }
 
     resize() {

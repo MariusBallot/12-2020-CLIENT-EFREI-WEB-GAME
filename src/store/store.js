@@ -96,6 +96,7 @@ export const store = new Vuex.Store({
         },
         async gameFinished(context, ndata) {
             const userRes = await axios.put('/api/user', ndata)
+
             this.dispatch('loadCurrUser')
         },
     }

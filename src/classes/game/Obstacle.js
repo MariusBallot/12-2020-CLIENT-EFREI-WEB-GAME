@@ -45,6 +45,13 @@ export default class Objstacle {
     }
 
     reset() {
+        this.currPos.x = GameConfig.obstacles.space * this.index + GameConfig.obstacles.startSpace
+        // this.currPos.x = 300
+
+        this.availHeight = GameConfig.viewer.h - (2 * GameConfig.walls.vertMargin + 2 * GameConfig.walls.thickness)
+        this.seed = Math.round(Math.random() * (GameConfig.obstacles.vertNumber - 1))
+        this.currPos.y = (GameConfig.walls.vertMargin + GameConfig.walls.thickness + (this.availHeight / GameConfig.obstacles.vertNumber) / 2)
+            + (this.availHeight / GameConfig.obstacles.vertNumber) * this.seed
         Matter.Body.setPosition(this.oBody, {
             x: this.currPos.x,
             y: this.currPos.y,
