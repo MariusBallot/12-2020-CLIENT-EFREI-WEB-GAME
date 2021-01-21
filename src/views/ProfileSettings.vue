@@ -10,7 +10,7 @@
             <input
               id="pseudo"
               type="text"
-              v-model="userInfo.textId"
+              v-model="userModif.gametag"
               :placeholder="[[currUser.gametag]]"
             />
           </div>
@@ -21,20 +21,29 @@
             <div class="profileSettings_wrapper_infos_second_input">
               <input
                 type="Password"
-                v-model="userInfo.pwd"
+                v-model="userModif.currpwd"
                 placeholder="Old password"
               />
-              <input type="Password" placeholder="New password" />
-              <input type="Password" placeholder="Confirm new password" />
+              <input
+                type="Password"
+                v-model="userModif.pwd"
+                placeholder="New password"
+              />
+              <input
+                type="Password"
+                v-model="userModif.cpwd"
+                placeholder="Confirm new password"
+              />
             </div>
           </div>
           <div class="profileSettings_wrapper_infos_buts">
             <div class="profileSettings_wrapper_infos_buts_submit">
-              <CusButton bCol="gold" bText="Submit" />
+              <CusButton @click.native="onSubmit" bCol="gold" bText="Submit" />
             </div>
           </div>
-          <p class="profileSettings_wrapper_infos_da">Delete account</p>
         </form>
+        <p class="profileSettings_wrapper_infos_da">Delete account</p>
+        <p class="profileSettings_wrapper_infos_error">{{ modifError }}</p>
       </div>
     </div>
   </div>
@@ -50,14 +59,16 @@ export default {
     CusButton,
     Loader,
   },
+
   data() {
     return {
-      userInfo: {
-        textId: null,
+      userModif: {
+        gametag: null,
+        currpwd: null,
         pwd: null,
+        cpwd: null,
       },
-      logInError: null,
-      loading: false,
+      modifError: null,
     };
   },
   computed: {
@@ -66,6 +77,18 @@ export default {
     },
   },
   mounted() {},
+  methods: {
+    onSubmit: async function () {
+      let sres = await this.$store.dispatch("updateUser", this.userModif);
+      console.log(sres);
+
+      if (sres.success) {
+        this.modifError = "";
+      } else {
+        this.modifError = sres.msg;
+      }
+    },
+  },
 };
 </script>
 
@@ -134,7 +157,15 @@ export default {
         display: flex;
         justify-content: center;
         align-items: flex-end;
-        height: 100px;
+        height: 75px;
+        color: $neonRed;
+      }
+
+      &_error {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        height: 50px;
         color: $neonRed;
       }
     }

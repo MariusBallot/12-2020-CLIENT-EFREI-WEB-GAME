@@ -11,8 +11,6 @@ var _vuex = _interopRequireDefault(require("vuex"));
 
 var _axios = _interopRequireDefault(require("axios"));
 
-var _config = _interopRequireDefault(require("../utils/config"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 _vue["default"].use(_vuex["default"]);
@@ -30,6 +28,7 @@ var store = new _vuex["default"].Store({
       state.currUser = data;
     },
     onLoadUsers: function onLoadUsers(state, data) {
+      console.log(data);
       state.users = data;
     },
     onLoadIcons: function onLoadIcons(state, data) {
@@ -40,6 +39,9 @@ var store = new _vuex["default"].Store({
     },
     onNewGame: function onNewGame(state) {
       state.currUser.ngames++;
+    },
+    onUpdateUser: function onUpdateUser(state, data) {
+      state.currUser.gametag = data.gametag;
     }
   },
   actions: {
@@ -75,26 +77,25 @@ var store = new _vuex["default"].Store({
             case 2:
               userRes = _context2.sent;
               currUser = userRes.data.currUser;
-              console.log(userRes.data);
 
               if (userRes.data.loggedIn) {
-                _context2.next = 7;
+                _context2.next = 6;
                 break;
               }
 
               return _context2.abrupt("return", userRes.data);
 
-            case 7:
-              _context2.next = 9;
+            case 6:
+              _context2.next = 8;
               return regeneratorRuntime.awrap(_axios["default"].get('/api/icon/' + currUser.icon));
 
-            case 9:
+            case 8:
               userIconRes = _context2.sent;
               currUser.iconObj = userIconRes.data;
               this.commit('onLoadCurrUser', currUser);
               return _context2.abrupt("return", userRes.data);
 
-            case 13:
+            case 12:
             case "end":
               return _context2.stop();
           }
@@ -182,10 +183,9 @@ var store = new _vuex["default"].Store({
                   }
                 });
               });
-              console.log(users);
               this.commit('onLoadUsers', usersRes.data);
 
-            case 11:
+            case 10:
             case "end":
               return _context5.stop();
           }
@@ -222,39 +222,95 @@ var store = new _vuex["default"].Store({
         }
       }, null, this);
     },
-    newGame: function newGame(context) {
-      var newNgames, userRes;
-      return regeneratorRuntime.async(function newGame$(_context7) {
+    changedIcon: function changedIcon(context, iconId) {
+      var userRes;
+      return regeneratorRuntime.async(function changedIcon$(_context7) {
         while (1) {
           switch (_context7.prev = _context7.next) {
             case 0:
-              newNgames = context.state.currUser.ngames + 1;
-              _context7.next = 3;
+              _context7.next = 2;
               return regeneratorRuntime.awrap(_axios["default"].put('/api/user', {
-                ngames: newNgames
+                icon: iconId
               }));
 
-            case 3:
+            case 2:
               userRes = _context7.sent;
-              this.commit('onNewGame');
+              this.dispatch('loadCurrUser');
 
-            case 5:
+            case 4:
             case "end":
               return _context7.stop();
           }
         }
       }, null, this);
     },
-    gameFinished: function gameFinished(context) {
-      return regeneratorRuntime.async(function gameFinished$(_context8) {
+    newGame: function newGame(context) {
+      var newNgames, userRes;
+      return regeneratorRuntime.async(function newGame$(_context8) {
         while (1) {
           switch (_context8.prev = _context8.next) {
             case 0:
+              newNgames = context.state.currUser.ngames + 1;
+              _context8.next = 3;
+              return regeneratorRuntime.awrap(_axios["default"].put('/api/user', {
+                ngames: newNgames
+              }));
+
+            case 3:
+              userRes = _context8.sent;
+              this.commit('onNewGame');
+
+            case 5:
             case "end":
               return _context8.stop();
           }
         }
-      });
+      }, null, this);
+    },
+    gameFinished: function gameFinished(context, ndata) {
+      var userRes;
+      return regeneratorRuntime.async(function gameFinished$(_context9) {
+        while (1) {
+          switch (_context9.prev = _context9.next) {
+            case 0:
+              _context9.next = 2;
+              return regeneratorRuntime.awrap(_axios["default"].put('/api/user', ndata));
+
+            case 2:
+              userRes = _context9.sent;
+              this.dispatch('loadCurrUser');
+
+            case 4:
+            case "end":
+              return _context9.stop();
+          }
+        }
+      }, null, this);
+    },
+    updateUser: function updateUser(context, data) {
+      var res;
+      return regeneratorRuntime.async(function updateUser$(_context10) {
+        while (1) {
+          switch (_context10.prev = _context10.next) {
+            case 0:
+              _context10.next = 2;
+              return regeneratorRuntime.awrap(_axios["default"].put('/api/update-user', data));
+
+            case 2:
+              res = _context10.sent;
+
+              if (res.data.success) {
+                this.commit('onUpdateUser', res.data.currUser);
+              }
+
+              return _context10.abrupt("return", res.data);
+
+            case 5:
+            case "end":
+              return _context10.stop();
+          }
+        }
+      }, null, this);
     }
   }
 });

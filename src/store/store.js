@@ -28,6 +28,9 @@ export const store = new Vuex.Store({
         },
         onNewGame(state) {
             state.currUser.ngames++
+        },
+        onUpdateUser(state,data){
+            state.currUser.gametag = data.gametag
         }
 
     },
@@ -97,6 +100,15 @@ export const store = new Vuex.Store({
         async gameFinished(context, ndata) {
             const userRes = await axios.put('/api/user', ndata)
             this.dispatch('loadCurrUser')
+        },
+        async updateUser(context, data) {
+            const res = await axios.put('/api/update-user', data)
+           if(res.data.success){
+               this.commit('onUpdateUser',res.data.currUser)
+           }
+           
+           
+            return res.data     
         },
     }
 })
