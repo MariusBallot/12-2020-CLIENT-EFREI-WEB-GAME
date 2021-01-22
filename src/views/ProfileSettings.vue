@@ -157,7 +157,7 @@ export default {
         display: flex;
         justify-content: center;
         align-items: flex-end;
-        height: 75px;
+        height: 35px;
         color: $neonRed;
       }
 
