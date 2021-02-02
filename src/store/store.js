@@ -29,7 +29,6 @@ export const store = new Vuex.Store({
         onNewGame(state) {
             state.currUser.ngames++
         }
-
     },
     actions: {
         async register(context, req) {
@@ -39,6 +38,7 @@ export const store = new Vuex.Store({
         async login(context, req) {
             const userRes = await axios.post('/api/login', req)
             let currUser = userRes.data.currUser
+
             if (!userRes.data.loggedIn)
                 return userRes.data
 
@@ -95,7 +95,7 @@ export const store = new Vuex.Store({
             this.commit('onNewGame')
         },
         async gameFinished(context, ndata) {
-            const userRes = await axios.put('/api/user', ndata)
+            const userRes = await axios.put('/api/modif-user', ndata)
 
             this.dispatch('loadCurrUser')
         },
