@@ -58,6 +58,9 @@ export const store = new Vuex.Store({
             let currUser = userRes.data.currUser
             const userIconRes = await axios.get('/api/icon/' + currUser.icon)
             currUser.iconObj = userIconRes.data
+            const userSkinRes = await axios.get('/api/skin/' + currUser.skin)
+            currUser.skinObj = userSkinRes.data
+            console.log(currUser)
             this.commit('onLoadCurrUser', currUser)
         },
         async loadUsers(context) {

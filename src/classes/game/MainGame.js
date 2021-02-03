@@ -149,6 +149,7 @@ class MainGame {
         this.startTime = 0;
         this.lost = false
         Obstacles.stop()
+        PIXI.Loader.shared.reset()
         RAF.unsubscribe("gameUpadate")
     }
 

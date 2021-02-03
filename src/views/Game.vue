@@ -110,7 +110,6 @@ export default {
         this.pb = true;
       }
       this.death = true;
-      console.log(this.nData);
       this.$store.dispatch("gameFinished", this.nData);
     },
     onReset() {

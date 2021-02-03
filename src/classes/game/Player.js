@@ -2,6 +2,7 @@ import Matter from 'matter-js'
 import * as PIXI from "pixi.js"
 import Controls from './Controls'
 import GameConfig from './GameConfig'
+import { store } from '../../store/store'
 
 
 export default class Player {
@@ -18,7 +19,8 @@ export default class Player {
         this.pBody.gameType = "player"
         Matter.World.add(this.engine.world, this.pBody)
 
-        this.loader.add('pSkin', 'assets/images/skinTest.jpg')
+        console.log(store.state.currUser.skinObj.image[0].url)
+        this.loader.add('pSkin', store.state.currUser.skinObj.image[0].url)
         this.loader.load(this.onLoaded)
 
         this.prevConfig = {
